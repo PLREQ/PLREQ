@@ -58,16 +58,88 @@
 		D5AEA12328D9DCA800A25BDC /* PLREQ */ = {
 			isa = PBXGroup;
 			children = (
-				D5AEA12428D9DCA800A25BDC /* AppDelegate.swift */,
-				D5AEA12628D9DCA800A25BDC /* SceneDelegate.swift */,
+				D5AEA13D28D9EE7E00A25BDC /* Extensions */,
+				D5AEA14328D9F1CE00A25BDC /* Resources */,
 				D5AEA12828D9DCA800A25BDC /* ViewController.swift */,
 				D5AEA12A28D9DCA800A25BDC /* Main.storyboard */,
-				D5AEA13028D9DCA800A25BDC /* Assets.xcassets */,
-				D5AEA13228D9DCA800A25BDC /* LaunchScreen.storyboard */,
-				D5AEA13528D9DCA800A25BDC /* Info.plist */,
-				D5AEA12D28D9DCA800A25BDC /* PLREQ.xcdatamodeld */,
+				D5AEA13C28D9EE7800A25BDC /* View */,
+				D5AEA13B28D9EE4800A25BDC /* ViewModels */,
+				D5AEA13E28D9EE8B00A25BDC /* Models */,
 			);
 			path = PLREQ;
+			sourceTree = "<group>";
+		};
+		D5AEA13B28D9EE4800A25BDC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D5AEA13C28D9EE7800A25BDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D5AEA13F28D9EF7600A25BDC /* MatchView */,
+				D5AEA14028D9EF7D00A25BDC /* PlayListView */,
+				D5AEA14228D9EFBE00A25BDC /* MapView */,
+				D5AEA14128D9EFAB00A25BDC /* PlayListDetailView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D5AEA13D28D9EE7E00A25BDC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D5AEA13E28D9EE8B00A25BDC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D5AEA12D28D9DCA800A25BDC /* PLREQ.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D5AEA13F28D9EF7600A25BDC /* MatchView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MatchView;
+			sourceTree = "<group>";
+		};
+		D5AEA14028D9EF7D00A25BDC /* PlayListView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PlayListView;
+			sourceTree = "<group>";
+		};
+		D5AEA14128D9EFAB00A25BDC /* PlayListDetailView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PlayListDetailView;
+			sourceTree = "<group>";
+		};
+		D5AEA14228D9EFBE00A25BDC /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		D5AEA14328D9F1CE00A25BDC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D5AEA13528D9DCA800A25BDC /* Info.plist */,
+				D5AEA13228D9DCA800A25BDC /* LaunchScreen.storyboard */,
+				D5AEA12628D9DCA800A25BDC /* SceneDelegate.swift */,
+				D5AEA12428D9DCA800A25BDC /* AppDelegate.swift */,
+				D5AEA13028D9DCA800A25BDC /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
