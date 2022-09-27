@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		D58C916428E303C600270282 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C916328E303C600270282 /* MatchViewModel.swift */; };
+		D58C916E28E318D000270282 /* imsi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C916D28E318D000270282 /* imsi.swift */; };
+		D58C917028E3192C00270282 /* MatchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58C916F28E3192C00270282 /* MatchView.storyboard */; };
+		D58C917228E3193F00270282 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C917128E3193F00270282 /* MatchViewController.swift */; };
+		D58C917428E3195D00270282 /* PlayListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58C917328E3195D00270282 /* PlayListView.storyboard */; };
+		D58C917628E3196700270282 /* PlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C917528E3196700270282 /* PlayListViewController.swift */; };
+		D58C917828E319B700270282 /* PlayListDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58C917728E319B700270282 /* PlayListDetailView.storyboard */; };
+		D58C917A28E319C400270282 /* PlayListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C917928E319C400270282 /* PlayListDetailViewController.swift */; };
+		D58C917C28E319D600270282 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58C917B28E319D600270282 /* MapView.storyboard */; };
+		D58C917E28E319E300270282 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C917D28E319E300270282 /* MapViewController.swift */; };
 		D5AEA12528D9DCA800A25BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AEA12428D9DCA800A25BDC /* AppDelegate.swift */; };
 		D5AEA12728D9DCA800A25BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AEA12628D9DCA800A25BDC /* SceneDelegate.swift */; };
 		D5AEA12928D9DCA800A25BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AEA12828D9DCA800A25BDC /* ViewController.swift */; };
@@ -19,6 +28,15 @@
 
 /* Begin PBXFileReference section */
 		D58C916328E303C600270282 /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
+		D58C916D28E318D000270282 /* imsi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imsi.swift; sourceTree = "<group>"; };
+		D58C916F28E3192C00270282 /* MatchView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchView.storyboard; sourceTree = "<group>"; };
+		D58C917128E3193F00270282 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		D58C917328E3195D00270282 /* PlayListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayListView.storyboard; sourceTree = "<group>"; };
+		D58C917528E3196700270282 /* PlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListViewController.swift; sourceTree = "<group>"; };
+		D58C917728E319B700270282 /* PlayListDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayListDetailView.storyboard; sourceTree = "<group>"; };
+		D58C917928E319C400270282 /* PlayListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailViewController.swift; sourceTree = "<group>"; };
+		D58C917B28E319D600270282 /* MapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
+		D58C917D28E319E300270282 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D5AEA12128D9DCA800A25BDC /* PLREQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLREQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5AEA12428D9DCA800A25BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5AEA12628D9DCA800A25BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +59,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D58C916728E3186A00270282 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D58C916928E3186A00270282 /* MatchView */,
+				D58C916B28E3186A00270282 /* PlayListView */,
+				D58C916828E3186A00270282 /* PlayListDetailView */,
+				D58C916A28E3186A00270282 /* MapView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D58C916828E3186A00270282 /* PlayListDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				D58C917728E319B700270282 /* PlayListDetailView.storyboard */,
+				D58C917928E319C400270282 /* PlayListDetailViewController.swift */,
+			);
+			path = PlayListDetailView;
+			sourceTree = "<group>";
+		};
+		D58C916928E3186A00270282 /* MatchView */ = {
+			isa = PBXGroup;
+			children = (
+				D58C916F28E3192C00270282 /* MatchView.storyboard */,
+				D58C917128E3193F00270282 /* MatchViewController.swift */,
+			);
+			path = MatchView;
+			sourceTree = "<group>";
+		};
+		D58C916A28E3186A00270282 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				D58C917B28E319D600270282 /* MapView.storyboard */,
+				D58C917D28E319E300270282 /* MapViewController.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		D58C916B28E3186A00270282 /* PlayListView */ = {
+			isa = PBXGroup;
+			children = (
+				D58C917328E3195D00270282 /* PlayListView.storyboard */,
+				D58C917528E3196700270282 /* PlayListViewController.swift */,
+			);
+			path = PlayListView;
+			sourceTree = "<group>";
+		};
+		D58C916C28E3187D00270282 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D58C916D28E318D000270282 /* imsi.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D5AEA11828D9DCA800A25BDC = {
 			isa = PBXGroup;
 			children = (
@@ -60,11 +133,11 @@
 		D5AEA12328D9DCA800A25BDC /* PLREQ */ = {
 			isa = PBXGroup;
 			children = (
-				D5AEA13D28D9EE7E00A25BDC /* Extensions */,
+				D58C916C28E3187D00270282 /* Extensions */,
 				D5AEA14328D9F1CE00A25BDC /* Resources */,
 				D5AEA12828D9DCA800A25BDC /* ViewController.swift */,
 				D5AEA12A28D9DCA800A25BDC /* Main.storyboard */,
-				D5AEA13C28D9EE7800A25BDC /* View */,
+				D58C916728E3186A00270282 /* Views */,
 				D5AEA13B28D9EE4800A25BDC /* ViewModels */,
 				D5AEA13E28D9EE8B00A25BDC /* Models */,
 			);
@@ -79,58 +152,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		D5AEA13C28D9EE7800A25BDC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				D5AEA13F28D9EF7600A25BDC /* MatchView */,
-				D5AEA14028D9EF7D00A25BDC /* PlayListView */,
-				D5AEA14228D9EFBE00A25BDC /* MapView */,
-				D5AEA14128D9EFAB00A25BDC /* PlayListDetailView */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		D5AEA13D28D9EE7E00A25BDC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		D5AEA13E28D9EE8B00A25BDC /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				D5AEA12D28D9DCA800A25BDC /* PLREQ.xcdatamodeld */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		D5AEA13F28D9EF7600A25BDC /* MatchView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MatchView;
-			sourceTree = "<group>";
-		};
-		D5AEA14028D9EF7D00A25BDC /* PlayListView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PlayListView;
-			sourceTree = "<group>";
-		};
-		D5AEA14128D9EFAB00A25BDC /* PlayListDetailView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PlayListDetailView;
-			sourceTree = "<group>";
-		};
-		D5AEA14228D9EFBE00A25BDC /* MapView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MapView;
 			sourceTree = "<group>";
 		};
 		D5AEA14328D9F1CE00A25BDC /* Resources */ = {
@@ -203,9 +230,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D58C917828E319B700270282 /* PlayListDetailView.storyboard in Resources */,
+				D58C917C28E319D600270282 /* MapView.storyboard in Resources */,
 				D5AEA13428D9DCA800A25BDC /* LaunchScreen.storyboard in Resources */,
+				D58C917428E3195D00270282 /* PlayListView.storyboard in Resources */,
 				D5AEA13128D9DCA800A25BDC /* Assets.xcassets in Resources */,
 				D5AEA12C28D9DCA800A25BDC /* Main.storyboard in Resources */,
+				D58C917028E3192C00270282 /* MatchView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,9 +247,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D58C917628E3196700270282 /* PlayListViewController.swift in Sources */,
 				D5AEA12928D9DCA800A25BDC /* ViewController.swift in Sources */,
+				D58C917A28E319C400270282 /* PlayListDetailViewController.swift in Sources */,
+				D58C917E28E319E300270282 /* MapViewController.swift in Sources */,
 				D5AEA12528D9DCA800A25BDC /* AppDelegate.swift in Sources */,
+				D58C917228E3193F00270282 /* MatchViewController.swift in Sources */,
 				D58C916428E303C600270282 /* MatchViewModel.swift in Sources */,
+				D58C916E28E318D000270282 /* imsi.swift in Sources */,
 				D5AEA12F28D9DCA800A25BDC /* PLREQ.xcdatamodeld in Sources */,
 				D5AEA12728D9DCA800A25BDC /* SceneDelegate.swift in Sources */,
 			);
