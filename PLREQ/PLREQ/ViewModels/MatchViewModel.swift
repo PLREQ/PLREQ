@@ -7,27 +7,26 @@
 
 import ShazamKit
 import AVFAudio
-//AVFoundation에서 오디오 부분만 사용하기에 AVFAudio를 import
+// AVFoundation에서 오디오 부분만 사용하기에 AVFAudio를 import
 
-public class MatchViewModel: NSObject {
+class MatchViewModel: NSObject {
     var session: SHSession?
     let audioEngine = AVAudioEngine()
-    
     var matchHandler: ((SHMatchedMediaItem?, Error?) -> Void)?
-    
     var lastMatch: SHMatchedMediaItem?
+    
+    // 음악 검색 결과를 담을 변수 선언
     var title: String?
-    var subtitle: String?
     var artist: String?
-    var coverUrl: URL?
-
-    var status: String = ""
+    var musicImageURL: URL?
+    // 노래를 검색하였을 때 검색에 실패하면 false, 성공하면 true
+    var status: Bool = false
     
     init(matchHandler handler: ((SHMatchedMediaItem?, Error?) -> Void)?) {
         matchHandler = handler
     }
     
-    func match(catalog: SHCustomCatalog? = nil) throws {
+    func songSearch(catalog: SHCustomCatalog? = nil) throws {
         if let catalog = catalog {
             session = SHSession(catalog: catalog)
         } else {
@@ -64,14 +63,12 @@ public class MatchViewModel: NSObject {
     
     func songMatched(item: SHMatchedMediaItem?, error: Error?) {
         if error != nil {
-            status = "일치하는 노래를 찾지 못했어요 ㅠㅠ :("
+            status = false
         } else {
-            status = "노래를 찾았어요! :)"
-            print("Found song!")
+            status = true
             title = item?.title
-            subtitle = item?.subtitle
             artist = item?.artist
-            coverUrl = item?.artworkURL
+            musicImageURL = item?.artworkURL
         }
     }
 }
