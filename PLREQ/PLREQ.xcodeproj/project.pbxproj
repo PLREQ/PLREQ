@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D58C916428E303C600270282 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C916328E303C600270282 /* MatchViewModel.swift */; };
 		D5AEA12528D9DCA800A25BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AEA12428D9DCA800A25BDC /* AppDelegate.swift */; };
 		D5AEA12728D9DCA800A25BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AEA12628D9DCA800A25BDC /* SceneDelegate.swift */; };
 		D5AEA12928D9DCA800A25BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AEA12828D9DCA800A25BDC /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D58C916328E303C600270282 /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 		D5AEA12128D9DCA800A25BDC /* PLREQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLREQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5AEA12428D9DCA800A25BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5AEA12628D9DCA800A25BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		D5AEA13B28D9EE4800A25BDC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D58C916328E303C600270282 /* MatchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			files = (
 				D5AEA12928D9DCA800A25BDC /* ViewController.swift in Sources */,
 				D5AEA12528D9DCA800A25BDC /* AppDelegate.swift in Sources */,
+				D58C916428E303C600270282 /* MatchViewModel.swift in Sources */,
 				D5AEA12F28D9DCA800A25BDC /* PLREQ.xcdatamodeld in Sources */,
 				D5AEA12728D9DCA800A25BDC /* SceneDelegate.swift in Sources */,
 			);
@@ -367,6 +371,7 @@
 				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "노래 검색을 하기위해서 마이크 권한이 필요합니다. 녹음된 사운드는 음악 검색에만 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -397,6 +402,7 @@
 				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "노래 검색을 하기위해서 마이크 권한이 필요합니다. 녹음된 사운드는 음악 검색에만 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
