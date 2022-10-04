@@ -20,5 +20,8 @@ class PlayListCollectionViewCell: UICollectionViewCell {
         
     }
 
-    
+    override func layoutSubviews() {
+        self.playListName.sizeToFit()
+    }
 }
+
