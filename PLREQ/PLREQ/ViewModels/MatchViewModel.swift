@@ -60,17 +60,6 @@ class MatchViewModel: NSObject {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
     }
-    
-    func songMatched(item: SHMatchedMediaItem?, error: Error?) {
-        if error != nil {
-            status = false
-        } else {
-            status = true
-            title = item?.title
-            artist = item?.artist
-            musicImageURL = item?.artworkURL
-        }
-    }
 }
 
 extension MatchViewModel: SHSessionDelegate {
