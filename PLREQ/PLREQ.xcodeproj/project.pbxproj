@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		D54C413628E343F400C7C0FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C413528E343F400C7C0FD /* AppDelegate.swift */; };
 		D54C413828E343F400C7C0FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C413728E343F400C7C0FD /* SceneDelegate.swift */; };
 		D54C413A28E343F400C7C0FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C413928E343F400C7C0FD /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		D54C413228E343F400C7C0FD /* PLREQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLREQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D54C413528E343F400C7C0FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D54C413728E343F400C7C0FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D58069A028E45C7500461CD8 /* MatchViewController.swift */,
+				8B93D54028E8789700AD8170 /* MatchMusicCell.swift */,
 				D58069A128E45C7500461CD8 /* MatchView.storyboard */,
 			);
 			path = MatchView;
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */,
+				8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */,
 				D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */,
 				D580697E28E45BF600461CD8 /* imsi.swift in Sources */,
 				D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */,
@@ -414,6 +418,7 @@
 				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -442,6 +447,7 @@
 				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
