@@ -57,18 +57,6 @@ class PlayListViewController: UIViewController {
             let containerVC = segue.destination as! PlacePlayListViewController
             containerVC.playListList = playListList
         }
-        
-    }
-    
-    
-    @IBAction func viewSelect(_ sender: UISegmentedControl) {
-        if(sender.selectedSegmentIndex == 0) {
-            RecentPlayListContainerView.isHidden = false
-            PlacePlayListContainerView.isHidden = true
-        }else if(sender.selectedSegmentIndex == 1) {
-            RecentPlayListContainerView.isHidden = true
-            PlacePlayListContainerView.isHidden = false
-        }
     }
     
     @IBAction func selecButton(_ sender: UIButton) {
@@ -77,30 +65,28 @@ class PlayListViewController: UIViewController {
             PlacePlayListContainerView.isHidden = true
             recentButton.layer.addBorder([.bottom], color: .white, width: 2)
             placeButton.layer.addBorder([.bottom], color: .black, width: 2)
-//            placeButton.layer.display()
         } else {
             RecentPlayListContainerView.isHidden = true
             PlacePlayListContainerView.isHidden = false
             placeButton.layer.addBorder([.bottom], color: .white, width: 2)
             recentButton.layer.addBorder([.bottom], color: .black, width: 2)
-//            recentButton.layer.addBorder.removeFromSuperlayer()
-//            recentButton.layer.addSublayer(recentButton)
         }
     }
     
     private func setButton() {
         [recentButton, placeButton].forEach {
             $0.titleLabel?.textColor = .white
-            $0.titleLabel?.font = .systemFont(ofSize: 20)
-            $0.titleLabel?.minimumScaleFactor = 0.5
-//            recentButton.isLayoutMarginsRelativeArrangement = true
-//            recentButton.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            if $0 == recentButton {
+                $0.titleLabel?.setLable(text: "최근", fontSize: 20)
+            } else {
+                $0.titleLabel?.setLable(text: "지역", fontSize: 20)
+            }
         }
         RecentPlayListContainerView.isHidden = false
         PlacePlayListContainerView.isHidden = true
         
         playListButtonStackView.isLayoutMarginsRelativeArrangement = true
-        playListButtonStackView.layoutMargins = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+        playListButtonStackView.layoutMargins = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width / 18, bottom: 0, right: UIScreen.main.bounds.width / 18)
         playListButtonStackView.layer.addBorder([.bottom], color: .gray, width: 1)
 
     }

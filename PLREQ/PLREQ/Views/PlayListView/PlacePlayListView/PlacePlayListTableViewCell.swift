@@ -11,12 +11,19 @@ class PlacePlayListTableViewCell: UITableViewCell {
     @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var PlacePlayListCollectionView: UICollectionView!
     var playListList: [PlayList] = []
+    let width = UIScreen.main.bounds.width * 0.9589
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Initialization code
+    }
+    
+
+    override func layoutSubviews() {
+        setAutoLayout()
         collectionViewLink()
         registerNib()
-        // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,6 +35,31 @@ class PlacePlayListTableViewCell: UITableViewCell {
     private func collectionViewLink() {
         self.PlacePlayListCollectionView.delegate = self
         self.PlacePlayListCollectionView.dataSource = self
+    }
+    
+    private func setAutoLayout() {
+        var height = UIScreen.main.bounds.height * 0.4146
+        if !((UIScreen.main.bounds.width / UIScreen.main.bounds.height) <= 9/19) {
+            height = UIScreen.main.bounds.height * 0.5
+        }
+        placeName.translatesAutoresizingMaskIntoConstraints = false
+        placeName.widthAnchor.constraint(equalToConstant: width).isActive = true
+        placeName.topAnchor.constraint(equalTo: self.topAnchor, constant: 0 ).isActive = true
+        placeName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0 ).isActive = true
+        placeName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -(height * 0.9) ).isActive = true
+        
+        PlacePlayListCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        PlacePlayListCollectionView.widthAnchor.constraint(equalToConstant: width).isActive = true
+        if (UIScreen.main.bounds.width / UIScreen.main.bounds.height) <= 9/19 {
+            PlacePlayListCollectionView.heightAnchor.constraint(equalToConstant: height * (7.5/10)).isActive = true
+            PlacePlayListCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: height / 10 ).isActive = true
+        } else {
+            PlacePlayListCollectionView.heightAnchor.constraint(equalToConstant: height * (7.5/10)).isActive = true
+            PlacePlayListCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: height / 9 ).isActive = true
+        }
+        
+        PlacePlayListCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0 ).isActive = true
+        PlacePlayListCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10 ).isActive = true
     }
     
     private func registerNib() {
@@ -48,13 +80,10 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegate, UICollectionView
         cell.PlayListImageArr[2].load(url: playListList[indexPath.row].thirdImageURL)
         cell.PlayListImageArr[3].load(url: playListList[indexPath.row].fourthImageURL)
         
-        cell.playListName.text = playListList[indexPath.row].title
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        cell.playListDay.text = dateFormatter.string(from: playListList[indexPath.row].date)
-        
-        cell.layer.cornerRadius = 10
+        cell.playListName.setLable(text: playListList[indexPath.row].title, fontSize: 14)
+
+        cell.playListDay.setLable(text: Date().toYMDString(date: playListList[indexPath.row].date), fontSize: 12)
+        cell.layer.cornerRadius = UIScreen.main.bounds.width / 2.3375 / 10
         
         return cell
     }
@@ -71,7 +100,9 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: 160, height: 250)
+        let width = UIScreen.main.bounds.width / 2.3375
+        let size = CGSize(width: width, height: width * 25 / 16 )
+//        let size = CGSize(width: 160, height: 250)
         return size
     }
 }

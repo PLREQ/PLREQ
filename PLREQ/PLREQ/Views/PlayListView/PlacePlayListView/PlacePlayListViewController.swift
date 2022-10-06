@@ -18,6 +18,7 @@ class PlacePlayListViewController: UIViewController {
         super.viewDidLoad()
         registerNib()
         tableViewLink()
+        setAutoLayout()
         // Do any additional setup after loading the view.
     }
     
@@ -28,6 +29,14 @@ class PlacePlayListViewController: UIViewController {
     private func tableViewLink() {
         self.PlacePlayListTableView.delegate = self
         self.PlacePlayListTableView.dataSource = self
+    }
+    
+    private func setAutoLayout() {
+        self.PlacePlayListTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.PlacePlayListTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0 ).isActive = true
+        self.PlacePlayListTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        self.PlacePlayListTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.frame.width / 20).isActive = true
+        self.PlacePlayListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
     }
     
    
@@ -65,7 +74,8 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlacePlayListTableViewCell", for: indexPath) as? PlacePlayListTableViewCell else { return UITableViewCell() }
-        cell.placeName.text = placeList[indexPath.row]
+        cell.placeName.setLable(text: placeList[indexPath.row], fontSize: 18)
+
         for i in 0..<playListList.count {
             if cell.placeName.text == playListList[i].location {
                 cell.playListList.append(playListList[i])
@@ -74,4 +84,12 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (UIScreen.main.bounds.width / UIScreen.main.bounds.height) <= 9/19 {
+            return UIScreen.main.bounds.height * 0.40
+        } else {
+            return UIScreen.main.bounds.height * 0.5
+        }
+            
+    }
 }

@@ -27,6 +27,14 @@ class RecentPlayListViewController: UIViewController {
     private func registerNib() {
         self.RecentPlayListCollectionView.register(UINib(nibName: "PlayListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListCollectionViewCell")
     }
+    
+    private func setAutoLayout() {
+        self.RecentPlayListCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.RecentPlayListCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0 ).isActive = true
+        self.RecentPlayListCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        self.RecentPlayListCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.frame.width / 20).isActive = true
+        self.RecentPlayListCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -(self.view.frame.width / 20)).isActive = true
+    }
     /*
      // MARK: - Navigation
      
@@ -52,13 +60,11 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
         cell.PlayListImageArr[2].load(url: playListList[indexPath.row].thirdImageURL)
         cell.PlayListImageArr[3].load(url: playListList[indexPath.row].fourthImageURL)
         
-        cell.playListName.text = playListList[indexPath.row].title
+        cell.playListName.setLable(text: playListList[indexPath.row].title, fontSize: 14)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        cell.playListDay.text = dateFormatter.string(from: playListList[indexPath.row].date)
+        cell.playListDay.setLable(text: Date().toYMDString(date: playListList[indexPath.row].date), fontSize: 12)
         
-        cell.layer.cornerRadius = 10
+        cell.layer.cornerRadius = self.view.frame.width / 2.3375 / 16
         
         return cell
     }
@@ -81,7 +87,9 @@ extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: 160, height: 250)
+        let width = self.view.frame.width / 2.3375
+        let size = CGSize(width: width, height: width * 25 / 16 )
+//        let size = CGSize(width: 160, height: 250)
         return size
     }
 }

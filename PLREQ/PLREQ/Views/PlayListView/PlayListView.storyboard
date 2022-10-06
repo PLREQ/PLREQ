@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJN-Gg-Rdz">
-                                <rect key="frame" x="0.0" y="161" width="414" height="735"/>
+                                <rect key="frame" x="0.0" y="126" width="414" height="770"/>
                                 <connections>
                                     <segue destination="oni-oA-Ax8" kind="embed" identifier="RecentPlayListViewContainer" id="oya-dB-Lcf"/>
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="nlo-GS-PG0">
-                                <rect key="frame" x="0.0" y="78" width="414" height="38"/>
+                                <rect key="frame" x="0.0" y="58" width="414" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMS-Z2-FRY">
                                         <rect key="frame" x="0.0" y="0.0" width="194.5" height="38"/>
@@ -70,7 +69,7 @@
                                 </subviews>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQs-uS-8jn">
-                                <rect key="frame" x="0.0" y="161" width="414" height="701"/>
+                                <rect key="frame" x="0.0" y="126" width="414" height="770"/>
                                 <connections>
                                     <segue destination="R4a-b7-d0e" kind="embed" identifier="PlacePlayListViewContainer" id="l49-Td-JqE"/>
                                 </connections>
@@ -80,18 +79,16 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lQs-uS-8jn" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="444-oW-4X2"/>
-                            <constraint firstAttribute="bottom" secondItem="lQs-uS-8jn" secondAttribute="bottom" id="57b-M2-ND9"/>
-                            <constraint firstItem="lQs-uS-8jn" firstAttribute="top" secondItem="nlo-GS-PG0" secondAttribute="bottom" constant="45" id="7hP-dI-nI4"/>
+                            <constraint firstItem="lQs-uS-8jn" firstAttribute="top" secondItem="nlo-GS-PG0" secondAttribute="bottom" constant="30" id="7hP-dI-nI4"/>
                             <constraint firstItem="gJN-Gg-Rdz" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="953-EQ-N65"/>
                             <constraint firstItem="nlo-GS-PG0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9Hm-cv-dnE"/>
                             <constraint firstItem="gJN-Gg-Rdz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="AMr-zR-3N6"/>
                             <constraint firstItem="nlo-GS-PG0" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BCp-Xf-ZjB"/>
-                            <constraint firstItem="nlo-GS-PG0" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="BYd-X4-Sz1"/>
-                            <constraint firstItem="gJN-Gg-Rdz" firstAttribute="top" secondItem="nlo-GS-PG0" secondAttribute="bottom" constant="45" id="GXB-jJ-M8c"/>
+                            <constraint firstItem="nlo-GS-PG0" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="BYd-X4-Sz1"/>
+                            <constraint firstItem="gJN-Gg-Rdz" firstAttribute="top" secondItem="nlo-GS-PG0" secondAttribute="bottom" constant="30" id="GXB-jJ-M8c"/>
                             <constraint firstItem="lQs-uS-8jn" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="KMa-vI-xoy"/>
-                            <constraint firstItem="lQs-uS-8jn" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Tag-FQ-K34"/>
+                            <constraint firstAttribute="bottom" secondItem="lQs-uS-8jn" secondAttribute="bottom" id="RBK-P8-mNX"/>
                             <constraint firstAttribute="bottom" secondItem="gJN-Gg-Rdz" secondAttribute="bottom" id="XxB-8m-vJS"/>
-                            <constraint firstItem="lQs-uS-8jn" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="emS-sY-RgC"/>
                             <constraint firstItem="gJN-Gg-Rdz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="gCm-PH-bMj"/>
                             <constraint firstItem="lQs-uS-8jn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mYH-AR-vmB"/>
                         </constraints>
@@ -113,11 +110,12 @@
             <objects>
                 <viewController storyboardIdentifier="PlacePlayListView" title="PlacePlayListView" id="R4a-b7-d0e" customClass="PlacePlayListViewController" customModule="PLREQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JfP-c1-wwm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="701"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pt4-tT-SIM">
-                                <rect key="frame" x="20" y="0.0" width="374" height="701"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pt4-tT-SIM">
+                                <rect key="frame" x="20" y="0.0" width="394" height="735"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,12 +124,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2hR-XN-up5"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="pt4-tT-SIM" firstAttribute="leading" secondItem="JfP-c1-wwm" secondAttribute="leading" constant="20" id="JBX-d6-3aZ"/>
-                            <constraint firstItem="pt4-tT-SIM" firstAttribute="top" secondItem="JfP-c1-wwm" secondAttribute="top" id="jYC-eZ-fcs"/>
-                            <constraint firstAttribute="trailing" secondItem="pt4-tT-SIM" secondAttribute="trailing" constant="20" id="oST-uP-qwx"/>
-                            <constraint firstAttribute="bottom" secondItem="pt4-tT-SIM" secondAttribute="bottom" id="sNa-Ns-VpQ"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="PlacePlayListTableView" destination="pt4-tT-SIM" id="mVG-m3-DeI"/>
@@ -139,18 +131,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cor-W1-DGX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="450.72463768115944" y="741.96428571428567"/>
+            <point key="canvasLocation" x="450.72463768115944" y="741.62946428571422"/>
         </scene>
         <!--RecentPlayListView-->
         <scene sceneID="Xgz-Kn-RCu">
             <objects>
                 <viewController storyboardIdentifier="RecentPlayListView" title="RecentPlayListView" id="oni-oA-Ax8" customClass="RecentPlayListViewController" customModule="PLREQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="amV-qU-EKJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="735"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BVs-zC-yO8">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BVs-zC-yO8">
                                 <rect key="frame" x="20" y="0.0" width="374" height="735"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pcj-Tt-zfH">
                                     <size key="itemSize" width="128" height="128"/>
@@ -158,27 +151,11 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lFT-ZW-PPi" customClass="PlayListCollectionViewCell" customModule="PLREQ" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ewx-6d-tEn">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jV5-dw-vdN"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="BVs-zC-yO8" secondAttribute="trailing" constant="20" id="JFE-lg-7w7"/>
-                            <constraint firstAttribute="bottom" secondItem="BVs-zC-yO8" secondAttribute="bottom" id="gXu-Pp-g9x"/>
-                            <constraint firstItem="BVs-zC-yO8" firstAttribute="top" secondItem="amV-qU-EKJ" secondAttribute="top" id="mKI-gk-5x7"/>
-                            <constraint firstItem="BVs-zC-yO8" firstAttribute="leading" secondItem="amV-qU-EKJ" secondAttribute="leading" constant="20" id="tsb-mT-BaE"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="RecentPlayListCollectionView" destination="BVs-zC-yO8" id="VLZ-JF-ccV"/>
