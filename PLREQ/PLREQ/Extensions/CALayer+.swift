@@ -8,6 +8,7 @@
 import UIKit
 
 extension CALayer {
+    // 원하는 방향을 [.top,.bottom]와 같이 지정하여 원하는 곳에만 테두리 추가
     func addBorder(_ arrEdge: [UIRectEdge], color: UIColor, width: CGFloat) {
         for edge in arrEdge {
             let border = CALayer()

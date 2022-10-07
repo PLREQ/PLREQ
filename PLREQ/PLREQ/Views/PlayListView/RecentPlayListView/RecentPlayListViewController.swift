@@ -77,6 +77,7 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
 extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
     // cell 사이즈( 옆 라인을 고려하여 설정 )
     
+    // 윗 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 26
     }
@@ -86,6 +87,7 @@ extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
+    // 셀의 크기 지정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.view.frame.width / 2.3375
         let size = CGSize(width: width, height: width * 25 / 16 )

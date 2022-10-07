@@ -53,6 +53,7 @@ class PlacePlayListViewController: UIViewController {
 
 extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 플레이리스트 목록에서 같은 지역을 가진 경우에는 하나의 테이블 영역에 모두 들어가기에 지역의 갯수를 체크하여 지역의 갯수에 맞추어 테이블 뷰 갯수를 반환
         for i in 0..<playListList.count {
             var check: Bool = false
             if placeList.isEmpty {
@@ -75,7 +76,7 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlacePlayListTableViewCell", for: indexPath) as? PlacePlayListTableViewCell else { return UITableViewCell() }
         cell.placeName.setLable(text: placeList[indexPath.row], fontSize: 18)
-
+        // 테이블뷰의 이름과 플레이리스트안의 지역 이름을 비교하여 테이블뷰 안의 컬렉션 뷰 셀의 갯수를 미리 지정
         for i in 0..<playListList.count {
             if cell.placeName.text == playListList[i].location {
                 cell.playListList.append(playListList[i])
