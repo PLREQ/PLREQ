@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Music {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Music> {
@@ -22,6 +21,6 @@ extension Music {
 
 }
 
-extension Music : Identifiable {
+extension Music: Identifiable {
 
 }
