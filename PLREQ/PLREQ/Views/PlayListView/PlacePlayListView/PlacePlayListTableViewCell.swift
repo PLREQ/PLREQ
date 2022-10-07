@@ -10,16 +10,15 @@ import UIKit
 class PlacePlayListTableViewCell: UITableViewCell {
     @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var PlacePlayListCollectionView: UICollectionView!
+    
     var playListList: [PlayList] = []
     let width = UIScreen.main.bounds.width * 0.9589
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-
     override func layoutSubviews() {
         setAutoLayout()
         collectionViewLink()
@@ -87,8 +86,6 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegate, UICollectionView
         
         return cell
     }
-    
-    
 }
 
 extension PlacePlayListTableViewCell: UICollectionViewDelegateFlowLayout {

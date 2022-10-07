@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     // 라벨을 세팅하는 함수
-    func setLable(text: String, fontSize : CGFloat) {
+    func setLable(text: String, fontSize: CGFloat) {
         self.text = text
         self.font = .systemFont(ofSize: fontSize)
         self.adjustsFontSizeToFitWidth = true
