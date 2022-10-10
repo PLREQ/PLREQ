@@ -80,7 +80,7 @@ class MatchViewController: UIViewController {
             self.viewModel?.title = item?.title
             self.viewModel?.artist = item?.artist
             self.viewModel?.musicImageURL = item?.artworkURL
-            print("dfajkdfhasfhkash")
+            print(viewModel?.title)
             viewDraw()
         }
     }
