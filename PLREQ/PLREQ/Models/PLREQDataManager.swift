@@ -48,10 +48,9 @@ class PLREQDataManager {
         return result
     }
     
-    func save(title: String, artist: String, location: String, latitude: Float, longtitude: Float, firstImageURL: URL, secondImageURL: URL, thirdImageURL: URL, fourthImageURL: URL, musics: [Music]) -> Bool {
+    func save(title: String, location: String, latitude: Float, longtitude: Float, firstImageURL: URL, secondImageURL: URL, thirdImageURL: URL, fourthImageURL: URL, musics: [Music]) -> Bool {
         let playListObject = NSEntityDescription.insertNewObject(forEntityName: playListModelName, into: context)
-        playListObject.setValue(title, forKey: "location")
-        playListObject.setValue(artist, forKey: "artist")
+        playListObject.setValue(title, forKey: "title")
         playListObject.setValue(Date(), forKey: "day")
         playListObject.setValue(location, forKey: "location")
         playListObject.setValue(latitude, forKey: "latitude")
@@ -62,7 +61,7 @@ class PLREQDataManager {
         playListObject.setValue(fourthImageURL, forKey: "fourthImageURL")
         
         for music in musics {
-            var musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
+            let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
             musicObject.title = music.title
             musicObject.artist = music.artist
             musicObject.musicImageURL = music.musicImageURL

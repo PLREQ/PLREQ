@@ -7,7 +7,6 @@
         <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PlayList" inverseName="music" inverseEntity="PlayList"/>
     </entity>
     <entity name="PlayList" representedClassName=".PlayListDB" syncable="YES">
-        <attribute name="artist" optional="YES" attributeType="String"/>
         <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstImageURL" optional="YES" attributeType="URI"/>
         <attribute name="fourthImageURL" optional="YES" attributeType="URI"/>

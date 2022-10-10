@@ -16,7 +16,6 @@ extension PlayListDB {
     }
 
     @NSManaged public var title: String?
-    @NSManaged public var artist: String?
     @NSManaged public var day: Date?
     @NSManaged public var location: String?
     @NSManaged public var latitude: Float
