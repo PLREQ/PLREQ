@@ -88,6 +88,7 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGt-k6-d2G">
                                 <rect key="frame" x="170.33333333333334" y="735.66666666666663" width="49.666666666666657" height="34.333333333333371"/>
+                                <color key="tintColor" red="0.96862745100000003" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="record.circle" catalog="system" title=""/>
                                 <connections>

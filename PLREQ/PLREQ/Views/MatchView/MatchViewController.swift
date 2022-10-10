@@ -18,8 +18,8 @@ class MatchViewController: UIViewController {
 
     //MARK: Variabales
     var recordedMusicList = [Music]()
+    // 임시 Image URL 추가
     var recordedMusic = Music(title: "", artist: "", musicImageURL: URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!)
-//    var recordedMusic: Music?
     var viewModel: MatchViewModel?
     var isListening: Bool = false
     
@@ -33,14 +33,12 @@ class MatchViewController: UIViewController {
         self.isListening.toggle()
         if self.isListening {
             do {
-                print("👀")
                 try self.viewModel?.songSearch()
-                
             } catch {
                 print("error")
             }
         } else {
-            print("isListening : \(self.isListening)")
+            print("----- Not Listening -----")
         }
     }
     
@@ -52,7 +50,6 @@ class MatchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         self.viewModel = MatchViewModel(matchHandler: songMatched)
     }
     
@@ -68,20 +65,24 @@ class MatchViewController: UIViewController {
         self.matchMusicCollectionView.dataSource = self
     }
     
+    //MARK: Shazam Function
     private func songMatched(item: SHMatchedMediaItem?, error: Error?) {
-        print("❤️")
         if error != nil {
             self.viewModel?.status = false
-            print("🔥")
         } else {
-            print("😇")
             self.viewModel?.status = true
+            
+            // 동일한 타이틀, 아티스트의 음악이 이미 배열에 있는 경우 추가하지 않고 함수 종료
+            for music in recordedMusicList {
+                if music.title == item?.title && music.artist == item?.artist {
+                    return
+                }
+            }
             
             self.viewModel?.title = item?.title
             self.viewModel?.artist = item?.artist
             self.viewModel?.musicImageURL = item?.artworkURL
-            print(viewModel?.title)
-            viewDraw()
+            self.viewDraw()
         }
     }
     
@@ -95,8 +96,7 @@ class MatchViewController: UIViewController {
     }
 }
 
-extension MatchViewController:  UICollectionViewDataSource {
-    
+extension MatchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.recordedMusicList.count
     }

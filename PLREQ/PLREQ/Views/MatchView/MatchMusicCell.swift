@@ -8,8 +8,12 @@
 import UIKit
 
 class MatchMusicCell: UICollectionViewCell {
-    
     @IBOutlet weak var musicTitle: UILabel!
     @IBOutlet weak var musicArtist: UILabel!
     @IBOutlet weak var musicImage: UIImageView!
+    
+    override func layoutSubviews() {
+        self.musicTitle.textColor = UIColor.white
+        self.musicArtist.textColor = UIColor.white
+    }
 }
