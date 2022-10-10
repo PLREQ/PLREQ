@@ -25,6 +25,9 @@ class PlayListViewController: UIViewController {
     @IBOutlet weak var RecentPlayListContainerView: UIView!
     @IBOutlet weak var PlacePlayListContainerView: UIView!
     
+    let recentPlayListViewSegue: String = "RecentPlayListViewContainer"
+    let placePlayListViewSegue: String = "PlacePlayListViewContainer"
+    
     let playListList: [PlayList] = [
         PlayList(title: "을지로 가맥", date: Date(), location: "서울시 >", firstImageURL: URL(string: "https://tistory1.daumcdn.net/tistory/4386109/attach/4dc4a9330fb242ec8ecbeca6e459db47")!, secondImageURL: URL(string: "https://lh3.googleusercontent.com/G5BJ35MVUR1FY1UbswJdJUZQK6WynLqI4OZTWw76vERV4V9WiPUllt4ZEz297GKqcqZsbPqzJomJfW0=w544-h544-l90-rj")!, thirdImageURL: URL(string: "https://lh3.googleusercontent.com/ztYiQ1G-ifyBLm2mhVANYpkIOFciiNZMwNTKr2kwm7FEM3VUi-8L68m7TFOaH7CBmYjkytqMw8QQXMRt=w544-h544-l90-rj")!, fourthImageURL: URL(string: "https://lh3.googleusercontent.com/sfZHJFUzpft18lZ5hAqpjEk7ybrvJcZMTXfjPXSoK883po7xEO_R3FLqiCmfmQ0sSZaoOqbDMEzYjLw=w544-h544-l90-rj")!),
         PlayList(title: "지곡회관에서 다 같이 부르던 노래", date: Date(), location: "포항시 >", firstImageURL: URL(string: "https://lh3.googleusercontent.com/N05ScoheX4GQydoi_CO2CxyYZPuFdJ7faBtYngLco5lWTskhNwsB1DuykR5QrEVWQuqMuTM_6CmaLg4=w544-h544-l90-rj")!, secondImageURL: URL(string: "https://lh3.googleusercontent.com/EMO0yIZp463wd_9hduzAwXc2D_YqS1djD7WDe5ipXmK9ZbNuvY0_j-0QqVmH6pcqk_gUZmc5xNgWhDs=w544-h544-l90-rj")!, thirdImageURL: URL(string: "https://lh3.googleusercontent.com/pfRt8Wdw2pBSi39h8fpyUkfol51ZRocytunDNGZWuDuoPzhF0TplmzL5h5_VR9Vt_oWBJambj8qS19C2nQ=w544-h544-l90-rj")!, fourthImageURL: URL(string: "https://lh3.googleusercontent.com/x87vTXqhZYY2VGMTmXkbCJG-3l58O37sFVsA9pluP6nxXanJrNs-uFYezP9W3CDg152MYmyOZQEYTG2V=w544-h544-l90-rj")!),
@@ -48,12 +51,12 @@ class PlayListViewController: UIViewController {
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //storyboard에서 설정한 identifier와 동일한 이름
-        if segue.identifier == "RecentPlayListViewContainer" {
+        if segue.identifier == recentPlayListViewSegue {
             let containerVC = segue.destination as! RecentPlayListViewController
             containerVC.playListList = playListList
         }
         
-        if segue.identifier == "PlacePlayListViewContainer" {
+        if segue.identifier == placePlayListViewSegue {
             let containerVC = segue.destination as! PlacePlayListViewController
             containerVC.playListList = playListList
         }

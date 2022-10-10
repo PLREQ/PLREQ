@@ -10,6 +10,8 @@ import UIKit
 class PlacePlayListViewController: UIViewController {
     
     @IBOutlet weak var PlacePlayListTableView: UITableView!
+    let placePlayListTableViewCellNib: UINib = UINib(nibName: "PlacePlayListTableViewCell", bundle: nil)
+    let placePlayListTableViewCell: String = "PlacePlayListTableViewCell"
     
     var playListList: [PlayList] = []
     var placeList: [String] = []
@@ -23,7 +25,7 @@ class PlacePlayListViewController: UIViewController {
     }
     
     private func registerNib() {
-        PlacePlayListTableView.register(UINib(nibName: "PlacePlayListTableViewCell", bundle: nil), forCellReuseIdentifier: "PlacePlayListTableViewCell")
+        PlacePlayListTableView.register(placePlayListTableViewCellNib, forCellReuseIdentifier: placePlayListTableViewCell)
     }
     
     private func tableViewLink() {
@@ -74,7 +76,7 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlacePlayListTableViewCell", for: indexPath) as? PlacePlayListTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: placePlayListTableViewCell, for: indexPath) as? PlacePlayListTableViewCell else { return UITableViewCell() }
         cell.placeName.setLable(text: placeList[indexPath.row], fontSize: 18)
         // 테이블뷰의 이름과 플레이리스트안의 지역 이름을 비교하여 테이블뷰 안의 컬렉션 뷰 셀의 갯수를 미리 지정
         for i in 0..<playListList.count {

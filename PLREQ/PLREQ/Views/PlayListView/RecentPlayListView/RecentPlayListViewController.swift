@@ -11,6 +11,8 @@ class RecentPlayListViewController: UIViewController {
     
     @IBOutlet weak var RecentPlayListCollectionView: UICollectionView!
     var playListList: [PlayList] = []
+    let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
+    let playListCollectionViewCell: String = "PlayListCollectionViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class RecentPlayListViewController: UIViewController {
     }
     
     private func registerNib() {
-        self.RecentPlayListCollectionView.register(UINib(nibName: "PlayListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListCollectionViewCell")
+        self.RecentPlayListCollectionView.register(playListCollectionViewCellNib, forCellWithReuseIdentifier: playListCollectionViewCell)
     }
     
     private func setAutoLayout() {
@@ -54,7 +56,7 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlayListCollectionViewCell", for: indexPath) as? PlayListCollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: playListCollectionViewCell, for: indexPath) as? PlayListCollectionViewCell else { return UICollectionViewCell()}
         cell.PlayListImageArr[0].load(url: playListList[indexPath.row].firstImageURL)
         cell.PlayListImageArr[1].load(url: playListList[indexPath.row].secondImageURL)
         cell.PlayListImageArr[2].load(url: playListList[indexPath.row].thirdImageURL)
