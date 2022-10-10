@@ -14,7 +14,7 @@
 		D54C414028E343F400C7C0FD /* PLREQ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D54C413E28E343F400C7C0FD /* PLREQ.xcdatamodeld */; };
 		D54C414228E343F500C7C0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D54C414128E343F500C7C0FD /* Assets.xcassets */; };
 		D54C414528E343F500C7C0FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54C414328E343F500C7C0FD /* LaunchScreen.storyboard */; };
-		D580697E28E45BF600461CD8 /* imsi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580697D28E45BF600461CD8 /* imsi.swift */; };
+		D580697E28E45BF600461CD8 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580697D28E45BF600461CD8 /* CALayer+.swift */; };
 		D580698528E45C2500461CD8 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580698428E45C2500461CD8 /* MatchViewModel.swift */; };
 		D58069AA28E45C7500461CD8 /* PlayListDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D580699D28E45C7500461CD8 /* PlayListDetailView.storyboard */; };
 		D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580699E28E45C7500461CD8 /* PlayListDetailViewController.swift */; };
@@ -26,6 +26,13 @@
 		D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58069A728E45C7500461CD8 /* PlayListViewController.swift */; };
 		D58069B228E45C7500461CD8 /* PlayListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58069A828E45C7500461CD8 /* PlayListCollectionViewCell.swift */; };
 		D58069B328E45C7500461CD8 /* PlayListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58069A928E45C7500461CD8 /* PlayListCollectionViewCell.xib */; };
+		D59398FC28EC6E300082A3F9 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59398FB28EC6E300082A3F9 /* UIImageView+.swift */; };
+		D593996128EF55710082A3F9 /* UILable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D593996028EF55710082A3F9 /* UILable+.swift */; };
+		D593996328EF59B30082A3F9 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D593996228EF59B30082A3F9 /* Date+.swift */; };
+		D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9AD9F28EAFC1800859D50 /* RecentPlayListViewController.swift */; };
+		D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9ADA228EAFC5000859D50 /* PlacePlayListViewController.swift */; };
+		D5B9ADA628EB1E0400859D50 /* PlacePlayListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9ADA428EB1E0400859D50 /* PlacePlayListTableViewCell.swift */; };
+		D5B9ADA728EB1E0400859D50 /* PlacePlayListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B9ADA528EB1E0400859D50 /* PlacePlayListTableViewCell.xib */; };
 		D5A7B5C228F078F0007721B3 /* PlayList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5BE28F078F0007721B3 /* PlayList+CoreDataClass.swift */; };
 		D5A7B5C328F078F0007721B3 /* PlayList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5BF28F078F0007721B3 /* PlayList+CoreDataProperties.swift */; };
 		D5A7B5C428F078F0007721B3 /* Music+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5C028F078F0007721B3 /* Music+CoreDataClass.swift */; };
@@ -42,7 +49,7 @@
 		D54C414128E343F500C7C0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D54C414428E343F500C7C0FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D54C414628E343F500C7C0FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D580697D28E45BF600461CD8 /* imsi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imsi.swift; sourceTree = "<group>"; };
+		D580697D28E45BF600461CD8 /* CALayer+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		D580698428E45C2500461CD8 /* MatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 		D580699D28E45C7500461CD8 /* PlayListDetailView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayListDetailView.storyboard; sourceTree = "<group>"; };
 		D580699E28E45C7500461CD8 /* PlayListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListDetailViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +61,13 @@
 		D58069A728E45C7500461CD8 /* PlayListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListViewController.swift; sourceTree = "<group>"; };
 		D58069A828E45C7500461CD8 /* PlayListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListCollectionViewCell.swift; sourceTree = "<group>"; };
 		D58069A928E45C7500461CD8 /* PlayListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayListCollectionViewCell.xib; sourceTree = "<group>"; };
+		D59398FB28EC6E300082A3F9 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		D593996028EF55710082A3F9 /* UILable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILable+.swift"; sourceTree = "<group>"; };
+		D593996228EF59B30082A3F9 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		D5B9AD9F28EAFC1800859D50 /* RecentPlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPlayListViewController.swift; sourceTree = "<group>"; };
+		D5B9ADA228EAFC5000859D50 /* PlacePlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePlayListViewController.swift; sourceTree = "<group>"; };
+		D5B9ADA428EB1E0400859D50 /* PlacePlayListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePlayListTableViewCell.swift; sourceTree = "<group>"; };
+		D5B9ADA528EB1E0400859D50 /* PlacePlayListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePlayListTableViewCell.xib; sourceTree = "<group>"; };
 		D5A7B5BE28F078F0007721B3 /* PlayList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D5A7B5BF28F078F0007721B3 /* PlayList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D5A7B5C028F078F0007721B3 /* Music+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Music+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -105,7 +119,10 @@
 		D580697C28E45BF600461CD8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D580697D28E45BF600461CD8 /* imsi.swift */,
+				D580697D28E45BF600461CD8 /* CALayer+.swift */,
+				D59398FB28EC6E300082A3F9 /* UIImageView+.swift */,
+				D593996028EF55710082A3F9 /* UILable+.swift */,
+				D593996228EF59B30082A3F9 /* Date+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -171,6 +188,8 @@
 		D58069A528E45C7500461CD8 /* PlayListView */ = {
 			isa = PBXGroup;
 			children = (
+				D5B9AD9E28EAFBF600859D50 /* RecentPlayListView */,
+				D5B9ADA128EAFC3B00859D50 /* PlacePlayListView */,
 				D58069A628E45C7500461CD8 /* PlayListView.storyboard */,
 				D58069A728E45C7500461CD8 /* PlayListViewController.swift */,
 				D58069A828E45C7500461CD8 /* PlayListCollectionViewCell.swift */,
@@ -188,6 +207,24 @@
 				D54C413728E343F400C7C0FD /* SceneDelegate.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D5B9AD9E28EAFBF600859D50 /* RecentPlayListView */ = {
+			isa = PBXGroup;
+			children = (
+				D5B9AD9F28EAFC1800859D50 /* RecentPlayListViewController.swift */,
+			);
+			path = RecentPlayListView;
+			sourceTree = "<group>";
+		};
+		D5B9ADA128EAFC3B00859D50 /* PlacePlayListView */ = {
+			isa = PBXGroup;
+			children = (
+				D5B9ADA228EAFC5000859D50 /* PlacePlayListViewController.swift */,
+				D5B9ADA428EB1E0400859D50 /* PlacePlayListTableViewCell.swift */,
+				D5B9ADA528EB1E0400859D50 /* PlacePlayListTableViewCell.xib */,
+			);
+			path = PlacePlayListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +287,7 @@
 			files = (
 				D58069B328E45C7500461CD8 /* PlayListCollectionViewCell.xib in Resources */,
 				D58069AA28E45C7500461CD8 /* PlayListDetailView.storyboard in Resources */,
+				D5B9ADA728EB1E0400859D50 /* PlacePlayListTableViewCell.xib in Resources */,
 				D54C414528E343F500C7C0FD /* LaunchScreen.storyboard in Resources */,
 				D58069AF28E45C7500461CD8 /* MapView.storyboard in Resources */,
 				D54C414228E343F500C7C0FD /* Assets.xcassets in Resources */,
@@ -268,7 +306,10 @@
 			files = (
 				D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */,
 				D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */,
-				D580697E28E45BF600461CD8 /* imsi.swift in Sources */,
+				D593996128EF55710082A3F9 /* UILable+.swift in Sources */,
+				D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */,
+				D580697E28E45BF600461CD8 /* CALayer+.swift in Sources */,
+				D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */,
 				D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */,
 				D5A7B5C328F078F0007721B3 /* PlayList+CoreDataProperties.swift in Sources */,
 				D5A7B5C428F078F0007721B3 /* Music+CoreDataClass.swift in Sources */,
@@ -276,7 +317,10 @@
 				D5A7B5C228F078F0007721B3 /* PlayList+CoreDataClass.swift in Sources */,
 				D54C413A28E343F400C7C0FD /* ViewController.swift in Sources */,
 				D58069AE28E45C7500461CD8 /* MapViewController.swift in Sources */,
+				D59398FC28EC6E300082A3F9 /* UIImageView+.swift in Sources */,
 				D54C413628E343F400C7C0FD /* AppDelegate.swift in Sources */,
+				D593996328EF59B30082A3F9 /* Date+.swift in Sources */,
+				D5B9ADA628EB1E0400859D50 /* PlacePlayListTableViewCell.swift in Sources */,
 				D54C414028E343F400C7C0FD /* PLREQ.xcdatamodeld in Sources */,
 				D580698528E45C2500461CD8 /* MatchViewModel.swift in Sources */,
 				D5A7B5C528F078F0007721B3 /* Music+CoreDataProperties.swift in Sources */,

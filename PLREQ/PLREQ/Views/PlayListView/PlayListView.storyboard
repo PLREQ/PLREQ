@@ -1,42 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--PlayListView-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayListView" title="PlayListView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="PlayListViewController" customModule="PLREQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2zy-vY-MWp">
-                                <rect key="frame" x="142" y="44" width="131" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJN-Gg-Rdz">
+                                <rect key="frame" x="0.0" y="126" width="414" height="770"/>
+                                <connections>
+                                    <segue destination="oni-oA-Ax8" kind="embed" identifier="RecentPlayListViewContainer" id="oya-dB-Lcf"/>
+                                </connections>
+                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="nlo-GS-PG0">
+                                <rect key="frame" x="0.0" y="58" width="414" height="38"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMS-Z2-FRY">
+                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="38"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="최근">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="최근">
+                                                    <attributes>
+                                                        <font key="NSFont" size="20" name="AppleSDGothicNeo-Regular"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="selecButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="v5h-7a-oT7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hF2-EW-VrL">
+                                        <rect key="frame" x="219.5" y="0.0" width="194.5" height="38"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="지역">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="지역">
+                                                    <attributes>
+                                                        <font key="NSFont" metaFont="system" size="20"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="selecButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="0i4-7j-vaa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQs-uS-8jn">
+                                <rect key="frame" x="0.0" y="126" width="414" height="770"/>
+                                <connections>
+                                    <segue destination="R4a-b7-d0e" kind="embed" identifier="PlacePlayListViewContainer" id="l49-Td-JqE"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lQs-uS-8jn" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="444-oW-4X2"/>
+                            <constraint firstItem="lQs-uS-8jn" firstAttribute="top" secondItem="nlo-GS-PG0" secondAttribute="bottom" constant="30" id="7hP-dI-nI4"/>
+                            <constraint firstItem="gJN-Gg-Rdz" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="953-EQ-N65"/>
+                            <constraint firstItem="nlo-GS-PG0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9Hm-cv-dnE"/>
+                            <constraint firstItem="gJN-Gg-Rdz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="AMr-zR-3N6"/>
+                            <constraint firstItem="nlo-GS-PG0" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BCp-Xf-ZjB"/>
+                            <constraint firstItem="nlo-GS-PG0" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="BYd-X4-Sz1"/>
+                            <constraint firstItem="gJN-Gg-Rdz" firstAttribute="top" secondItem="nlo-GS-PG0" secondAttribute="bottom" constant="30" id="GXB-jJ-M8c"/>
+                            <constraint firstItem="lQs-uS-8jn" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="KMa-vI-xoy"/>
+                            <constraint firstAttribute="bottom" secondItem="lQs-uS-8jn" secondAttribute="bottom" id="RBK-P8-mNX"/>
+                            <constraint firstAttribute="bottom" secondItem="gJN-Gg-Rdz" secondAttribute="bottom" id="XxB-8m-vJS"/>
+                            <constraint firstItem="gJN-Gg-Rdz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="gCm-PH-bMj"/>
+                            <constraint firstItem="lQs-uS-8jn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mYH-AR-vmB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="PlacePlayListContainerView" destination="lQs-uS-8jn" id="qRr-5Y-Apk"/>
+                        <outlet property="RecentPlayListContainerView" destination="gJN-Gg-Rdz" id="e3z-PE-3VA"/>
+                        <outlet property="placeButton" destination="hF2-EW-VrL" id="cyQ-k4-YfU"/>
+                        <outlet property="playListButtonStackView" destination="nlo-GS-PG0" id="Xv9-v8-fla"/>
+                        <outlet property="recentButton" destination="YMS-Z2-FRY" id="68r-7Q-5ZJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="96"/>
+            <point key="canvasLocation" x="89.855072463768124" y="95.758928571428569"/>
+        </scene>
+        <!--PlacePlayListView-->
+        <scene sceneID="DRC-Ct-ofN">
+            <objects>
+                <viewController storyboardIdentifier="PlacePlayListView" title="PlacePlayListView" id="R4a-b7-d0e" customClass="PlacePlayListViewController" customModule="PLREQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JfP-c1-wwm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pt4-tT-SIM">
+                                <rect key="frame" x="20" y="0.0" width="394" height="735"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2hR-XN-up5"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="PlacePlayListTableView" destination="pt4-tT-SIM" id="mVG-m3-DeI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cor-W1-DGX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="450.72463768115944" y="741.62946428571422"/>
+        </scene>
+        <!--RecentPlayListView-->
+        <scene sceneID="Xgz-Kn-RCu">
+            <objects>
+                <viewController storyboardIdentifier="RecentPlayListView" title="RecentPlayListView" id="oni-oA-Ax8" customClass="RecentPlayListViewController" customModule="PLREQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="amV-qU-EKJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BVs-zC-yO8">
+                                <rect key="frame" x="20" y="0.0" width="374" height="735"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pcj-Tt-zfH">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jV5-dw-vdN"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="RecentPlayListCollectionView" destination="BVs-zC-yO8" id="VLZ-JF-ccV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ppC-xx-UZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-617.39130434782612" y="765.40178571428567"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
