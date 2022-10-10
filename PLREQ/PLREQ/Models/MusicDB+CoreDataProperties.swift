@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 
-
 extension MusicDB {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MusicDB> {
         return NSFetchRequest<MusicDB>(entityName: "Music")
     }
 
+    @NSManaged public var title: String?
     @NSManaged public var artist: String?
     @NSManaged public var musicImageURL: URL?
-    @NSManaged public var title: String?
+    
     @NSManaged public var playlist: PlayListDB?
 
 }
