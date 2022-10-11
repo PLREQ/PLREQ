@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537200E28F4A50200753C36 /* PLREQDataManager.swift */; };
+		D537201428F4A81A00753C36 /* PlayListDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537201028F4A81A00753C36 /* PlayListDB+CoreDataClass.swift */; };
+		D537201528F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537201128F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift */; };
+		D537201628F4A81A00753C36 /* MusicDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537201228F4A81A00753C36 /* MusicDB+CoreDataClass.swift */; };
+		D537201728F4A81A00753C36 /* MusicDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537201328F4A81A00753C36 /* MusicDB+CoreDataProperties.swift */; };
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		D54C413628E343F400C7C0FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C413528E343F400C7C0FD /* AppDelegate.swift */; };
 		D54C413828E343F400C7C0FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C413728E343F400C7C0FD /* SceneDelegate.swift */; };
@@ -34,13 +39,14 @@
 		D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9ADA228EAFC5000859D50 /* PlacePlayListViewController.swift */; };
 		D5B9ADA628EB1E0400859D50 /* PlacePlayListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9ADA428EB1E0400859D50 /* PlacePlayListTableViewCell.swift */; };
 		D5B9ADA728EB1E0400859D50 /* PlacePlayListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B9ADA528EB1E0400859D50 /* PlacePlayListTableViewCell.xib */; };
-		D5A7B5C228F078F0007721B3 /* PlayList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5BE28F078F0007721B3 /* PlayList+CoreDataClass.swift */; };
-		D5A7B5C328F078F0007721B3 /* PlayList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5BF28F078F0007721B3 /* PlayList+CoreDataProperties.swift */; };
-		D5A7B5C428F078F0007721B3 /* Music+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5C028F078F0007721B3 /* Music+CoreDataClass.swift */; };
-		D5A7B5C528F078F0007721B3 /* Music+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7B5C128F078F0007721B3 /* Music+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D537200E28F4A50200753C36 /* PLREQDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLREQDataManager.swift; sourceTree = "<group>"; };
+		D537201028F4A81A00753C36 /* PlayListDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayListDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D537201128F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayListDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D537201228F4A81A00753C36 /* MusicDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D537201328F4A81A00753C36 /* MusicDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		D54C413228E343F400C7C0FD /* PLREQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLREQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D54C413528E343F400C7C0FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,10 +76,6 @@
 		D5B9ADA228EAFC5000859D50 /* PlacePlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePlayListViewController.swift; sourceTree = "<group>"; };
 		D5B9ADA428EB1E0400859D50 /* PlacePlayListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePlayListTableViewCell.swift; sourceTree = "<group>"; };
 		D5B9ADA528EB1E0400859D50 /* PlacePlayListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePlayListTableViewCell.xib; sourceTree = "<group>"; };
-		D5A7B5BE28F078F0007721B3 /* PlayList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayList+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D5A7B5BF28F078F0007721B3 /* PlayList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayList+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D5A7B5C028F078F0007721B3 /* Music+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Music+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D5A7B5C128F078F0007721B3 /* Music+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Music+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,11 +134,12 @@
 		D580697F28E45C0900461CD8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D5A7B5BE28F078F0007721B3 /* PlayList+CoreDataClass.swift */,
-				D5A7B5BF28F078F0007721B3 /* PlayList+CoreDataProperties.swift */,
-				D5A7B5C028F078F0007721B3 /* Music+CoreDataClass.swift */,
-				D5A7B5C128F078F0007721B3 /* Music+CoreDataProperties.swift */,
+				D537201028F4A81A00753C36 /* PlayListDB+CoreDataClass.swift */,
+				D537201128F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift */,
+				D537201228F4A81A00753C36 /* MusicDB+CoreDataClass.swift */,
+				D537201328F4A81A00753C36 /* MusicDB+CoreDataProperties.swift */,
 				D54C413E28E343F400C7C0FD /* PLREQ.xcdatamodeld */,
+				D537200E28F4A50200753C36 /* PLREQDataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,25 +313,26 @@
 				D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */,
 				8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */,
 				D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */,
+				D537201428F4A81A00753C36 /* PlayListDB+CoreDataClass.swift in Sources */,
 				D593996128EF55710082A3F9 /* UILable+.swift in Sources */,
 				D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */,
 				D580697E28E45BF600461CD8 /* CALayer+.swift in Sources */,
 				D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */,
+				D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */,
 				D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */,
-				D5A7B5C328F078F0007721B3 /* PlayList+CoreDataProperties.swift in Sources */,
-				D5A7B5C428F078F0007721B3 /* Music+CoreDataClass.swift in Sources */,
+				D537201528F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift in Sources */,
 				D58069B228E45C7500461CD8 /* PlayListCollectionViewCell.swift in Sources */,
-				D5A7B5C228F078F0007721B3 /* PlayList+CoreDataClass.swift in Sources */,
 				D54C413A28E343F400C7C0FD /* ViewController.swift in Sources */,
 				D58069AE28E45C7500461CD8 /* MapViewController.swift in Sources */,
 				D59398FC28EC6E300082A3F9 /* UIImageView+.swift in Sources */,
+				D537201728F4A81A00753C36 /* MusicDB+CoreDataProperties.swift in Sources */,
 				D54C413628E343F400C7C0FD /* AppDelegate.swift in Sources */,
 				D593996328EF59B30082A3F9 /* Date+.swift in Sources */,
 				D5B9ADA628EB1E0400859D50 /* PlacePlayListTableViewCell.swift in Sources */,
 				D54C414028E343F400C7C0FD /* PLREQ.xcdatamodeld in Sources */,
 				D580698528E45C2500461CD8 /* MatchViewModel.swift in Sources */,
-				D5A7B5C528F078F0007721B3 /* Music+CoreDataProperties.swift in Sources */,
 				D54C413828E343F400C7C0FD /* SceneDelegate.swift in Sources */,
+				D537201628F4A81A00753C36 /* MusicDB+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
