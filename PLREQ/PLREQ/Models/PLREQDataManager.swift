@@ -87,4 +87,8 @@ class PLREQDataManager {
             return false
         }
     }
+    
+    func musicsFetch(playList: PlayListDB) -> [MusicDB] {
+        return playList.music?.array as! [MusicDB]
+    }
 }
