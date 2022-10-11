@@ -44,7 +44,14 @@ class PLREQDataManager {
         let sort = NSSortDescriptor(key: "day", ascending: false)
         fetchRequest.sortDescriptors = [sort]
         
-        let result = try! context.fetch(fetchRequest)
+        var result = [NSManagedObject]()
+        
+        do {
+            result = try! context.fetch(fetchRequest)
+        } catch {
+            print("fetch fail")
+        }
+        
         return result
     }
     

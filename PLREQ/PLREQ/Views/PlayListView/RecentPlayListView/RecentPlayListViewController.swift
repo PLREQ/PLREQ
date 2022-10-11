@@ -18,6 +18,7 @@ class RecentPlayListViewController: UIViewController {
         super.viewDidLoad()
         collectionViewLink()
         registerNib()
+        setAutoLayout()
         // Do any additional setup after loading the view.
     }
     
