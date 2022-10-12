@@ -106,7 +106,3 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
             
     }
 }
-
-protocol collectionViewCellClicked {
-    func cellClicked(indexPath: IndexPath)
-}
