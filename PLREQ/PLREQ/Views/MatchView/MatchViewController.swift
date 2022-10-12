@@ -8,12 +8,6 @@
 import UIKit
 import ShazamKit
 
-struct Music {
-    var title: String
-    var artist: String
-    var musicImageURL: URL
-}
-
 class MatchViewController: UIViewController {
 
     //MARK: Variabales
@@ -22,6 +16,7 @@ class MatchViewController: UIViewController {
     var recordedMusic = Music(title: "", artist: "", musicImageURL: URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!)
     var viewModel: MatchViewModel?
     var isListening: Bool = false
+    var timer: Timer?
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -32,13 +27,24 @@ class MatchViewController: UIViewController {
     @IBAction func tapRecordButton(_ sender: UIButton) {
         self.isListening.toggle()
         if self.isListening {
-            do {
-                try self.viewModel?.songSearch()
-            } catch {
-                print("error")
-            }
+            timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
             print("----- Not Listening -----")
+        }
+    }
+    
+    @IBAction func tapPlayListButton(_ sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "PlayListView", bundle: nil)
+        guard let playListViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListView") as? PlayListViewController else { return }
+        self.navigationController?.pushViewController(playListViewController, animated: true)
+    }
+    
+    @objc func catchMusic() {
+        do {
+            try self.viewModel?.songSearch()
+        } catch {
+            print("error")
         }
     }
     
@@ -75,10 +81,11 @@ class MatchViewController: UIViewController {
             // 동일한 타이틀, 아티스트의 음악이 이미 배열에 있는 경우 추가하지 않고 함수 종료
             for music in recordedMusicList {
                 if music.title == item?.title && music.artist == item?.artist {
+                    print("🥹")
                     return
                 }
             }
-            
+            print("🔥")
             self.viewModel?.title = item?.title
             self.viewModel?.artist = item?.artist
             self.viewModel?.musicImageURL = item?.artworkURL
