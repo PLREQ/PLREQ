@@ -8,13 +8,16 @@
 import UIKit
 
 class PlayListDetailViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    var playList: PlayListDB!
+    var musicList: [MusicDB]! {
+        return playList.music?.array as? [MusicDB]
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
 
     /*
     // MARK: - Navigation
