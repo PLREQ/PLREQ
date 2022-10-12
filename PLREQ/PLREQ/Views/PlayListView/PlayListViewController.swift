@@ -8,18 +8,6 @@
 import UIKit
 import CoreData
 
-struct PlayList {
-    var title: String
-    var day: Date
-    var location: String
-    var latitude: Float
-    var longtitude: Float
-    var firstImageURL: URL
-    var secondImageURL: URL
-    var thirdImageURL: URL
-    var fourthImageURL: URL
-}
-
 class PlayListViewController: UIViewController {
     
     @IBOutlet weak var recentButton: UIButton!
