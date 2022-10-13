@@ -36,19 +36,19 @@
                                             <action selector="shareButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FXE-FJ-vfJ"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1O5-z6-Zks">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1O5-z6-Zks">
                                         <rect key="frame" x="16" y="180" width="358" height="664"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playListDetailCell" id="KE9-hg-cyN" customClass="PlayListDetailCell" customModule="PLREQ" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="50" width="358" height="70.333335876464844"/>
+                                                <rect key="frame" x="0.0" y="50" width="358" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KE9-hg-cyN" id="tmc-Z4-dRj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="70.333335876464844"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="70"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sj2-0Z-mBi">
-                                                            <rect key="frame" x="10" y="10.000000000000004" width="50" height="50.333333333333343"/>
+                                                            <rect key="frame" x="10" y="10" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="W0Q-y2-cpi"/>
                                                                 <constraint firstAttribute="height" constant="50" id="ca3-rV-1cB"/>
