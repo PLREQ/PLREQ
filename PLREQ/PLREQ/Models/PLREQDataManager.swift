@@ -9,12 +9,6 @@ import Foundation
 import UIKit
 import CoreData
 
-struct Music {
-    var title: String
-    var artist: String
-    var musicImageURL: URL
-}
-
 class PLREQDataManager {
     static let shared: PLREQDataManager = PLREQDataManager()
     
