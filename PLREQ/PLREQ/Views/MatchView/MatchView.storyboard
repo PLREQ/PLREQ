@@ -99,6 +99,9 @@
                                 <rect key="frame" x="349" y="72" width="21" height="22"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="list.bullet" catalog="system"/>
+                                <connections>
+                                    <action selector="tapPlayListButton:" destination="QHG-as-yXz" eventType="touchUpInside" id="nIX-lE-eKX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mgW-pw-VFr"/>
