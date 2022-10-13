@@ -10,18 +10,25 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
-    
+
     let mapView = MKMapView()
     let manager = CLLocationManager()
+    var dissmissButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mapView)
         mapView.frame = view.bounds
-        mapView.delegate = self
+        setMapView()
+        view.addSubview(dissmissButton)
+        setDissmissButton()
         addCustomPin()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         manager.desiredAccuracy = kCLLocationAccuracyBest // battery
@@ -30,10 +37,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         manager.startUpdatingLocation()
     }
 
+    func setDissmissButton(){
+        let safeArea = self.view.safeAreaLayoutGuide
+        dissmissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
+        dissmissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
+        dissmissButton.tintColor = .white
+        dissmissButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        dissmissButton.addTarget(self, action: #selector(dissmissMapView), for: .touchUpInside)
+    }
+
+    func setMapView(){
+        mapView.delegate = self
+    }
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             manager.stopUpdatingLocation()
-            
             render(location)
         }
     }
@@ -56,17 +75,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func addCustomPin() {
         // testpin
-        let firstPin = MKPointAnnotation()
-        let secondPin = MKPointAnnotation()
+        let pin = MKPointAnnotation()
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 36.0139,
                                                      longitude: 129.3232)
         let secondCoordinate = CLLocationCoordinate2D(latitude: 36.0192,
                                                      longitude: 129.3433)
-        firstPin.coordinate = firstCoordinate
-        secondPin.coordinate = secondCoordinate
-        mapView.addAnnotation(firstPin)
-        mapView.addAnnotation(secondPin)
+        pin.coordinate = firstCoordinate
+        mapView.addAnnotation(pin)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -87,6 +103,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         
         return annotationView
+    }
+    
+    @objc func dissmissMapView(){
+        navigationController?.popViewController(animated: true)
+//        navigationController?.popToRootViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
+//        navigationController?.popToViewController(PlacePlayListViewController, animated:  )
     }
 }
 
