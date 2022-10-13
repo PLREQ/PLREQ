@@ -27,10 +27,15 @@ class MatchViewController: UIViewController {
     @IBAction func tapRecordButton(_ sender: UIButton) {
         self.isListening.toggle()
         if self.isListening {
+            // 30초 동안 한번씩 songSearch 함수 실행
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
-            print("----- Not Listening -----")
+            if self.recordedMusicList.count == 0 {
+                self.isEmptyRecordedMusicListAlert()
+            } else {
+                self.saveRecordedMusicList()
+            }
         }
     }
     
@@ -81,11 +86,9 @@ class MatchViewController: UIViewController {
             // 동일한 타이틀, 아티스트의 음악이 이미 배열에 있는 경우 추가하지 않고 함수 종료
             for music in recordedMusicList {
                 if music.title == item?.title && music.artist == item?.artist {
-                    print("🥹")
                     return
                 }
             }
-            print("🔥")
             self.viewModel?.title = item?.title
             self.viewModel?.artist = item?.artist
             self.viewModel?.musicImageURL = item?.artworkURL
@@ -100,6 +103,45 @@ class MatchViewController: UIViewController {
         
         self.recordedMusicList.append(self.recordedMusic)
         self.matchMusicCollectionView.reloadData()
+    }
+    
+    private func isEmptyRecordedMusicListAlert() {
+        let alert = UIAlertController(title: "검색된 음악이 없습니다.", message: "", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        alert.addAction(confirm)
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func saveRecordedMusicList() {
+        let alert = UIAlertController(title: "재생 목록 저장", message: nil, preferredStyle: .alert)
+        
+        let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
+            guard let title = alert.textFields?[0].text else { return }
+            let firstImageURL = self.recordedMusicList[0].musicImageURL
+            let secondImageURL = self.recordedMusicList[1].musicImageURL
+            let thirdImageURL = self.recordedMusicList[2].musicImageURL
+            let fourthImageURL = self.recordedMusicList[3].musicImageURL
+
+            PLREQDataManager.shared.save(title: title, location: "", latitude: 0.0, longtitude: 0.0, firstImageURL: firstImageURL, secondImageURL: secondImageURL, thirdImageURL: thirdImageURL, fourthImageURL: fourthImageURL, musics: self.recordedMusicList)
+            
+            self.recordedMusicList = [Music]()
+            self.matchMusicCollectionView.reloadData()
+        })
+        
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
+            alert.dismiss(animated: true)
+        })
+                                         
+        alert.addAction(cancelButton)
+        alert.addAction(registerButton)
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "성수동에서의 나른한 오후"
+        })
+        
+        self.present(alert, animated: true)
     }
 }
 
