@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFE1AE28F8412700D183CE /* Struct+.swift */; };
+		D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */; };
+		D50F95DC28F5DDE40072CDB5 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */; };
+		D50F95E528F6EA930072CDB5 /* Protocol+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95E428F6EA930072CDB5 /* Protocol+.swift */; };
 		D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537200E28F4A50200753C36 /* PLREQDataManager.swift */; };
 		D537201428F4A81A00753C36 /* PlayListDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537201028F4A81A00753C36 /* PlayListDB+CoreDataClass.swift */; };
 		D537201528F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D537201128F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift */; };
@@ -45,6 +48,9 @@
 /* Begin PBXFileReference section */
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		8BFFE1AE28F8412700D183CE /* Struct+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+.swift"; sourceTree = "<group>"; };
+		D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+.swift"; sourceTree = "<group>"; };
+		D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
+		D50F95E428F6EA930072CDB5 /* Protocol+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+.swift"; sourceTree = "<group>"; };
 		D537200E28F4A50200753C36 /* PLREQDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLREQDataManager.swift; sourceTree = "<group>"; };
 		D537201028F4A81A00753C36 /* PlayListDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayListDB+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D537201128F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayListDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -91,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D50F95E328F6EA8A0072CDB5 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D50F95E428F6EA930072CDB5 /* Protocol+.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		D54C412928E343F400C7C0FD = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +132,7 @@
 				D580699B28E45C7500461CD8 /* Views */,
 				D580698328E45C2500461CD8 /* ViewModels */,
 				D580697F28E45C0900461CD8 /* Models */,
+				D50F95E328F6EA8A0072CDB5 /* Protocol */,
 			);
 			path = PLREQ;
 			sourceTree = "<group>";
@@ -129,6 +144,8 @@
 				D59398FB28EC6E300082A3F9 /* UIImageView+.swift */,
 				D593996028EF55710082A3F9 /* UILable+.swift */,
 				D593996228EF59B30082A3F9 /* Date+.swift */,
+				D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */,
+				D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -319,10 +336,12 @@
 				D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */,
 				D537201428F4A81A00753C36 /* PlayListDB+CoreDataClass.swift in Sources */,
 				D593996128EF55710082A3F9 /* UILable+.swift in Sources */,
+				D50F95E528F6EA930072CDB5 /* Protocol+.swift in Sources */,
 				D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */,
 				D580697E28E45BF600461CD8 /* CALayer+.swift in Sources */,
 				D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */,
 				D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */,
+				D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */,
 				D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */,
 				D537201528F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift in Sources */,
 				D58069B228E45C7500461CD8 /* PlayListCollectionViewCell.swift in Sources */,
@@ -334,6 +353,7 @@
 				D593996328EF59B30082A3F9 /* Date+.swift in Sources */,
 				D5B9ADA628EB1E0400859D50 /* PlacePlayListTableViewCell.swift in Sources */,
 				D54C414028E343F400C7C0FD /* PLREQ.xcdatamodeld in Sources */,
+				D50F95DC28F5DDE40072CDB5 /* UINavigationController+.swift in Sources */,
 				D580698528E45C2500461CD8 /* MatchViewModel.swift in Sources */,
 				D54C413828E343F400C7C0FD /* SceneDelegate.swift in Sources */,
 				D537201628F4A81A00753C36 /* MusicDB+CoreDataClass.swift in Sources */,
@@ -412,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -466,7 +486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -483,7 +503,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V8U96P27D9;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
@@ -512,7 +532,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V8U96P27D9;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";

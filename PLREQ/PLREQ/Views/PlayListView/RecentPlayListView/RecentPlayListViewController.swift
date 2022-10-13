@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 class RecentPlayListViewController: UIViewController {
     
     @IBOutlet weak var RecentPlayListCollectionView: UICollectionView!
-    var playListList: [PlayList] = []
+    var playListList: [NSManagedObject] = []
     let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
     
@@ -58,22 +59,26 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: playListCollectionViewCell, for: indexPath) as? PlayListCollectionViewCell else { return UICollectionViewCell()}
-        cell.PlayListImageArr[0].load(url: playListList[indexPath.row].firstImageURL)
-        cell.PlayListImageArr[1].load(url: playListList[indexPath.row].secondImageURL)
-        cell.PlayListImageArr[2].load(url: playListList[indexPath.row].thirdImageURL)
-        cell.PlayListImageArr[3].load(url: playListList[indexPath.row].fourthImageURL)
+        let playListData = playListList[indexPath.row]
+        cell.PlayListImageArr[0].load(url: playListData.dataToURL(forKey: "firstImageURL"))
+        cell.PlayListImageArr[1].load(url: playListData.dataToURL(forKey: "secondImageURL"))
+        cell.PlayListImageArr[2].load(url: playListData.dataToURL(forKey: "thirdImageURL"))
+        cell.PlayListImageArr[3].load(url: playListData.dataToURL(forKey: "fourthImageURL"))
         
-        cell.playListName.setLable(text: playListList[indexPath.row].title, fontSize: 14)
+        cell.playListName.setLable(text: playListData.dataToString(forKey: "title"), fontSize: 14)
         
-        cell.playListDay.setLable(text: Date().toYMDString(date: playListList[indexPath.row].date), fontSize: 12)
+        cell.playListDay.setLable(text: Date().toYMDString(date: playListData.dataToDate(forKey: "day")), fontSize: 12)
         
         cell.layer.cornerRadius = self.view.frame.width / 2.3375 / 16
         
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let storyBoard = UIStoryboard(name: "PlayListDetailView", bundle: nil)
+        guard let playListDetailViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListDetailView") as? PlayListDetailViewController else { return }
+        playListDetailViewController.playList = (playListList[indexPath.row] as! PlayListDB)
+        self.navigationController?.pushViewController(playListDetailViewController, animated: true)
     }
 }
 
@@ -94,7 +99,7 @@ extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.view.frame.width / 2.3375
         let size = CGSize(width: width, height: width * 25 / 16 )
-//        let size = CGSize(width: 160, height: 250)
+        //        let size = CGSize(width: 160, height: 250)
         return size
     }
 }

@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import CoreData
 
-class PlacePlayListViewController: UIViewController {
+class PlacePlayListViewController: UIViewController, collectionViewCellClicked {
+    func cellClicked(indexPath: IndexPath) {
+        let storyBoard = UIStoryboard(name: "PlayListDetailView", bundle: nil)
+        guard let playListDetailViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListDetailView") as? PlayListDetailViewController else { return }
+        playListDetailViewController.playList = (playListList[indexPath.row] as! PlayListDB)
+        self.navigationController?.pushViewController(playListDetailViewController, animated: true)
+    }
     
     @IBOutlet weak var PlacePlayListTableView: UITableView!
     let placePlayListTableViewCellNib: UINib = UINib(nibName: "PlacePlayListTableViewCell", bundle: nil)
     let placePlayListTableViewCell: String = "PlacePlayListTableViewCell"
     
-    var playListList: [PlayList] = []
+    var playListList: [NSManagedObject] = []
     var placeList: [String] = []
     
     override func viewDidLoad() {
@@ -57,18 +64,19 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 플레이리스트 목록에서 같은 지역을 가진 경우에는 하나의 테이블 영역에 모두 들어가기에 지역의 갯수를 체크하여 지역의 갯수에 맞추어 테이블 뷰 갯수를 반환
         for i in 0..<playListList.count {
+            let playListData = playListList[i]
             var check: Bool = false
             if placeList.isEmpty {
-                placeList.append(playListList[i].location)
+                placeList.append(playListData.dataToString(forKey: "location"))
             } else {
                 for j in 0..<placeList.count {
-                    if playListList[i].location == self.placeList[j] {
+                    if playListData.dataToString(forKey: "location") == self.placeList[j] {
                         check.toggle()
                         break
                     }
                 }
                 if !check {
-                    placeList.append(playListList[i].location)
+                    placeList.append(playListData.dataToString(forKey: "location"))
                 }
             }
         }
@@ -77,11 +85,13 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: placePlayListTableViewCell, for: indexPath) as? PlacePlayListTableViewCell else { return UITableViewCell() }
+        cell.delegate = self
         cell.placeName.setLable(text: placeList[indexPath.row], fontSize: 18)
         // 테이블뷰의 이름과 플레이리스트안의 지역 이름을 비교하여 테이블뷰 안의 컬렉션 뷰 셀의 갯수를 미리 지정
         for i in 0..<playListList.count {
-            if cell.placeName.text == playListList[i].location {
-                cell.playListList.append(playListList[i])
+            let playListData = playListList[i]
+            if cell.placeName.text == playListData.dataToString(forKey: "location") {
+                cell.playListList.append(playListData)
             }
         }
         return cell

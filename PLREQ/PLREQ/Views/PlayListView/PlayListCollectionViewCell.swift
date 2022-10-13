@@ -8,7 +8,7 @@
 import UIKit
 
 class PlayListCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet var PlayListImageArr: [UIImageView]!
     @IBOutlet weak var playListName: UILabel!
     @IBOutlet weak var playListDay: UILabel!
