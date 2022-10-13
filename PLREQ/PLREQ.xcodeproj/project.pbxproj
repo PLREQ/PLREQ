@@ -10,6 +10,7 @@
 		0A9CD5F828F856E5002E4882 /* PlayListDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */; };
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFE1AE28F8412700D183CE /* Struct+.swift */; };
+		A8DBF62128F83D4000A01C47 /* MapAnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */; };
 		D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */; };
 		D50F95DC28F5DDE40072CDB5 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */; };
 		D50F95E528F6EA930072CDB5 /* Protocol+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95E428F6EA930072CDB5 /* Protocol+.swift */; };
@@ -50,6 +51,7 @@
 		0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailCell.swift; sourceTree = "<group>"; };
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		8BFFE1AE28F8412700D183CE /* Struct+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+.swift"; sourceTree = "<group>"; };
+		A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationViewController.swift; sourceTree = "<group>"; };
 		D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+.swift"; sourceTree = "<group>"; };
 		D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		D50F95E428F6EA930072CDB5 /* Protocol+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+.swift"; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8DBF61F28F83D2800A01C47 /* MapAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */,
+			);
+			path = MapAnnotation;
+			sourceTree = "<group>";
+		};
 		D50F95E328F6EA8A0072CDB5 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +218,7 @@
 		D58069A228E45C7500461CD8 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				A8DBF61F28F83D2800A01C47 /* MapAnnotation */,
 				D58069A328E45C7500461CD8 /* MapViewController.swift */,
 				D58069A428E45C7500461CD8 /* MapView.storyboard */,
 			);
@@ -337,6 +348,7 @@
 				D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */,
 				8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */,
 				D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */,
+				A8DBF62128F83D4000A01C47 /* MapAnnotationViewController.swift in Sources */,
 				D537201428F4A81A00753C36 /* PlayListDB+CoreDataClass.swift in Sources */,
 				D593996128EF55710082A3F9 /* UILable+.swift in Sources */,
 				D50F95E528F6EA930072CDB5 /* Protocol+.swift in Sources */,
@@ -507,7 +519,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HD34Q2YK79;
+				DEVELOPMENT_TEAM = 22A6RK2943;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
@@ -537,7 +549,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HD34Q2YK79;
+				DEVELOPMENT_TEAM = 22A6RK2943;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
