@@ -9,6 +9,9 @@ import UIKit
 
 final class PlayListDetailViewController: UIViewController {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var navigationTitle: UINavigationItem!
+    
     @IBOutlet weak var shareButtonTapped: UIButton!
     @IBOutlet weak var musicDetailTableView: UITableView!
     
@@ -17,21 +20,32 @@ final class PlayListDetailViewController: UIViewController {
         return playList.music?.array as? [MusicDB]
     }
     
+    var navigationTitleText: String! {
+        return "\(playList.dataToString(forKey: "title"))"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        musicDetailTableView.delegate = self
+        setupNavigationController()
+        navigationTitle.title = navigationTitleText
+        
         musicDetailTableView.dataSource = self
         
         shareButtonTapped.layer.cornerRadius = shareButtonTapped.frame.height / 2
     }
 
+    @IBAction func goToBackButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func shareButtonTapped(_ sender: Any) {
-        print("되나?")
+        print("Is it sellected?")
     }
 }
 
-extension PlayListDetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension PlayListDetailViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return musicList.count
     }
@@ -42,11 +56,20 @@ extension PlayListDetailViewController: UITableViewDataSource, UITableViewDelega
         let musicData = musicList[indexPath.row]
         cell?.musicImage.load(url: musicData.dataToURL(forKey: "musicImageURL"))
         cell?.musicImage.layer.cornerRadius = 6
-//        view.layer.cornerRadius = Constant.thumbnailSize / 2.0
 
         cell?.musicTitle.text = musicData.dataToString(forKey: "title")
         cell?.musicArtist.text = musicData.dataToString(forKey: "artist")
         
         return cell ?? UITableViewCell()
+    }
+}
+
+private extension PlayListDetailViewController {
+    
+    func setupNavigationController() {
+        self.navigationBar.translatesAutoresizingMaskIntoConstraints = false
+        self.navigationBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.navigationBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        self.navigationBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
     }
 }
