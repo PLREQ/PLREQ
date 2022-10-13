@@ -17,6 +17,11 @@ class MatchViewController: UIViewController {
     var viewModel: MatchViewModel?
     var isListening: Bool = false
     var timer: Timer?
+    let playListViewController: PlayListViewController = {
+        let storyBoard = UIStoryboard(name: "PlayListView", bundle: nil)
+        guard let playListViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListView") as? PlayListViewController else { return UIViewController() as! PlayListViewController }
+        return playListViewController
+    }()
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -40,9 +45,7 @@ class MatchViewController: UIViewController {
     }
     
     @IBAction func tapPlayListButton(_ sender: UIButton) {
-        let storyBoard = UIStoryboard(name: "PlayListView", bundle: nil)
-        guard let playListViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListView") as? PlayListViewController else { return }
-        self.navigationController?.pushViewController(playListViewController, animated: true)
+        self.navigationController?.pushViewController(self.playListViewController, animated: true)
     }
     
     @objc func catchMusic() {
@@ -129,6 +132,7 @@ class MatchViewController: UIViewController {
             
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
+            self.navigationController?.pushViewController(self.playListViewController, animated: true)
         })
         
         let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
