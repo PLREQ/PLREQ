@@ -8,11 +8,7 @@
 import UIKit
 import CoreData
 
-class PlacePlayListTableViewCell: UITableViewCell, collectionViewCelEditButtonlClicked {
-    func buttonClicked(indexPath: Int) {
-        editDelegate?.buttonClicked(indexPath: indexPath)
-    }
-    
+class PlacePlayListTableViewCell: UITableViewCell {
     @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var PlacePlayListCollectionView: UICollectionView!
     
@@ -117,5 +113,11 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegateFlowLayout {
         let size = CGSize(width: width, height: width * 25 / 16 )
 //        let size = CGSize(width: 160, height: 250)
         return size
+    }
+}
+
+extension PlacePlayListTableViewCell: collectionViewCelEditButtonlClicked {
+    func buttonClicked(indexPath: Int) {
+        editDelegate?.buttonClicked(indexPath: indexPath)
     }
 }

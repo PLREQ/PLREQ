@@ -8,71 +8,7 @@
 import UIKit
 import CoreData
 
-class RecentPlayListViewController: UIViewController, collectionViewCelEditButtonlClicked {
-    func buttonClicked(indexPath: Int) {
-        let alret = UIAlertController(title: playListList[indexPath].dataToString(forKey: "title"), message: "알림창 내용", preferredStyle: .actionSheet)
-        let delete = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
-            let deleteAlert = UIAlertController(title: "\(self.playListList[indexPath].dataToString(forKey: "title"))를 정말 삭제하시겠어요?", message: "삭제하면 되돌릴 수 없어요!", preferredStyle: .alert)
-            let deleteCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            let deletePlayList = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
-                let check = PLREQDataManager.shared.delete(playListObject: self.playListList[indexPath])
-                self.playListList = PLREQDataManager.shared.fetch()
-                self.RecentPlayListCollectionView.reloadData()
-            }
-            deleteAlert.addAction(deleteCancel)
-            deleteAlert.addAction(deletePlayList)
-            self.present(deleteAlert, animated: true, completion: nil)
-        }
-        let apple = UIAlertAction(title: "애플뮤직으로 내보내기", style: .default) { _ in
-            
-        }
-        let appleName = UIAlertAction(title: "애플뮤직 기존 플레이리스트에 추가하기", style: .default) { _ in
-            let appleAlert = UIAlertController(title: "이름을 입력해주세요.", message: nil, preferredStyle: .alert)
-            let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
-                
-            })
-            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
-                appleAlert.dismiss(animated: true)
-            })
-              
-            appleAlert.addAction(cancelButton)
-            appleAlert.addAction(registerButton)
-            appleAlert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "PLREQ"
-            })
-            
-            self.present(appleAlert, animated: true)
-        }
-        let changeTitle = UIAlertAction(title: "플레이 이름 변경하기", style: .default) { _ in
-            let changeAlert = UIAlertController(title: "이름을 입력해주세요.", message: nil, preferredStyle: .alert)
-            let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
-                guard let title = changeAlert.textFields?[0].text else { return }
-                PLREQDataManager.shared.updateTitle(playListObject: self.playListList[indexPath], title: title)
-                self.playListList = PLREQDataManager.shared.fetch()
-                self.RecentPlayListCollectionView.reloadData()
-            })
-            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
-                changeAlert.dismiss(animated: true)
-            })
-              
-            changeAlert.addAction(cancelButton)
-            changeAlert.addAction(registerButton)
-            changeAlert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "PLREQ"
-            })
-            
-            self.present(changeAlert, animated: true)
-        }
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        alret.addAction(cancel)
-        alret.addAction(changeTitle)
-        alret.addAction(apple)
-        alret.addAction(appleName)
-        alret.addAction(delete)
-        present(alret, animated: true, completion: nil)
-    }
-    
+class RecentPlayListViewController: UIViewController {
     
     @IBOutlet weak var RecentPlayListCollectionView: UICollectionView!
     
@@ -169,5 +105,71 @@ extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
         let size = CGSize(width: width, height: width * 25 / 16 )
         //        let size = CGSize(width: 160, height: 250)
         return size
+    }
+}
+
+extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
+    func buttonClicked(indexPath: Int) {
+        let alret = UIAlertController(title: playListList[indexPath].dataToString(forKey: "title"), message: "알림창 내용", preferredStyle: .actionSheet)
+        let delete = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
+            let deleteAlert = UIAlertController(title: "\(self.playListList[indexPath].dataToString(forKey: "title"))를 정말 삭제하시겠어요?", message: "삭제하면 되돌릴 수 없어요!", preferredStyle: .alert)
+            let deleteCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let deletePlayList = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
+                let check = PLREQDataManager.shared.delete(playListObject: self.playListList[indexPath])
+                self.playListList = PLREQDataManager.shared.fetch()
+                self.RecentPlayListCollectionView.reloadData()
+            }
+            deleteAlert.addAction(deleteCancel)
+            deleteAlert.addAction(deletePlayList)
+            self.present(deleteAlert, animated: true, completion: nil)
+        }
+        let apple = UIAlertAction(title: "애플뮤직으로 내보내기", style: .default) { _ in
+            
+        }
+        let appleName = UIAlertAction(title: "애플뮤직 기존 플레이리스트에 추가하기", style: .default) { _ in
+            let appleAlert = UIAlertController(title: "이름을 입력해주세요.", message: nil, preferredStyle: .alert)
+            let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
+                
+            })
+            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
+                appleAlert.dismiss(animated: true)
+            })
+            
+            appleAlert.addAction(cancelButton)
+            appleAlert.addAction(registerButton)
+            appleAlert.addTextField(configurationHandler: { textField in
+                textField.placeholder = "PLREQ"
+            })
+            
+            self.present(appleAlert, animated: true)
+        }
+        let changeTitle = UIAlertAction(title: "플레이 이름 변경하기", style: .default) { _ in
+            let changeAlert = UIAlertController(title: "이름을 입력해주세요.", message: nil, preferredStyle: .alert)
+            let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
+                guard let title = changeAlert.textFields?[0].text else { return }
+                PLREQDataManager.shared.updateTitle(playListObject: self.playListList[indexPath], title: title)
+                self.playListList = PLREQDataManager.shared.fetch()
+                self.RecentPlayListCollectionView.reloadData()
+            })
+            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
+                changeAlert.dismiss(animated: true)
+            })
+            
+            changeAlert.addAction(cancelButton)
+            changeAlert.addAction(registerButton)
+            changeAlert.addTextField(configurationHandler: { textField in
+                textField.placeholder = "PLREQ"
+            })
+            
+            self.present(changeAlert, animated: true)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alret.addAction(cancel)
+        alret.addAction(changeTitle)
+        alret.addAction(apple)
+        alret.addAction(appleName)
+        alret.addAction(delete)
+        present(alret, animated: true, completion: nil)
     }
 }
