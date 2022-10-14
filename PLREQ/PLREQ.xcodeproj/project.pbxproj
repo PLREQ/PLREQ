@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A9CD5F828F856E5002E4882 /* PlayListDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */; };
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFE1AE28F8412700D183CE /* Struct+.swift */; };
 		A8DBF62128F83D4000A01C47 /* MapAnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailCell.swift; sourceTree = "<group>"; };
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		8BFFE1AE28F8412700D183CE /* Struct+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+.swift"; sourceTree = "<group>"; };
 		A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				D580699D28E45C7500461CD8 /* PlayListDetailView.storyboard */,
 				D580699E28E45C7500461CD8 /* PlayListDetailViewController.swift */,
+				0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */,
 			);
 			path = PlayListDetailView;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				D593996128EF55710082A3F9 /* UILable+.swift in Sources */,
 				D50F95E528F6EA930072CDB5 /* Protocol+.swift in Sources */,
 				D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */,
+				0A9CD5F828F856E5002E4882 /* PlayListDetailCell.swift in Sources */,
 				D580697E28E45BF600461CD8 /* CALayer+.swift in Sources */,
 				D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */,
 				D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */,
@@ -532,6 +536,7 @@
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Use your photo album.\nUse your photo album.\nUse your photo album.\nUse user's photo album.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -562,6 +567,7 @@
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Use your photo album.\nUse your photo album.\nUse your photo album.\nUse user's photo album.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
