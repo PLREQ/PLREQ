@@ -36,7 +36,9 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
                     var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
                     request.includeTopResults = true
                     let reponse = try await request.response()
-                    try await MusicLibrary.shared.add(reponse.songs.first!, to: newPlayList)
+                    if !reponse.songs.isEmpty { // 검색한 노래가 있는지 화기인
+                        try await MusicLibrary.shared.add(reponse.songs.first!, to: newPlayList)
+                    }
                 }
             }
         }
@@ -46,14 +48,34 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
     func addSongsToPlayList(name: String, musicList: [String]) {
         Task {
             let request = MusicLibrarySearchRequest(term: name, types: [Playlist.self])
-            let response = try await request.response()
-            Task {
-                musicList.forEach() { musicTitle in
-                    Task {
-                        var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
-                        request.includeTopResults = true
-                        let reponse = try await request.response()
-                        try await MusicLibrary.shared.add(reponse.songs.first!, to: response.playlists[0])
+            let libraryResponse = try await request.response()
+            print("❤️")
+            if !libraryResponse.playlists.isEmpty { // 입력하려고하는 플레이리스트의 이름이 있는지 확인
+                Task {
+                    musicList.forEach() { musicTitle in
+                        Task {
+                            print("❤️")
+                            var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
+                            request.includeTopResults = true
+                            let response = try await request.response()
+                            try await MusicLibrary.shared.add(response.songs.first!, to: libraryResponse.playlists[0])
+                        }
+                    }
+                }
+            } else {
+                Task {
+                    print("❤️")
+                    let newPlayList = try await MusicLibrary.shared.createPlaylist(name: name, description: "PLREQ에서 생성된 플레이리스트 입니다.", authorDisplayName: "PLREQ")
+                    musicList.forEach() { musicTitle in
+                        Task {
+                            print("❤️")
+                            var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
+                            request.includeTopResults = true
+                            let reponse = try await request.response()
+                            if !reponse.songs.isEmpty { // 검색한 노래가 있는지 화기인
+                                try await MusicLibrary.shared.add(reponse.songs.first!, to: newPlayList)
+                            }
+                        }
                     }
                 }
             }
