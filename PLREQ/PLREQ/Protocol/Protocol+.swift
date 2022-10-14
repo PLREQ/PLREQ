@@ -10,3 +10,7 @@ import Foundation
 protocol collectionViewCellClicked {
     func cellClicked(indexPath: IndexPath)
 }
+
+protocol collectionViewCelEditButtonlClicked {
+    func buttonClicked(indexPath: Int)
+}

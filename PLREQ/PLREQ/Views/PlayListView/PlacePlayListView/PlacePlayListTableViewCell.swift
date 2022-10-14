@@ -17,7 +17,8 @@ class PlacePlayListTableViewCell: UITableViewCell {
     let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
     var delegate: collectionViewCellClicked?
-    
+    var editDelegate: collectionViewCelEditButtonlClicked?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -77,7 +78,10 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: playListCollectionViewCell, for: indexPath) as? PlayListCollectionViewCell else { return UICollectionViewCell()}
+        
         let playListData = playListList[indexPath.row]
+        cell.delegate = self
+        cell.indexPath = indexPath.row
         cell.PlayListImageArr[0].load(url: playListData.dataToURL(forKey: "firstImageURL"))
         cell.PlayListImageArr[1].load(url: playListData.dataToURL(forKey: "secondImageURL"))
         cell.PlayListImageArr[2].load(url: playListData.dataToURL(forKey: "thirdImageURL"))
@@ -109,5 +113,11 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegateFlowLayout {
         let size = CGSize(width: width, height: width * 25 / 16 )
 //        let size = CGSize(width: 160, height: 250)
         return size
+    }
+}
+
+extension PlacePlayListTableViewCell: collectionViewCelEditButtonlClicked {
+    func buttonClicked(indexPath: Int) {
+        editDelegate?.buttonClicked(indexPath: indexPath)
     }
 }
