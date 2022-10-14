@@ -22,11 +22,7 @@ class PlacePlayListTableViewCell: UITableViewCell, collectionViewCelEditButtonlC
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
     var delegate: collectionViewCellClicked?
     var editDelegate: collectionViewCelEditButtonlClicked?
-    var dataCheck: Bool = false {
-        didSet {
-            
-        }
-    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
