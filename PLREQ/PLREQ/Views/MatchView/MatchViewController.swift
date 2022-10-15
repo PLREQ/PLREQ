@@ -7,9 +7,10 @@
 
 import UIKit
 import ShazamKit
+import CoreLocation
 
 class MatchViewController: UIViewController {
-
+    
     //MARK: Variabales
     var recordedMusicList = [Music]()
     // 임시 Image URL 추가
@@ -22,6 +23,9 @@ class MatchViewController: UIViewController {
         guard let playListViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListView") as? PlayListViewController else { return UIViewController() as! PlayListViewController }
         return playListViewController
     }()
+    let locationManager = CLLocationManager()
+    var currentLocation: String = ""
+    var currentTime: String = ""
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -36,7 +40,6 @@ class MatchViewController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
-            self.viewModel?.stopListening()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
@@ -52,6 +55,7 @@ class MatchViewController: UIViewController {
     @objc func catchMusic() {
         do {
             try self.viewModel?.songSearch()
+            self.locationManager.stopUpdatingLocation()
         } catch {
             print("error")
         }
@@ -68,11 +72,13 @@ class MatchViewController: UIViewController {
         if self.viewModel == nil {
             self.viewModel = MatchViewModel(matchHandler: songMatched)
         }
+        self.locationManager.startUpdatingLocation()
     }
     
     //MARK: Style Function
     private func styleFunction() {
         self.configureCollectionView()
+        self.configureLocationManager()
     }
     
     private func configureCollectionView() {
@@ -80,6 +86,12 @@ class MatchViewController: UIViewController {
         self.matchMusicCollectionView.backgroundColor = UIColor.white
         self.matchMusicCollectionView.delegate = self
         self.matchMusicCollectionView.dataSource = self
+    }
+    
+    private func configureLocationManager() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     //MARK: Shazam Function
@@ -145,11 +157,35 @@ class MatchViewController: UIViewController {
         alert.addAction(cancelButton)
         alert.addAction(registerButton)
         alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "성수동에서의 나른한 오후"
+            self.currentTimeFormatter(.now)
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                textField.text = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+            case .denied, .notDetermined, .restricted:
+                textField.text = ""
+            default:
+                textField.placeholder = ""
+            }
         })
-        
         self.present(alert, animated: true)
     }
+    
+    private func currentTimeFormatter(_ date: Date) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH"
+        let currentHour: String = timeFormatter.string(from: date)
+        
+        if Int(currentHour) ?? 0 < 6 {
+            self.currentTime = "시원한 새벽"
+        } else if Int(currentHour) ?? 0 < 12 {
+            self.currentTime = "산뜻한 아침"
+        } else if Int(currentHour) ?? 0 < 18 {
+            self.currentTime = "나른한 오후"
+        } else {
+            self.currentTime = "적적한 저녁"
+        }
+    }
+    
 }
 
 extension MatchViewController: UICollectionViewDataSource {
@@ -175,5 +211,27 @@ extension MatchViewController: UICollectionViewDataSource {
 extension MatchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+    }
+}
+
+extension MatchViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let currentLatitude = location.coordinate.latitude
+            let currentLongtitude = location.coordinate.longitude
+            
+            let findLocation = CLLocation(latitude: currentLatitude, longitude: currentLongtitude)
+            let geocoder = CLGeocoder()
+            let locale = Locale(identifier: "Ko-kr")
+            geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in
+                if let address: [CLPlacemark] = place {
+                    self?.currentLocation = "\(address.last?.locality ?? "")"
+                }
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error \(error.localizedDescription)")
     }
 }

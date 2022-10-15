@@ -518,6 +518,7 @@
 				DEVELOPMENT_TEAM = V8U96P27D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -547,6 +548,7 @@
 				DEVELOPMENT_TEAM = V8U96P27D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
