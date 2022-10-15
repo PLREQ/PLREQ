@@ -128,6 +128,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
             deleteAlert.addAction(deletePlayList)
             self.present(deleteAlert, animated: true, completion: nil)
         }
+        
         let apple = UIAlertAction(title: "애플뮤직으로 내보내기", style: .default) { _ in
             if #available(iOS 16.0, *) {
                 let appleAlert = UIAlertController(title: "정말 내보내시겠어요?", message: "'\(self.playListList[indexPath].dataToString(forKey: "title"))'으로 저장됩니다.", preferredStyle: .alert)
@@ -185,6 +186,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
             
             self.present(appleNameAlert, animated: true)
         }
+        
         let changeTitle = UIAlertAction(title: "플레이리스트 이름 변경하기", style: .default) { _ in
             let changeAlert = UIAlertController(title: "이름을 입력해주세요.", message: nil, preferredStyle: .alert)
             let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in

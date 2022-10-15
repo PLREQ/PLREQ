@@ -49,12 +49,10 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
         Task {
             let request = MusicLibrarySearchRequest(term: name, types: [Playlist.self])
             let libraryResponse = try await request.response()
-            print("❤️")
             if !libraryResponse.playlists.isEmpty { // 입력하려고하는 플레이리스트의 이름이 있는지 확인
                 Task {
                     musicList.forEach() { musicTitle in
                         Task {
-                            print("❤️")
                             var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
                             request.includeTopResults = true
                             let response = try await request.response()
@@ -64,11 +62,9 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
                 }
             } else {
                 Task {
-                    print("❤️")
                     let newPlayList = try await MusicLibrary.shared.createPlaylist(name: name, description: "PLREQ에서 생성된 플레이리스트 입니다.", authorDisplayName: "PLREQ")
                     musicList.forEach() { musicTitle in
                         Task {
-                            print("❤️")
                             var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
                             request.includeTopResults = true
                             let reponse = try await request.response()
