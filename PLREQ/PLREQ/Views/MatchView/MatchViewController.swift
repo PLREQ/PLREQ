@@ -36,6 +36,7 @@ class MatchViewController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
+            self.viewModel?.stopListening()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
@@ -64,7 +65,9 @@ class MatchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.viewModel = MatchViewModel(matchHandler: songMatched)
+        if self.viewModel == nil {
+            self.viewModel = MatchViewModel(matchHandler: songMatched)
+        }
     }
     
     //MARK: Style Function
@@ -104,7 +107,7 @@ class MatchViewController: UIViewController {
         self.recordedMusic.artist = self.viewModel?.artist ?? ""
         self.recordedMusic.musicImageURL = self.viewModel?.musicImageURL ?? URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!
         
-        self.recordedMusicList.append(self.recordedMusic)
+        self.recordedMusicList.insert(self.recordedMusic, at: 0)
         self.matchMusicCollectionView.reloadData()
     }
     
