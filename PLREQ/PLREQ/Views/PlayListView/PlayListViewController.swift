@@ -63,7 +63,7 @@ class PlayListViewController: UIViewController {
         self.navigationController?.pushViewController(mapViewViewController, animated: true)
     }
     
-    @IBAction func selecButton(_ sender: UIButton) {
+    @IBAction func selectButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "최근" {
             NotificationCenter.default.post(name: .viewReload, object: nil)
             RecentPlayListContainerView.isHidden = false
