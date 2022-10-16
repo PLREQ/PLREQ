@@ -536,6 +536,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V8U96P27D9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
 				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
@@ -569,6 +573,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V8U96P27D9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PLREQ/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
 				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
