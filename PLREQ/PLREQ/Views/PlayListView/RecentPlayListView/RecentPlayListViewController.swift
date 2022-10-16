@@ -11,6 +11,7 @@ import CoreData
 class RecentPlayListViewController: UIViewController {
     
     @IBOutlet weak var RecentPlayListCollectionView: UICollectionView!
+    
     var playListList: [NSManagedObject] = []
     let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
@@ -20,7 +21,12 @@ class RecentPlayListViewController: UIViewController {
         collectionViewLink()
         registerNib()
         setAutoLayout()
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
+    }
+    
+    @objc func reloadView(_ noti: Notification) {
+        self.playListList = PLREQDataManager.shared.fetch()
+        self.RecentPlayListCollectionView.reloadData()
     }
     
     private func collectionViewLink() {
@@ -59,7 +65,10 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: playListCollectionViewCell, for: indexPath) as? PlayListCollectionViewCell else { return UICollectionViewCell()}
+        
         let playListData = playListList[indexPath.row]
+        cell.delegate = self
+        cell.indexPath = indexPath.row
         cell.PlayListImageArr[0].load(url: playListData.dataToURL(forKey: "firstImageURL"))
         cell.PlayListImageArr[1].load(url: playListData.dataToURL(forKey: "secondImageURL"))
         cell.PlayListImageArr[2].load(url: playListData.dataToURL(forKey: "thirdImageURL"))
@@ -101,5 +110,111 @@ extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
         let size = CGSize(width: width, height: width * 25 / 16 )
         //        let size = CGSize(width: 160, height: 250)
         return size
+    }
+}
+
+extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
+    func buttonClicked(indexPath: Int) {
+        let alret = UIAlertController(title: playListList[indexPath].dataToString(forKey: "title"), message: "알림창 내용", preferredStyle: .actionSheet)
+        let delete = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
+            let deleteAlert = UIAlertController(title: "\(self.playListList[indexPath].dataToString(forKey: "title"))를 정말 삭제하시겠어요?", message: "삭제하면 되돌릴 수 없어요!", preferredStyle: .alert)
+            let deleteCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let deletePlayList = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
+                _ = PLREQDataManager.shared.delete(playListObject: self.playListList[indexPath])
+                self.playListList = PLREQDataManager.shared.fetch()
+                self.RecentPlayListCollectionView.reloadData()
+            }
+            deleteAlert.addAction(deleteCancel)
+            deleteAlert.addAction(deletePlayList)
+            self.present(deleteAlert, animated: true, completion: nil)
+        }
+        
+        let apple = UIAlertAction(title: "애플뮤직으로 내보내기", style: .default) { _ in
+            if #available(iOS 16.0, *) {
+                let appleAlert = UIAlertController(title: "정말 내보내시겠어요?", message: "'\(self.playListList[indexPath].dataToString(forKey: "title"))'으로 저장됩니다.", preferredStyle: .alert)
+                let appleCancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+                let addPlayList = UIAlertAction(title: "플레이리스트 내보내기", style: .default) { _ in
+                    let musicLists = (self.playListList[indexPath] as! PlayListDB).music?.array as? [MusicDB]
+                    var musicListsTitle: [String] = []
+                    for i in 0..<musicLists!.count {
+                        musicListsTitle.append("")
+                        musicListsTitle[i] = musicListsTitle[i] + musicLists![i].dataToString(forKey: "artist") + " " + musicLists![i].dataToString(forKey: "title")
+                    }
+                    AppleMusicExport().addPlayList(name: self.playListList[indexPath].dataToString(forKey: "title"), musicList: musicListsTitle)
+                }
+                appleAlert.addAction(addPlayList)
+                appleAlert.addAction(appleCancel)
+                self.present(appleAlert, animated: true, completion: nil)
+            } else {
+                let appleAlert = UIAlertController(title: "애플 뮤직 관련 기능을 사용하실려면 iOS 16버전 이상의 버전이 필요합니다.", message: "사용하시려면 iOS 버전을 확인해주세요.", preferredStyle: .alert)
+                let appleCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                appleAlert.addAction(appleCancel)
+                self.present(appleAlert, animated: true, completion: nil)
+            }
+        }
+        
+        let appleName = UIAlertAction(title: "애플뮤직 특정 플레이리스트에 추가하기", style: .default) { _ in
+            let appleNameAlert = UIAlertController(title: "이름을 입력해주세요.\n(일치하는 플레이리스트가 없다면 입력한 이름으로 저장됩니다.)", message: nil, preferredStyle: .alert)
+            let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
+                if #available(iOS 16.0, *) {
+                    guard var playlistTitle = appleNameAlert.textFields?[0].text else { return }
+                    if((playlistTitle == "")) { playlistTitle = self.playListList[indexPath].dataToString(forKey: "title") }
+                    let musicLists = (self.playListList[indexPath] as! PlayListDB).music?.array as? [MusicDB]
+                    var musicListsTitle: [String] = []
+                    for i in 0..<musicLists!.count {
+                        musicListsTitle.append("")
+                        musicListsTitle[i] = musicListsTitle[i] + musicLists![i].dataToString(forKey: "artist") + " " + musicLists![i].dataToString(forKey: "title")
+                    }
+                    AppleMusicExport().addSongsToPlayList(name: playlistTitle, musicList: musicListsTitle)
+                    appleNameAlert.dismiss(animated: true)
+                } else {
+                    let appleAlert = UIAlertController(title: "애플 뮤직 관련 기능을 사용하실려면 iOS 16버전 이상의 버전이 필요합니다.", message: "사용하시려면 iOS 버전을 확인해주세요.", preferredStyle: .alert)
+                    let appleCancel = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                    appleAlert.addAction(appleCancel)
+                    self.present(appleAlert, animated: true, completion: nil)
+                }
+            })
+            let cancelButton = UIAlertAction(title: "취소", style: .destructive, handler: { _ in
+                appleNameAlert.dismiss(animated: true)
+            })
+            
+            appleNameAlert.addAction(cancelButton)
+            appleNameAlert.addAction(registerButton)
+            appleNameAlert.addTextField(configurationHandler: { textField in
+                textField.placeholder = self.playListList[indexPath].dataToString(forKey: "title")
+            })
+            
+            self.present(appleNameAlert, animated: true)
+        }
+        
+        let changeTitle = UIAlertAction(title: "플레이리스트 이름 변경하기", style: .default) { _ in
+            let changeAlert = UIAlertController(title: "이름을 입력해주세요.", message: nil, preferredStyle: .alert)
+            let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
+                guard var title = changeAlert.textFields?[0].text else { return }
+                if(title == "") { title = "PLREQ" }
+                _ = PLREQDataManager.shared.updateTitle(playListObject: self.playListList[indexPath], title: title)
+                self.playListList = PLREQDataManager.shared.fetch()
+                self.RecentPlayListCollectionView.reloadData()
+            })
+            let cancelButton = UIAlertAction(title: "취소", style: .destructive, handler: { _ in
+                changeAlert.dismiss(animated: true)
+            })
+            
+            changeAlert.addAction(cancelButton)
+            changeAlert.addAction(registerButton)
+            changeAlert.addTextField(configurationHandler: { textField in
+                textField.placeholder = "PLREQ"
+            })
+            
+            self.present(changeAlert, animated: true)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alret.addAction(cancel)
+        alret.addAction(changeTitle)
+        alret.addAction(apple)
+        alret.addAction(appleName)
+        alret.addAction(delete)
+        present(alret, animated: true, completion: nil)
     }
 }

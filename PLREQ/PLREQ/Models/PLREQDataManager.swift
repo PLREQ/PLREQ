@@ -88,6 +88,17 @@ class PLREQDataManager {
         }
     }
     
+    func updateTitle(playListObject: NSManagedObject, title: String) -> Bool {
+        playListObject.setValue(title, forKey: "title")
+        
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
     func musicsFetch(playList: PlayListDB) -> [MusicDB] {
         return playList.music?.array as! [MusicDB]
     }
