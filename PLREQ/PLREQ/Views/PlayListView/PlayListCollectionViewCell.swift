@@ -9,11 +9,14 @@ import UIKit
 
 class PlayListCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet var PlayListImageArr: [UIImageView]!
     @IBOutlet weak var playListName: UILabel!
     @IBOutlet weak var playListDay: UILabel!
     let width = UIScreen.main.bounds.width / 2.4375
     let padding = UIScreen.main.bounds.width
+    var delegate: collectionViewCelEditButtonlClicked?
+    var indexPath: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +26,10 @@ class PlayListCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         setLayout()
         self.playListName.sizeToFit()
+    }
+    
+    @IBAction func clickEditButton(_ sender: Any) {
+        delegate?.buttonClicked(indexPath: indexPath)
     }
     
     private func setLayout() {
@@ -59,6 +66,13 @@ class PlayListCollectionViewCell: UICollectionViewCell {
         PlayListImageArr[3].trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         
         PlayListImageArr[0].trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -imageWidth).isActive = true
+        
+        editButton.transform = CGAffineTransformMakeRotation(CGFloat(Double.pi / 2))
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.widthAnchor.constraint(equalToConstant: imageWidth / 3).isActive = true
+        editButton.heightAnchor.constraint(equalToConstant: imageWidth / 1.8).isActive = true
+        editButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 0 ).isActive = true
+        editButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0 ).isActive = true
     }
 }
 
