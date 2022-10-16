@@ -40,7 +40,13 @@ final class PlayListDetailViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        print("Is it sellected?")
+        let image: UIImage = screenshot()
+
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(savedImage), nil)
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }
 
