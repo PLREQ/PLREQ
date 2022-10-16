@@ -185,7 +185,6 @@ class MatchViewController: UIViewController {
             self.currentTime = "적적한 저녁"
         }
     }
-    
 }
 
 extension MatchViewController: UICollectionViewDataSource {
