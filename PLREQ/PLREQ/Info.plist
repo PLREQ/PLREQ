@@ -21,5 +21,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>앱 사용하는동안 위치추적 해도 됩니까잉?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>계속 위치추적 해도 됩니깡?</string>
 </dict>
 </plist>
