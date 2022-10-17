@@ -22,7 +22,7 @@ extension NSManagedObject {
         return self.value(forKey: forKey) as? Date ?? Date()
     }
     
-    func dataToFloat(forKey: String) -> Float {
-        return self.value(forKey: forKey) as? Float ?? 0
+    func dataToDouble(forKey: String) -> Double {
+        return self.value(forKey: forKey) as? Double ?? 0
     }
 }
