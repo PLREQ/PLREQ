@@ -114,5 +114,24 @@ class PLREQDataManager {
             return false
         }
     }
-
+    
+    // 바뀐 음악의 순서를 저장
+    func musicChangeOrder(playListObject: [NSManagedObject], musics: [MusicDB]) -> Bool {
+        for i in 0..<playListObject.count {
+            if i < musics.count {
+                playListObject[i].setValue(musics[i].title, forKey: "title")
+                playListObject[i].setValue(musics[i].artist, forKey: "artist")
+                playListObject[i].setValue(musics[i].musicImageURL, forKey: "musicImageURL")
+            } else {
+                context.delete(playListObject[i])
+            }
+        }
+        
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
 }
