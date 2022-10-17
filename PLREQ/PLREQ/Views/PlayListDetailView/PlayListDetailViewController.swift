@@ -33,6 +33,10 @@ final class PlayListDetailViewController: UIViewController {
         musicDetailTableView.dataSource = self
         
         shareButtonTapped.layer.cornerRadius = shareButtonTapped.frame.height / 2
+        
+        musicDetailTableView.dragInteractionEnabled = true
+        musicDetailTableView.dragDelegate = self
+        musicDetailTableView.dropDelegate = self
     }
 
     @IBAction func goToBackButton(_ sender: Any) {
@@ -92,6 +96,28 @@ extension PlayListDetailViewController: UITableViewDataSource {
         } else {
             return
         }
+    }
+}
+
+extension PlayListDetailViewController: UITableViewDragDelegate {
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+}
+
+
+extension PlayListDetailViewController: UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if session.localDragSession != nil {
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
     }
 }
 
