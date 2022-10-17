@@ -37,7 +37,7 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="selecButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="v5h-7a-oT7"/>
+                                            <action selector="selectButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yn5-zX-KCj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hF2-EW-VrL">
@@ -58,7 +58,7 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="selecButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="0i4-7j-vaa"/>
+                                            <action selector="selectButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="p2j-Jd-ooa"/>
                                         </connections>
                                     </button>
                                 </subviews>
