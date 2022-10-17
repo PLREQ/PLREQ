@@ -7,9 +7,10 @@
 
 import UIKit
 import ShazamKit
+import CoreLocation
 
 class MatchViewController: UIViewController {
-
+    
     //MARK: Variabales
     var recordedMusicList = [Music]()
     // 임시 Image URL 추가
@@ -17,6 +18,14 @@ class MatchViewController: UIViewController {
     var viewModel: MatchViewModel?
     var isListening: Bool = false
     var timer: Timer?
+    let playListViewController: PlayListViewController = {
+        let storyBoard = UIStoryboard(name: "PlayListView", bundle: nil)
+        guard let playListViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListView") as? PlayListViewController else { return UIViewController() as! PlayListViewController }
+        return playListViewController
+    }()
+    let locationManager = CLLocationManager()
+    var currentLocation: String = ""
+    var currentTime: String = ""
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -40,14 +49,13 @@ class MatchViewController: UIViewController {
     }
     
     @IBAction func tapPlayListButton(_ sender: UIButton) {
-        let storyBoard = UIStoryboard(name: "PlayListView", bundle: nil)
-        guard let playListViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListView") as? PlayListViewController else { return }
-        self.navigationController?.pushViewController(playListViewController, animated: true)
+        self.navigationController?.pushViewController(self.playListViewController, animated: true)
     }
     
     @objc func catchMusic() {
         do {
             try self.viewModel?.songSearch()
+            self.locationManager.stopUpdatingLocation()
         } catch {
             print("error")
         }
@@ -61,12 +69,16 @@ class MatchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.viewModel = MatchViewModel(matchHandler: songMatched)
+        if self.viewModel == nil {
+            self.viewModel = MatchViewModel(matchHandler: songMatched)
+        }
+        self.locationManager.startUpdatingLocation()
     }
     
     //MARK: Style Function
     private func styleFunction() {
         self.configureCollectionView()
+        self.configureLocationManager()
     }
     
     private func configureCollectionView() {
@@ -74,6 +86,12 @@ class MatchViewController: UIViewController {
         self.matchMusicCollectionView.backgroundColor = UIColor.white
         self.matchMusicCollectionView.delegate = self
         self.matchMusicCollectionView.dataSource = self
+    }
+    
+    private func configureLocationManager() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     //MARK: Shazam Function
@@ -101,7 +119,7 @@ class MatchViewController: UIViewController {
         self.recordedMusic.artist = self.viewModel?.artist ?? ""
         self.recordedMusic.musicImageURL = self.viewModel?.musicImageURL ?? URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!
         
-        self.recordedMusicList.append(self.recordedMusic)
+        self.recordedMusicList.insert(self.recordedMusic, at: 0)
         self.matchMusicCollectionView.reloadData()
     }
     
@@ -129,6 +147,7 @@ class MatchViewController: UIViewController {
             
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
+            self.navigationController?.pushViewController(self.playListViewController, animated: true)
         })
         
         let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: { _ in
@@ -138,10 +157,33 @@ class MatchViewController: UIViewController {
         alert.addAction(cancelButton)
         alert.addAction(registerButton)
         alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "성수동에서의 나른한 오후"
+            self.currentTimeFormatter(.now)
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                textField.text = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+            case .denied, .notDetermined, .restricted:
+                textField.text = ""
+            default:
+                textField.placeholder = ""
+            }
         })
-        
         self.present(alert, animated: true)
+    }
+    
+    private func currentTimeFormatter(_ date: Date) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH"
+        let currentHour: String = timeFormatter.string(from: date)
+        
+        if Int(currentHour) ?? 0 < 6 {
+            self.currentTime = "시원한 새벽"
+        } else if Int(currentHour) ?? 0 < 12 {
+            self.currentTime = "산뜻한 아침"
+        } else if Int(currentHour) ?? 0 < 18 {
+            self.currentTime = "나른한 오후"
+        } else {
+            self.currentTime = "적적한 저녁"
+        }
     }
 }
 
@@ -168,5 +210,27 @@ extension MatchViewController: UICollectionViewDataSource {
 extension MatchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+    }
+}
+
+extension MatchViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let currentLatitude = location.coordinate.latitude
+            let currentLongtitude = location.coordinate.longitude
+            
+            let findLocation = CLLocation(latitude: currentLatitude, longitude: currentLongtitude)
+            let geocoder = CLGeocoder()
+            let locale = Locale(identifier: "Ko-kr")
+            geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in
+                if let address: [CLPlacemark] = place {
+                    self?.currentLocation = "\(address.last?.locality ?? "")"
+                }
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error \(error.localizedDescription)")
     }
 }

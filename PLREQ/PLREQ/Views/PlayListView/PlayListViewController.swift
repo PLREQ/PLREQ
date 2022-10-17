@@ -63,8 +63,9 @@ class PlayListViewController: UIViewController {
         self.navigationController?.pushViewController(mapViewViewController, animated: true)
     }
     
-    @IBAction func selecButton(_ sender: UIButton) {
+    @IBAction func selectButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "최근" {
+            NotificationCenter.default.post(name: .viewReload, object: nil)
             RecentPlayListContainerView.isHidden = false
             PlacePlayListContainerView.isHidden = true
             recentButton.layer.addBorder([.bottom], color: .white, width: 2)
@@ -74,6 +75,7 @@ class PlayListViewController: UIViewController {
             }
             buttonCheck = false
         } else {
+            NotificationCenter.default.post(name: .viewReload, object: nil)
             RecentPlayListContainerView.isHidden = true
             PlacePlayListContainerView.isHidden = false
             placeButton.layer.addBorder([.bottom], color: .white, width: 2)
@@ -104,14 +106,4 @@ class PlayListViewController: UIViewController {
         playListButtonStackView.layer.addBorder([.bottom], color: .gray, width: 1)
         
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
