@@ -142,7 +142,6 @@ extension MapViewController: MKMapViewDelegate {
 //        } else {
 //            annotationView?.annotation = annotation
 //        }
-        annotationView?.image = UIImage(named: "ian")
         return annotationView
     }
 }
