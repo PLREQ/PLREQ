@@ -4,7 +4,7 @@
         <attribute name="artist" optional="YES" attributeType="String"/>
         <attribute name="musicImageURL" optional="YES" attributeType="URI"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PlayList" inverseName="music" inverseEntity="PlayList"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayList" inverseName="music" inverseEntity="PlayList"/>
     </entity>
     <entity name="PlayList" representedClassName=".PlayListDB" syncable="YES">
         <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
