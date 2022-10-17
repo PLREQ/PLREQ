@@ -42,7 +42,11 @@ final class PlayListDetailViewController: UIViewController {
         
         inputMusicCellData()
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        PLREQDataManager.shared.musicChangeOrder(playListObject: musicList, musics: musics)
+    }
+    
     @IBAction func goToBackButton(_ sender: Any) {
         PLREQDataManager.shared.musicChangeOrder(playListObject: musicList, musics: musics)
         self.navigationController?.popViewController(animated: true)
