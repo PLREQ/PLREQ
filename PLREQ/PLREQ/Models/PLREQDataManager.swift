@@ -69,34 +69,19 @@ class PLREQDataManager {
             (playListObject as! PlayListDB).addToMusic(musicObject)
         }
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            return false
-        }
+        return saveContext()
     }
     
     func delete(playListObject: NSManagedObject) -> Bool {
         context.delete(playListObject)
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            return false
-        }
+        return saveContext()
     }
     
     func updateTitle(playListObject: NSManagedObject, title: String) -> Bool {
         playListObject.setValue(title, forKey: "title")
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            return false
-        }
+        return saveContext()
     }
     
     func musicsFetch(playList: PlayListDB) -> [MusicDB] {
@@ -107,12 +92,7 @@ class PLREQDataManager {
     func musicDelete(music: NSManagedObject) -> Bool {
         context.delete(music)
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            return false
-        }
+        return saveContext()
     }
     
     // 바뀐 음악의 순서를 저장
@@ -127,6 +107,10 @@ class PLREQDataManager {
             }
         }
         
+        return saveContext()
+    }
+    
+    func saveContext() -> Bool {
         do {
             try context.save()
             return true
