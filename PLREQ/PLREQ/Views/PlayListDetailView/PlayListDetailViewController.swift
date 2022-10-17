@@ -20,6 +20,8 @@ final class PlayListDetailViewController: UIViewController {
         return playList.music?.array as? [MusicDB]
     }
     
+    var musics: [Music] = []
+    
     var navigationTitleText: String! {
         return "\(playList.dataToString(forKey: "title"))"
     }
@@ -37,9 +39,12 @@ final class PlayListDetailViewController: UIViewController {
         musicDetailTableView.dragInteractionEnabled = true
         musicDetailTableView.dragDelegate = self
         musicDetailTableView.dropDelegate = self
+        
+        inputMusicCellData()
     }
 
     @IBAction func goToBackButton(_ sender: Any) {
+        PLREQDataManager.shared.musicChangeOrder(playListObject: musicList, musics: musics)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -97,6 +102,17 @@ extension PlayListDetailViewController: UITableViewDataSource {
             return
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedItem = musics[sourceIndexPath.row]
+        
+        musics.remove(at: sourceIndexPath.row)
+        musics.insert(movedItem, at: destinationIndexPath.row)
+    }
 }
 
 extension PlayListDetailViewController: UITableViewDragDelegate {
@@ -136,5 +152,16 @@ private extension PlayListDetailViewController {
             return
         }
         print("success")
+    }
+    
+    func inputMusicCellData() {
+        for i in 0 ..< musicList.count {
+            let musicCellData = musicList[i]
+            let title = musicCellData.dataToString(forKey: "title")
+            let artist = musicCellData.dataToString(forKey: "artist")
+            let musicImageURL = musicCellData.dataToURL(forKey: "musicImageURL")
+            let music = Music(title: title, artist: artist, musicImageURL: musicImageURL)
+            musics.append(music)
+        }
     }
 }
