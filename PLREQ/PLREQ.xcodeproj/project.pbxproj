@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A145DA428FD657900590500 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A145DA328FD657900590500 /* UIImage+.swift */; };
 		0A9CD5F828F856E5002E4882 /* PlayListDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */; };
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFE1AE28F8412700D183CE /* Struct+.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A145DA328FD657900590500 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailCell.swift; sourceTree = "<group>"; };
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		8BFFE1AE28F8412700D183CE /* Struct+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				D580697D28E45BF600461CD8 /* CALayer+.swift */,
 				D59398FB28EC6E300082A3F9 /* UIImageView+.swift */,
+				0A145DA328FD657900590500 /* UIImage+.swift */,
 				D593996028EF55710082A3F9 /* UILable+.swift */,
 				D593996228EF59B30082A3F9 /* Date+.swift */,
 				D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */,
@@ -387,6 +390,7 @@
 				D54C414028E343F400C7C0FD /* PLREQ.xcdatamodeld in Sources */,
 				D50F95DC28F5DDE40072CDB5 /* UINavigationController+.swift in Sources */,
 				D580698528E45C2500461CD8 /* MatchViewModel.swift in Sources */,
+				0A145DA428FD657900590500 /* UIImage+.swift in Sources */,
 				D54C413828E343F400C7C0FD /* SceneDelegate.swift in Sources */,
 				D537201628F4A81A00753C36 /* MusicDB+CoreDataClass.swift in Sources */,
 			);
@@ -536,7 +540,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V8U96P27D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
@@ -573,7 +576,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V8U96P27D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
