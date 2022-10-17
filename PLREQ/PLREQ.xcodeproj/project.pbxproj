@@ -540,6 +540,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HD34Q2YK79;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
@@ -572,6 +573,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HD34Q2YK79;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";

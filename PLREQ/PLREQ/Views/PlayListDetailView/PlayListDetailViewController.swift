@@ -42,11 +42,26 @@ final class PlayListDetailViewController: UIViewController {
     @IBAction func shareButtonTapped(_ sender: Any) {
         let image: UIImage = UIImage().shareWithImage(tableView: musicDetailTableView)
 
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(savedImage), nil)
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
+        let alret = UIAlertController(title: "플레이리스트가 저장됐어요!", message: "저장된 플레이리스트를 어떻게 도와드릴까요?", preferredStyle: .actionSheet)
         
-        self.present(activityViewController, animated: true, completion: nil)
+        let saveImageButton = UIAlertAction(title: "저장하기", style: .default) { _ in
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedImage), nil)
+        }
+        
+        let shareIamgeButton = UIAlertAction(title: "공유하기", style: .default) { _ in
+            let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+
+        let cancelButton = UIAlertAction(title: "취소하기", style: .cancel)
+        
+        alret.addAction(saveImageButton)
+        alret.addAction(shareIamgeButton)
+        alret.addAction(cancelButton)
+        
+        present(alret, animated: true, completion: nil)
     }
 }
 
