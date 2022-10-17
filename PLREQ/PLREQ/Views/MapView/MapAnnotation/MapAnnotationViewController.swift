@@ -18,11 +18,11 @@ class AnnotationView: UIView {
         DispatchQueue.main.async {
             self.configureImageView()
             self.configureSubView()
-
-            self.addSubview(self.firstImageView)
-            self.addSubview(self.secondImageView)
-            self.addSubview(self.thirdImageView)
-            self.addSubview(self.fourthImageView)
+//
+//            self.addSubview(self.firstImageView)
+//            self.addSubview(self.secondImageView)
+//            self.addSubview(self.thirdImageView)
+//            self.addSubview(self.fourthImageView)
         }
     }
 

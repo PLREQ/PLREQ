@@ -9,7 +9,7 @@ import CoreLocation
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
 
     let mapView = MKMapView()
     let manager = CLLocationManager()
@@ -37,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         manager.startUpdatingLocation()
     }
 
-    func setDissmissButton(){
+    func setDissmissButton() {
         let safeArea = self.view.safeAreaLayoutGuide
         dissmissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
         dissmissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
@@ -46,7 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         dissmissButton.addTarget(self, action: #selector(dissmissMapView), for: .touchUpInside)
     }
 
-    func setMapView(){
+    func setMapView() {
         mapView.delegate = self
     }
 
@@ -56,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             render(location)
         }
     }
-    
+
     func render(_ location: CLLocation){
         
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
@@ -67,52 +67,45 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         let region = MKCoordinateRegion(center: coordinate,
                                         span: span)
-        
         mapView.setRegion(region,
                           animated: true)
-
     }
-    
+
     func addCustomPin() {
         // testpin
         let pin = MKPointAnnotation()
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 36.0139,
                                                      longitude: 129.3232)
-        let secondCoordinate = CLLocationCoordinate2D(latitude: 36.0192,
-                                                     longitude: 129.3433)
+
         pin.coordinate = firstCoordinate
         mapView.addAnnotation(pin)
     }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation) else {
-            return nil
-        }
-         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
-        
-        if annotation ==  nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
-            annotationView?.canShowCallout = true
-        } else {
-            annotationView?.annotation = annotation
-        }
-        
-//        annotationView?.inputView(
-        
-        
-        return annotationView
-    }
-    
+
     @objc func dissmissMapView(){
         navigationController?.popViewController(animated: true)
-//        navigationController?.popToRootViewController(animated: true)
-//        navigationController?.popViewController(animated: true)
-//        navigationController?.popToViewController(PlacePlayListViewController, animated:  )
     }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
     
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "MapView")
+
+        if annotation ==  nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
+            annotationView?.canShowCallout = true
+        } else {
+            annotationView?.annotation = annotation
+        }
+        annotationView?.image = UIImage(named: "ian")
+        return annotationView
+    }
 }
