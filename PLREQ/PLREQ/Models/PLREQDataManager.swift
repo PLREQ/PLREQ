@@ -102,4 +102,17 @@ class PLREQDataManager {
     func musicsFetch(playList: PlayListDB) -> [MusicDB] {
         return playList.music?.array as! [MusicDB]
     }
+    
+    // 음악을 삭제하는 로직
+    func musicDelete(music: NSManagedObject) -> Bool {
+        context.delete(music)
+        
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+
 }
