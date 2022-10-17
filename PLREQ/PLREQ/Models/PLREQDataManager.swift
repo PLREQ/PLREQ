@@ -69,37 +69,53 @@ class PLREQDataManager {
             (playListObject as! PlayListDB).addToMusic(musicObject)
         }
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            return false
-        }
+        return saveContext()
     }
     
     func delete(playListObject: NSManagedObject) -> Bool {
         context.delete(playListObject)
         
-        do {
-            try context.save()
-            return true
-        } catch {
-            return false
-        }
+        return saveContext()
     }
     
     func updateTitle(playListObject: NSManagedObject, title: String) -> Bool {
         playListObject.setValue(title, forKey: "title")
         
+        return saveContext()
+    }
+    
+    func musicsFetch(playList: PlayListDB) -> [MusicDB] {
+        return playList.music?.array as! [MusicDB]
+    }
+    
+    // 음악을 삭제하는 로직
+    func musicDelete(music: NSManagedObject) -> Bool {
+        context.delete(music)
+        
+        return saveContext()
+    }
+    
+    // 바뀐 음악의 순서를 저장
+    func musicChangeOrder(playListObject: [NSManagedObject], musics: [MusicDB]) -> Bool {
+        for i in 0..<playListObject.count {
+            if i < musics.count {
+                playListObject[i].setValue(musics[i].title, forKey: "title")
+                playListObject[i].setValue(musics[i].artist, forKey: "artist")
+                playListObject[i].setValue(musics[i].musicImageURL, forKey: "musicImageURL")
+            } else {
+                context.delete(playListObject[i])
+            }
+        }
+        
+        return saveContext()
+    }
+    
+    func saveContext() -> Bool {
         do {
             try context.save()
             return true
         } catch {
             return false
         }
-    }
-    
-    func musicsFetch(playList: PlayListDB) -> [MusicDB] {
-        return playList.music?.array as! [MusicDB]
     }
 }
