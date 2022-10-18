@@ -14,7 +14,7 @@ class MapViewController: UIViewController {
 
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
-    var dissmissButton: UIButton = {
+    var dismissButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -24,13 +24,9 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCurrentLocation()
         configuration()
-        view.addSubview(mapView)
-        mapView.frame = view.bounds
         setMapView()
-        view.addSubview(dissmissButton)
-        setDissmissButton()
+        setdismissButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +48,7 @@ class MapViewController: UIViewController {
     }
 
     func configuration() {
-
+        setCurrentLocation()
         playListList = PLREQDataManager.shared.fetch()
 
         for i in 0..<playListList.count{
@@ -70,16 +66,19 @@ class MapViewController: UIViewController {
 //        addCustomPin(21.282778, -150.829444)
     }
 
-    func setDissmissButton() {
+    func setdismissButton() {
+        view.addSubview(dismissButton)
         let safeArea = self.view.safeAreaLayoutGuide
-        dissmissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
-        dissmissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
-        dissmissButton.tintColor = .white
-        dissmissButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        dissmissButton.addTarget(self, action: #selector(dissmissMapView), for: .touchUpInside)
+        dismissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
+        dismissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
+        dismissButton.tintColor = .white
+        dismissButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        dismissButton.addTarget(self, action: #selector(dismissMapView), for: .touchUpInside)
     }
 
     func setMapView() {
+        view.addSubview(mapView)
+        mapView.frame = view.bounds
         mapView.delegate = self
     }
 
@@ -113,7 +112,7 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(pin)
     }
 
-    @objc func dissmissMapView(){
+    @objc func dismissMapView(){
         navigationController?.popViewController(animated: true)
     }
 }
