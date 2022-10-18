@@ -96,7 +96,7 @@ class PLREQDataManager {
     }
     
     // 바뀐 음악의 순서를 저장
-    func musicChangeOrder(playListObject: [NSManagedObject], musics: [MusicDB]) -> Bool {
+    func musicChangeOrder(playListObject: [NSManagedObject], musics: [Music]) -> Bool {
         for i in 0..<playListObject.count {
             if i < musics.count {
                 playListObject[i].setValue(musics[i].title, forKey: "title")

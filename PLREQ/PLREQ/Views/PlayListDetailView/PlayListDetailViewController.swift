@@ -20,6 +20,8 @@ final class PlayListDetailViewController: UIViewController {
         return playList.music?.array as? [MusicDB]
     }
     
+    var musics: [Music] = []
+    
     var navigationTitleText: String! {
         return "\(playList.dataToString(forKey: "title"))"
     }
@@ -33,9 +35,20 @@ final class PlayListDetailViewController: UIViewController {
         musicDetailTableView.dataSource = self
         
         shareButtonTapped.layer.cornerRadius = shareButtonTapped.frame.height / 2
+        
+        musicDetailTableView.dragInteractionEnabled = true
+        musicDetailTableView.dragDelegate = self
+        musicDetailTableView.dropDelegate = self
+        
+        inputMusicCellData()
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        PLREQDataManager.shared.musicChangeOrder(playListObject: musicList, musics: musics)
+    }
+    
     @IBAction func goToBackButton(_ sender: Any) {
+        PLREQDataManager.shared.musicChangeOrder(playListObject: musicList, musics: musics)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -83,6 +96,49 @@ extension PlayListDetailViewController: UITableViewDataSource {
         
         return cell ?? UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let musicData = musicList[indexPath.row]
+            PLREQDataManager.shared.musicDelete(music: musicData)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else {
+            return
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedItem = musics[sourceIndexPath.row]
+        
+        musics.remove(at: sourceIndexPath.row)
+        musics.insert(movedItem, at: destinationIndexPath.row)
+    }
+}
+
+extension PlayListDetailViewController: UITableViewDragDelegate {
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+}
+
+
+extension PlayListDetailViewController: UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if session.localDragSession != nil {
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+    }
 }
 
 private extension PlayListDetailViewController {
@@ -100,5 +156,16 @@ private extension PlayListDetailViewController {
             return
         }
         print("success")
+    }
+    
+    func inputMusicCellData() {
+        for i in 0 ..< musicList.count {
+            let musicCellData = musicList[i]
+            let title = musicCellData.dataToString(forKey: "title")
+            let artist = musicCellData.dataToString(forKey: "artist")
+            let musicImageURL = musicCellData.dataToURL(forKey: "musicImageURL")
+            let music = Music(title: title, artist: artist, musicImageURL: musicImageURL)
+            musics.append(music)
+        }
     }
 }
