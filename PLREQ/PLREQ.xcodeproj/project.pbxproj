@@ -11,6 +11,7 @@
 		0A9CD5F828F856E5002E4882 /* PlayListDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */; };
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFE1AE28F8412700D183CE /* Struct+.swift */; };
+		A8A34C1628FDC3930030495E /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A34C1528FDC3930030495E /* AnnotationView.swift */; };
 		A8DBF62128F83D4000A01C47 /* MapAnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */; };
 		D50154BD28F9D38E001BA8D5 /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50154BC28F9D38E001BA8D5 /* Notification.Name+.swift */; };
 		D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */; };
@@ -55,6 +56,7 @@
 		0A9CD5F728F856E5002E4882 /* PlayListDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailCell.swift; sourceTree = "<group>"; };
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		8BFFE1AE28F8412700D183CE /* Struct+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+.swift"; sourceTree = "<group>"; };
+		A8A34C1528FDC3930030495E /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationViewController.swift; sourceTree = "<group>"; };
 		D50154BC28F9D38E001BA8D5 /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+.swift"; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		A8DBF61F28F83D2800A01C47 /* MapAnnotation */ = {
 			isa = PBXGroup;
 			children = (
+				A8A34C1528FDC3930030495E /* AnnotationView.swift */,
 				A8DBF62028F83D4000A01C47 /* MapAnnotationViewController.swift */,
 			);
 			path = MapAnnotation;
@@ -377,6 +380,7 @@
 				D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */,
 				D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */,
 				D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */,
+				A8A34C1628FDC3930030495E /* AnnotationView.swift in Sources */,
 				D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */,
 				D537201528F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift in Sources */,
 				D58069B228E45C7500461CD8 /* PlayListCollectionViewCell.swift in Sources */,
@@ -540,13 +544,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PLREQ/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
-				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
+				DEVELOPMENT_TEAM = 22A6RK2943;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Use your photo album.\nUse your photo album.\nUse your photo album.\nUse user's photo album.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -576,13 +578,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PLREQ/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
-				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
+				DEVELOPMENT_TEAM = 22A6RK2943;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "플레이리스트 제목 추천을 위해 현재 위치에 대한 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악을 매칭하기 위하여 마이크에 대한 접근권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Use your photo album.\nUse your photo album.\nUse your photo album.\nUse user's photo album.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
