@@ -47,7 +47,7 @@ class MapViewController: UIViewController {
     func setCurrentLocation(){
         locationManager.requestWhenInUseAuthorization()
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
             guard let currentLocation = locationManager.location else {
                 return
             }
