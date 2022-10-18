@@ -18,8 +18,8 @@ extension PlayListDB {
     @NSManaged public var title: String?
     @NSManaged public var day: Date?
     @NSManaged public var location: String?
-    @NSManaged public var latitude: Float
-    @NSManaged public var longtitude: Float
+    @NSManaged public var latitude: Double
+    @NSManaged public var longtitude: Double
     @NSManaged public var firstImageURL: URL?
     @NSManaged public var secondImageURL: URL?
     @NSManaged public var thirdImageURL: URL?

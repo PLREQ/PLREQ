@@ -13,78 +13,72 @@ import CoreData
 class MapViewController: UIViewController {
 
     let mapView = MKMapView()
-    let manager = CLLocationManager()
-    var dissmissButton: UIButton = {
+    let locationManager = CLLocationManager()
+    var dismissButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     var playListList: [NSManagedObject] = []
-    let locationManager = CLLocationManager()
-    var currentLocation: CLLocation!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCurrentLocation()
         configuration()
-        view.addSubview(mapView)
-        mapView.frame = view.bounds
         setMapView()
-        view.addSubview(dissmissButton)
-        setDissmissButton()
+        setdismissButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        manager.desiredAccuracy = kCLLocationAccuracyBest // battery
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // battery
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     // Map을 처음 켰을 때 현재 위치를 받아옵니다.
     func setCurrentLocation(){
-        locationManager.requestWhenInUseAuthorization()
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
             guard let currentLocation = locationManager.location else {
                 return
             }
-            print(currentLocation.coordinate.latitude)
-            print(currentLocation.coordinate.longitude)
         }
     }
 
     func configuration() {
-
+        setCurrentLocation()
         playListList = PLREQDataManager.shared.fetch()
 
         for i in 0..<playListList.count{
             let playListData = playListList[i]
             // 현재 들어오는 좌표를 확인하기 위해 남겨둔 코드입니다. 추후에 삭제하겠습니다.
-            print(playListData.dataToFloat(forKey: "latitude"))
+            print("💙💙💙💙💙: ", playListData.dataToDouble(forKey: "latitude"))
 
             // TODO: Longtitude, Latitude의 데이터 타입을 Float을 Double로 바꿀 필요가 있습니다
-            addCustomPin(playListData.dataToFloat(forKey: "latitude"), playListData.dataToFloat(forKey: "longtitude"))
+            addCustomPin(playListData.dataToDouble(forKey: "latitude"), playListData.dataToDouble(forKey: "longtitude"))
 
         }
 
         // Test Coordinate입니다 이슈가 해결되면 삭제하겠습니다.
-        addCustomPin(21.282778, -157.829444)
-        addCustomPin(21.282778, -150.829444)
+//        addCustomPin(21.282778, -157.829444)
+//        addCustomPin(21.282778, -150.829444)
     }
 
-    func setDissmissButton() {
+    func setdismissButton() {
+        view.addSubview(dismissButton)
         let safeArea = self.view.safeAreaLayoutGuide
-        dissmissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
-        dissmissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
-        dissmissButton.tintColor = .white
-        dissmissButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        dissmissButton.addTarget(self, action: #selector(dissmissMapView), for: .touchUpInside)
+        dismissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
+        dismissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
+        dismissButton.tintColor = .white
+        dismissButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        dismissButton.addTarget(self, action: #selector(dismissMapView), for: .touchUpInside)
     }
 
     func setMapView() {
+        view.addSubview(mapView)
+        mapView.frame = view.bounds
         mapView.delegate = self
     }
 
@@ -109,16 +103,16 @@ class MapViewController: UIViewController {
                           animated: true)
     }
 
-   func addCustomPin(_ latitude: Float, _ longtitude: Float) {
+   func addCustomPin(_ latitude: Double, _ longtitude: Double) {
 
         let pin = MKPointAnnotation()
-        let firstCoordinate = CLLocationCoordinate2D(latitude: Double(latitude),
-                                                     longitude: Double(longtitude))
-        pin.coordinate = firstCoordinate
+       let coordinate = CLLocationCoordinate2D(latitude: latitude,
+                                                longitude: longtitude)
+        pin.coordinate = coordinate
         mapView.addAnnotation(pin)
     }
 
-    @objc func dissmissMapView(){
+    @objc func dismissMapView(){
         navigationController?.popViewController(animated: true)
     }
 }
