@@ -93,7 +93,6 @@ class MatchViewController: UIViewController {
         self.view.backgroundColor = .black
         self.matchMusicCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
         self.matchMusicCollectionView.backgroundColor = UIColor.black
-        self.matchMusicCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.matchMusicCollectionView.delegate = self
         self.matchMusicCollectionView.dataSource = self
     }
