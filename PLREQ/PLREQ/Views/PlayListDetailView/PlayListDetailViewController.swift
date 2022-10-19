@@ -19,9 +19,8 @@ final class PlayListDetailViewController: UIViewController {
     var musicList: [MusicDB]! {
         return playList.music?.array as? [MusicDB]
     }
-    
     var musics: [Music] = []
-    
+    var isEditCheck: Bool = false // 화면을 수정했는지 확인하는 변수
     var navigationTitleText: String! {
         return "\(playList.dataToString(forKey: "title"))"
     }
@@ -45,6 +44,9 @@ final class PlayListDetailViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         PLREQDataManager.shared.musicChangeOrder(playListObject: musicList, musics: musics)
+        if isEditCheck { // 뮤직 리스트를 수정 했다면 플레이리스트 reload
+            NotificationCenter.default.post(name: .viewReload, object: nil)
+        }
     }
     
     @IBAction func goToBackButton(_ sender: Any) {
@@ -99,6 +101,7 @@ extension PlayListDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            isEditCheck.toggle()
             let musicData = musicList[indexPath.row]
             PLREQDataManager.shared.musicDelete(music: musicData)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -113,7 +116,7 @@ extension PlayListDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let movedItem = musics[sourceIndexPath.row]
-        
+        isEditCheck.toggle()
         musics.remove(at: sourceIndexPath.row)
         musics.insert(movedItem, at: destinationIndexPath.row)
     }
