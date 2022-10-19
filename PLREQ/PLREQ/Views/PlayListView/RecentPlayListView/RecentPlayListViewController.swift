@@ -16,12 +16,26 @@ class RecentPlayListViewController: UIViewController {
     let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(reloadCollectView), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        RecentPlayListCollectionView.refreshControl = refreshControl
         collectionViewLink()
         registerNib()
         setAutoLayout()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
+    }
+    
+    @objc func reloadCollectView() {
+        self.playListList = PLREQDataManager.shared.fetch()
+        self.RecentPlayListCollectionView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     @objc func reloadView(_ noti: Notification) {
