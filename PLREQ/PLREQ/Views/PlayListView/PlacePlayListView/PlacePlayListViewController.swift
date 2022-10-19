@@ -10,7 +10,7 @@ import CoreData
 
 class PlacePlayListViewController: UIViewController {
     
-    @IBOutlet weak var PlacePlayListTableView: UITableView!
+    @IBOutlet weak var placePlayListTableView: UITableView!
     let placePlayListTableViewCellNib: UINib = UINib(nibName: "PlacePlayListTableViewCell", bundle: nil)
     let placePlayListTableViewCell: String = "PlacePlayListTableViewCell"
     
@@ -29,24 +29,24 @@ class PlacePlayListViewController: UIViewController {
     @objc func reloadView(_ noti: Notification) {
         self.playListList = PLREQDataManager.shared.fetch()
         self.placeList.removeAll()
-        self.PlacePlayListTableView.reloadData()
+        self.placePlayListTableView.reloadData()
     }
     
     private func registerNib() {
-        PlacePlayListTableView.register(placePlayListTableViewCellNib, forCellReuseIdentifier: placePlayListTableViewCell)
+        placePlayListTableView.register(placePlayListTableViewCellNib, forCellReuseIdentifier: placePlayListTableViewCell)
     }
     
     private func tableViewLink() {
-        self.PlacePlayListTableView.delegate = self
-        self.PlacePlayListTableView.dataSource = self
+        self.placePlayListTableView.delegate = self
+        self.placePlayListTableView.dataSource = self
     }
     
     private func setAutoLayout() {
-        self.PlacePlayListTableView.translatesAutoresizingMaskIntoConstraints = false
-        self.PlacePlayListTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0 ).isActive = true
-        self.PlacePlayListTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        self.PlacePlayListTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.frame.width / 20).isActive = true
-        self.PlacePlayListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        self.placePlayListTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.placePlayListTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0 ).isActive = true
+        self.placePlayListTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        self.placePlayListTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.frame.width / 20).isActive = true
+        self.placePlayListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
     }
     
    
