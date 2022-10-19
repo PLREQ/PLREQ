@@ -24,8 +24,10 @@ class MatchViewController: UIViewController {
         return playListViewController
     }()
     let locationManager = CLLocationManager()
-    var currentLocation: String = ""
     var currentTime: String = ""
+    var currentLocation: String = ""
+    var currentLatitude: CLLocationDegrees = 0.0
+    var currentLongtitude: CLLocationDegrees = 0.0
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -143,8 +145,7 @@ class MatchViewController: UIViewController {
             let thirdImageURL = self.recordedMusicList[2].musicImageURL
             let fourthImageURL = self.recordedMusicList[3].musicImageURL
 
-            PLREQDataManager.shared.save(title: title, location: "", day: Date(), latitude: 0.0, longtitude: 0.0, firstImageURL: firstImageURL, secondImageURL: secondImageURL, thirdImageURL: thirdImageURL, fourthImageURL: fourthImageURL, musics: self.recordedMusicList)
-            
+            PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: Float(self.currentLatitude), longtitude: Float(self.currentLongtitude), firstImageURL: firstImageURL, secondImageURL: secondImageURL, thirdImageURL: thirdImageURL, fourthImageURL: fourthImageURL, musics: self.recordedMusicList)
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
             self.navigationController?.pushViewController(self.playListViewController, animated: true)
@@ -216,10 +217,10 @@ extension MatchViewController: UICollectionViewDelegateFlowLayout {
 extension MatchViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let currentLatitude = location.coordinate.latitude
-            let currentLongtitude = location.coordinate.longitude
+            self.currentLatitude = location.coordinate.latitude
+            self.currentLongtitude = location.coordinate.longitude
             
-            let findLocation = CLLocation(latitude: currentLatitude, longitude: currentLongtitude)
+            let findLocation = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude)
             let geocoder = CLGeocoder()
             let locale = Locale(identifier: "Ko-kr")
             geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in
