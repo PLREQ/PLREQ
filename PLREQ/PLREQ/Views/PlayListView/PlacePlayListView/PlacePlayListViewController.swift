@@ -119,9 +119,7 @@ extension PlacePlayListViewController: collectionViewCellClicked, collectionView
             let deleteCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let deletePlayList = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
                 _ = PLREQDataManager.shared.delete(playListObject: self.playListList[indexPath])
-                self.playListList = PLREQDataManager.shared.fetch()
-                self.placeList.removeAll()
-                self.PlacePlayListTableView.reloadData()
+                NotificationCenter.default.post(name: .viewReload, object: nil)
             }
             deleteAlert.addAction(deleteCancel)
             deleteAlert.addAction(deletePlayList)
@@ -193,9 +191,7 @@ extension PlacePlayListViewController: collectionViewCellClicked, collectionView
                 guard var title = changeAlert.textFields?[0].text else { return }
                 if(title == "") { title = "PLREQ" }
                 _ = PLREQDataManager.shared.updateTitle(playListObject: self.playListList[indexPath], title: title)
-                self.playListList = PLREQDataManager.shared.fetch()
-                self.placeList.removeAll()
-                self.PlacePlayListTableView.reloadData()
+                NotificationCenter.default.post(name: .viewReload, object: nil)
             })
             let cancelButton = UIAlertAction(title: "취소", style: .destructive, handler: { _ in
                 changeAlert.dismiss(animated: true)
