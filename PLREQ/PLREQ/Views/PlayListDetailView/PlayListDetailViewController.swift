@@ -100,6 +100,7 @@ extension PlayListDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let musicData = musicList[indexPath.row]
+            musics.remove(at: indexPath.row)
             PLREQDataManager.shared.musicDelete(music: musicData)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else {
