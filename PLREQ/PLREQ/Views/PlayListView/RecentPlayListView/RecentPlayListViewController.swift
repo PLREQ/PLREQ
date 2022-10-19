@@ -18,7 +18,7 @@ class RecentPlayListViewController: UIViewController {
     
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(reloadCollectView), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshReloadCollectView), for: .valueChanged)
         
         return refreshControl
     }()
@@ -32,7 +32,7 @@ class RecentPlayListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
     }
     
-    @objc func reloadCollectView() {
+    @objc func refreshReloadCollectView() {
         self.playListList = PLREQDataManager.shared.fetch()
         self.recentPlayListCollectionView.reloadData()
         self.refreshControl.endRefreshing()

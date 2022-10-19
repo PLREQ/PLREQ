@@ -17,8 +17,16 @@ class PlacePlayListViewController: UIViewController {
     var playListList: [NSManagedObject] = []
     var placeList: [String] = []
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshReloadTableView), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        placePlayListTableView.refreshControl = refreshControl
         registerNib()
         tableViewLink()
         setAutoLayout()
@@ -26,6 +34,12 @@ class PlacePlayListViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @objc func refreshReloadTableView() {
+        self.playListList = PLREQDataManager.shared.fetch()
+        self.placePlayListTableView.reloadData()
+        self.refreshControl.endRefreshing()
+    }
+    
     @objc func reloadView(_ noti: Notification) {
         self.playListList = PLREQDataManager.shared.fetch()
         self.placeList.removeAll()
