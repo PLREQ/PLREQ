@@ -65,7 +65,6 @@ class PlayListViewController: UIViewController {
     
     @IBAction func selectButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "최근" {
-            NotificationCenter.default.post(name: .viewReload, object: nil)
             RecentPlayListContainerView.isHidden = false
             PlacePlayListContainerView.isHidden = true
             recentButton.layer.addBorder([.bottom], color: .white, width: 2)
@@ -75,7 +74,6 @@ class PlayListViewController: UIViewController {
             }
             buttonCheck = false
         } else {
-            NotificationCenter.default.post(name: .viewReload, object: nil)
             RecentPlayListContainerView.isHidden = true
             PlacePlayListContainerView.isHidden = false
             placeButton.layer.addBorder([.bottom], color: .white, width: 2)

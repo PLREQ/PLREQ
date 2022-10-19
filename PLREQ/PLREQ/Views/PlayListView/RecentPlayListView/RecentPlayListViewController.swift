@@ -69,11 +69,15 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
         let playListData = playListList[indexPath.row]
         cell.delegate = self
         cell.indexPath = indexPath.row
-        cell.PlayListImageArr[0].load(url: playListData.dataToURL(forKey: "firstImageURL"))
-        cell.PlayListImageArr[1].load(url: playListData.dataToURL(forKey: "secondImageURL"))
-        cell.PlayListImageArr[2].load(url: playListData.dataToURL(forKey: "thirdImageURL"))
-        cell.PlayListImageArr[3].load(url: playListData.dataToURL(forKey: "fourthImageURL"))
-        
+        let musicsData = (playListData as! PlayListDB).music?.array as? [MusicDB]
+        for i in 0..<4 {
+            if i < musicsData!.count {
+                cell.PlayListImageArr[i].load(url: musicsData![i].dataToURL(forKey: "musicImageURL"))
+            } else {
+                cell.PlayListImageArr[i].load(url: URL(string:"http://t1.daumcdn.net/thumb/R600x0/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fqna%2Fimage%2F4b035cdf8372d67108f7e8d339660479dfb41bbd")!)
+            }
+        }
+
         cell.playListName.setLable(text: playListData.dataToString(forKey: "title"), fontSize: 14)
         
         cell.playListDay.setLable(text: Date().toYMDString(date: playListData.dataToDate(forKey: "day")), fontSize: 12)
@@ -121,8 +125,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
             let deleteCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let deletePlayList = UIAlertAction(title: "플레이리스트 삭제", style: .destructive) { _ in
                 _ = PLREQDataManager.shared.delete(playListObject: self.playListList[indexPath])
-                self.playListList = PLREQDataManager.shared.fetch()
-                self.RecentPlayListCollectionView.reloadData()
+                NotificationCenter.default.post(name: .viewReload, object: nil)
             }
             deleteAlert.addAction(deleteCancel)
             deleteAlert.addAction(deletePlayList)
@@ -193,8 +196,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
                 guard var title = changeAlert.textFields?[0].text else { return }
                 if(title == "") { title = "PLREQ" }
                 _ = PLREQDataManager.shared.updateTitle(playListObject: self.playListList[indexPath], title: title)
-                self.playListList = PLREQDataManager.shared.fetch()
-                self.RecentPlayListCollectionView.reloadData()
+                NotificationCenter.default.post(name: .viewReload, object: nil)
             })
             let cancelButton = UIAlertAction(title: "취소", style: .destructive, handler: { _ in
                 changeAlert.dismiss(animated: true)
