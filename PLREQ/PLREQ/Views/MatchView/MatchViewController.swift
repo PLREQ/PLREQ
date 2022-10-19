@@ -143,7 +143,7 @@ class MatchViewController: UIViewController {
             let thirdImageURL = self.recordedMusicList[2].musicImageURL
             let fourthImageURL = self.recordedMusicList[3].musicImageURL
 
-            PLREQDataManager.shared.save(title: title, location: "", day: Date(), latitude: 0.0, longtitude: 0.0, firstImageURL: firstImageURL, secondImageURL: secondImageURL, thirdImageURL: thirdImageURL, fourthImageURL: fourthImageURL, musics: self.recordedMusicList)
+//            PLREQDataManager.shared.save(title: title, location: "", day: Date(), latitude: 0.0, longtitude: 0.0, firstImageURL: firstImageURL, secondImageURL: secondImageURL, thirdImageURL: thirdImageURL, fourthImageURL: fourthImageURL, musics: self.recordedMusicList)
             
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()

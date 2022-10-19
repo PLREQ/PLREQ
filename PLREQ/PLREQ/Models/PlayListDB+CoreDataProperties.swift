@@ -20,10 +20,6 @@ extension PlayListDB {
     @NSManaged public var location: String?
     @NSManaged public var latitude: Double
     @NSManaged public var longtitude: Double
-    @NSManaged public var firstImageURL: URL?
-    @NSManaged public var secondImageURL: URL?
-    @NSManaged public var thirdImageURL: URL?
-    @NSManaged public var fourthImageURL: URL?
     
     @NSManaged public var music: NSOrderedSet?
 
