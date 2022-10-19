@@ -103,14 +103,22 @@
                                     <action selector="tapPlayListButton:" destination="QHG-as-yXz" eventType="touchUpInside" id="nIX-lE-eKX"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8es-rW-PEQ">
+                                <rect key="frame" x="174" y="411.66666666666669" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mgW-pw-VFr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mgW-pw-VFr" firstAttribute="bottom" secondItem="ZZW-29-KLd" secondAttribute="bottom" id="1io-9n-Oii"/>
                             <constraint firstItem="mgW-pw-VFr" firstAttribute="bottom" secondItem="iGt-k6-d2G" secondAttribute="bottom" constant="40" id="2Dt-Qj-SWI"/>
+                            <constraint firstItem="8es-rW-PEQ" firstAttribute="centerY" secondItem="8M7-g3-lod" secondAttribute="centerY" id="Cj5-1t-aDR"/>
                             <constraint firstItem="iGt-k6-d2G" firstAttribute="centerX" secondItem="8M7-g3-lod" secondAttribute="centerX" id="E7n-4S-Y8v"/>
                             <constraint firstItem="ZZW-29-KLd" firstAttribute="top" secondItem="mgW-pw-VFr" secondAttribute="top" id="Faf-iD-QBX"/>
+                            <constraint firstItem="8es-rW-PEQ" firstAttribute="centerX" secondItem="8M7-g3-lod" secondAttribute="centerX" id="Fp4-WC-ejD"/>
                             <constraint firstItem="mgW-pw-VFr" firstAttribute="trailing" secondItem="9ut-jX-QVO" secondAttribute="trailing" constant="20" id="Im4-gp-Zqz"/>
                             <constraint firstItem="mgW-pw-VFr" firstAttribute="trailing" secondItem="ZZW-29-KLd" secondAttribute="trailing" id="nyj-7W-zPJ"/>
                             <constraint firstItem="ZZW-29-KLd" firstAttribute="leading" secondItem="mgW-pw-VFr" secondAttribute="leading" id="onE-WM-Rfa"/>
@@ -120,6 +128,7 @@
                     <navigationItem key="navigationItem" id="Ujt-ba-ebN"/>
                     <connections>
                         <outlet property="matchMusicCollectionView" destination="ZZW-29-KLd" id="O9N-nE-Rw4"/>
+                        <outlet property="noRecordedMusicLabel" destination="8es-rW-PEQ" id="dd2-Wv-TYz"/>
                         <outlet property="playListButton" destination="9ut-jX-QVO" id="kEo-sm-wmS"/>
                         <outlet property="recordButton" destination="iGt-k6-d2G" id="9w8-ic-O03"/>
                     </connections>

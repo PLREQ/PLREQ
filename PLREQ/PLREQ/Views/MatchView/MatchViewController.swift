@@ -12,7 +12,11 @@ import CoreLocation
 class MatchViewController: UIViewController {
     
     //MARK: Variabales
-    var recordedMusicList = [Music]()
+    var recordedMusicList = [Music]() {
+        didSet {
+            self.noRecordedMusicLabel.isHidden = self.recordedMusicList.isEmpty ? false : true
+        }
+    }
     // 임시 Image URL 추가
     var recordedMusic = Music(title: "", artist: "", musicImageURL: URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!)
     var viewModel: MatchViewModel?
@@ -33,6 +37,7 @@ class MatchViewController: UIViewController {
     @IBOutlet weak var playListButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var matchMusicCollectionView: UICollectionView!
+    @IBOutlet weak var noRecordedMusicLabel: UILabel!
     
     //MARK: IBOutlet Function
     @IBAction func tapRecordButton(_ sender: UIButton) {
@@ -81,11 +86,14 @@ class MatchViewController: UIViewController {
     private func styleFunction() {
         self.configureCollectionView()
         self.configureLocationManager()
+        self.configureNoRecordedMusicLabel()
     }
     
     private func configureCollectionView() {
+        self.view.backgroundColor = .black
         self.matchMusicCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        self.matchMusicCollectionView.backgroundColor = UIColor.white
+        self.matchMusicCollectionView.backgroundColor = UIColor.black
+        self.matchMusicCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.matchMusicCollectionView.delegate = self
         self.matchMusicCollectionView.dataSource = self
     }
@@ -94,6 +102,12 @@ class MatchViewController: UIViewController {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
+    }
+    
+    private func configureNoRecordedMusicLabel() {
+        self.noRecordedMusicLabel.text = "하단의 버튼을 눌러 음악을 찾아보세요."
+        self.noRecordedMusicLabel.textColor = .white
+        self.noRecordedMusicLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
     }
     
     //MARK: Shazam Function
@@ -210,7 +224,7 @@ extension MatchViewController: UICollectionViewDataSource {
 
 extension MatchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+        return CGSize(width: UIScreen.main.bounds.width - 10, height: UIScreen.main.bounds.width - 10)
     }
 }
 
