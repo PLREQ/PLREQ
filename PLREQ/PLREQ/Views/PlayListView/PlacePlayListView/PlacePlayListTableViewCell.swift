@@ -82,10 +82,14 @@ extension PlacePlayListTableViewCell: UICollectionViewDelegate, UICollectionView
         let playListData = playListList[indexPath.row]
         cell.delegate = self
         cell.indexPath = indexPath.row
-        cell.PlayListImageArr[0].load(url: playListData.dataToURL(forKey: "firstImageURL"))
-        cell.PlayListImageArr[1].load(url: playListData.dataToURL(forKey: "secondImageURL"))
-        cell.PlayListImageArr[2].load(url: playListData.dataToURL(forKey: "thirdImageURL"))
-        cell.PlayListImageArr[3].load(url: playListData.dataToURL(forKey: "fourthImageURL"))
+        let musicsData = (playListData as! PlayListDB).music?.array as? [MusicDB]
+        for i in 0..<4 {
+            if i < musicsData!.count {
+                cell.PlayListImageArr[i].load(url: musicsData![i].dataToURL(forKey: "musicImageURL"))
+            } else {
+                cell.PlayListImageArr[i].load(url: URL(string:"http://t1.daumcdn.net/thumb/R600x0/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fqna%2Fimage%2F4b035cdf8372d67108f7e8d339660479dfb41bbd")!)
+            }
+        }
         
         cell.playListName.setLable(text: playListData.dataToString(forKey: "title"), fontSize: 14)
 
