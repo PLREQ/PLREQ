@@ -44,12 +44,14 @@ class MatchViewController: UIViewController {
         self.isListening.toggle()
         if self.isListening {
             // 30초 동안 한번씩 songSearch 함수 실행
+            self.locationManager.requestLocation()
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
+                self.viewModel?.stopListening()
                 self.saveRecordedMusicList()
             }
         }
@@ -62,7 +64,6 @@ class MatchViewController: UIViewController {
     @objc func catchMusic() {
         do {
             try self.viewModel?.songSearch()
-            self.locationManager.stopUpdatingLocation()
         } catch {
             print("error")
         }
@@ -79,7 +80,6 @@ class MatchViewController: UIViewController {
         if self.viewModel == nil {
             self.viewModel = MatchViewModel(matchHandler: songMatched)
         }
-        self.locationManager.startUpdatingLocation()
     }
     
     //MARK: Style Function
