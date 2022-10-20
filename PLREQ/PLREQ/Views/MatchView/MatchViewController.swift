@@ -12,7 +12,11 @@ import CoreLocation
 class MatchViewController: UIViewController {
     
     //MARK: Variabales
-    var recordedMusicList = [Music]()
+    var recordedMusicList = [Music]() {
+        didSet {
+            self.noRecordedMusicLabel.isHidden = self.recordedMusicList.isEmpty ? false : true
+        }
+    }
     // 임시 Image URL 추가
     var recordedMusic = Music(title: "", artist: "", musicImageURL: URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!)
     var viewModel: MatchViewModel?
@@ -24,25 +28,30 @@ class MatchViewController: UIViewController {
         return playListViewController
     }()
     let locationManager = CLLocationManager()
-    var currentLocation: String = ""
     var currentTime: String = ""
+    var currentLocation: String = ""
+    var currentLatitude: CLLocationDegrees = 0.0
+    var currentLongtitude: CLLocationDegrees = 0.0
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var matchMusicCollectionView: UICollectionView!
+    @IBOutlet weak var noRecordedMusicLabel: UILabel!
     
     //MARK: IBOutlet Function
     @IBAction func tapRecordButton(_ sender: UIButton) {
         self.isListening.toggle()
         if self.isListening {
             // 30초 동안 한번씩 songSearch 함수 실행
+            self.locationManager.requestLocation()
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
+                self.viewModel?.stopListening()
                 self.saveRecordedMusicList()
             }
         }
@@ -55,7 +64,6 @@ class MatchViewController: UIViewController {
     @objc func catchMusic() {
         do {
             try self.viewModel?.songSearch()
-            self.locationManager.stopUpdatingLocation()
         } catch {
             print("error")
         }
@@ -72,18 +80,19 @@ class MatchViewController: UIViewController {
         if self.viewModel == nil {
             self.viewModel = MatchViewModel(matchHandler: songMatched)
         }
-        self.locationManager.startUpdatingLocation()
     }
     
     //MARK: Style Function
     private func styleFunction() {
         self.configureCollectionView()
         self.configureLocationManager()
+        self.configureNoRecordedMusicLabel()
     }
     
     private func configureCollectionView() {
+        self.view.backgroundColor = .black
         self.matchMusicCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        self.matchMusicCollectionView.backgroundColor = UIColor.white
+        self.matchMusicCollectionView.backgroundColor = UIColor.black
         self.matchMusicCollectionView.delegate = self
         self.matchMusicCollectionView.dataSource = self
     }
@@ -92,6 +101,12 @@ class MatchViewController: UIViewController {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
+    }
+    
+    private func configureNoRecordedMusicLabel() {
+        self.noRecordedMusicLabel.text = "하단의 버튼을 눌러 음악을 찾아보세요."
+        self.noRecordedMusicLabel.textColor = .white
+        self.noRecordedMusicLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
     }
     
     //MARK: Shazam Function
@@ -143,8 +158,7 @@ class MatchViewController: UIViewController {
             let thirdImageURL = self.recordedMusicList[2].musicImageURL
             let fourthImageURL = self.recordedMusicList[3].musicImageURL
 
-//            PLREQDataManager.shared.save(title: title, location: "", day: Date(), latitude: 0.0, longtitude: 0.0, firstImageURL: firstImageURL, secondImageURL: secondImageURL, thirdImageURL: thirdImageURL, fourthImageURL: fourthImageURL, musics: self.recordedMusicList)
-            
+            PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
             self.navigationController?.pushViewController(self.playListViewController, animated: true)
@@ -209,17 +223,21 @@ extension MatchViewController: UICollectionViewDataSource {
 
 extension MatchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+        return CGSize(width: UIScreen.main.bounds.width - 10, height: UIScreen.main.bounds.width - 10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 }
 
 extension MatchViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let currentLatitude = location.coordinate.latitude
-            let currentLongtitude = location.coordinate.longitude
+            self.currentLatitude = location.coordinate.latitude
+            self.currentLongtitude = location.coordinate.longitude
             
-            let findLocation = CLLocation(latitude: currentLatitude, longitude: currentLongtitude)
+            let findLocation = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude)
             let geocoder = CLGeocoder()
             let locale = Locale(identifier: "Ko-kr")
             geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in

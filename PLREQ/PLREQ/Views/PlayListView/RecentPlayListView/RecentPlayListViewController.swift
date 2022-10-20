@@ -100,7 +100,7 @@ extension RecentPlayListViewController: UICollectionViewDelegateFlowLayout {
     
     // 윗 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 26
+        return 16
     }
     
     // 옆 간격
