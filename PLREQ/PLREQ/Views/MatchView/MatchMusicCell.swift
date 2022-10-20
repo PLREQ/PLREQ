@@ -14,9 +14,9 @@ class MatchMusicCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         self.musicTitle.textColor = UIColor.white
-        self.musicTitle.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 22)
-        self.musicArtist.textColor = UIColor.white
-        self.musicArtist.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
+        self.musicTitle.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 20)
+        self.musicArtist.textColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+        self.musicArtist.font = UIFont(name: "AppleSDGothicNeo-Light", size: 16)
         self.musicImage.layer.cornerRadius = 10
         self.musicImage.addMusicCellGradient()
     }
