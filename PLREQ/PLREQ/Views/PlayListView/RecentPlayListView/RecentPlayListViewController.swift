@@ -10,40 +10,54 @@ import CoreData
 
 class RecentPlayListViewController: UIViewController {
     
-    @IBOutlet weak var RecentPlayListCollectionView: UICollectionView!
+    @IBOutlet weak var recentPlayListCollectionView: UICollectionView!
     
     var playListList: [NSManagedObject] = []
     let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshReloadCollectView), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        recentPlayListCollectionView.refreshControl = refreshControl
         collectionViewLink()
         registerNib()
         setAutoLayout()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
     }
     
+    @objc func refreshReloadCollectView() {
+        self.playListList = PLREQDataManager.shared.fetch()
+        self.recentPlayListCollectionView.reloadData()
+        self.refreshControl.endRefreshing()
+    }
+    
     @objc func reloadView(_ noti: Notification) {
         self.playListList = PLREQDataManager.shared.fetch()
-        self.RecentPlayListCollectionView.reloadData()
+        self.recentPlayListCollectionView.reloadData()
     }
     
     private func collectionViewLink() {
-        self.RecentPlayListCollectionView.delegate = self
-        self.RecentPlayListCollectionView.dataSource = self
+        self.recentPlayListCollectionView.delegate = self
+        self.recentPlayListCollectionView.dataSource = self
     }
     
     private func registerNib() {
-        self.RecentPlayListCollectionView.register(playListCollectionViewCellNib, forCellWithReuseIdentifier: playListCollectionViewCell)
+        self.recentPlayListCollectionView.register(playListCollectionViewCellNib, forCellWithReuseIdentifier: playListCollectionViewCell)
     }
     
     private func setAutoLayout() {
-        self.RecentPlayListCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.RecentPlayListCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0 ).isActive = true
-        self.RecentPlayListCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        self.RecentPlayListCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.frame.width / 20).isActive = true
-        self.RecentPlayListCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -(self.view.frame.width / 20)).isActive = true
+        self.recentPlayListCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.recentPlayListCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0 ).isActive = true
+        self.recentPlayListCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        self.recentPlayListCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.frame.width / 20).isActive = true
+        self.recentPlayListCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -(self.view.frame.width / 20)).isActive = true
     }
     /*
      // MARK: - Navigation
