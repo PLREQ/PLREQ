@@ -104,6 +104,7 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
         cell.delegate = self
         cell.editDelegate = self
         cell.placeName.setLable(text: placeList[indexPath.row], fontSize: 18)
+        cell.placeName.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
         // 테이블뷰의 이름과 플레이리스트안의 지역 이름을 비교하여 테이블뷰 안의 컬렉션 뷰 셀의 갯수를 미리 지정
         for i in 0..<playListList.count {
             let playListData = playListList[i]
