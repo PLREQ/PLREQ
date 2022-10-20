@@ -18,6 +18,5 @@ class MatchMusicCell: UICollectionViewCell {
         self.musicArtist.textColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
         self.musicArtist.font = UIFont(name: "AppleSDGothicNeo-Light", size: 16)
         self.musicImage.layer.cornerRadius = 10
-        self.musicImage.addMusicCellGradient()
     }
 }
