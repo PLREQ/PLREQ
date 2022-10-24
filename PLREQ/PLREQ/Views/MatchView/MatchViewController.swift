@@ -48,10 +48,10 @@ class MatchViewController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
+            timer?.invalidate()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
-//                self.stopSongMatching()
                 self.saveRecordedMusicList()
             }
         }
@@ -80,10 +80,6 @@ class MatchViewController: UIViewController {
         if self.viewModel == nil {
             self.viewModel = MatchViewModel(matchHandler: songMatched)
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.stopSongMatching()
     }
     
     //MARK: Style Function
@@ -133,11 +129,6 @@ class MatchViewController: UIViewController {
         }
     }
     
-    private func stopSongMatching() {
-        self.viewModel?.audioEngine.stop()
-        self.viewModel?.audioEngine.inputNode.removeTap(onBus: 0)
-    }
-    
     private func viewDraw() {
         self.recordedMusic.title = self.viewModel?.title ?? ""
         self.recordedMusic.artist = self.viewModel?.artist ?? ""
@@ -168,7 +159,6 @@ class MatchViewController: UIViewController {
             } else {
                 PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             }
-            self.viewModel?.stopListening()
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
             self.navigationController?.pushViewController(self.playListViewController, animated: true)
