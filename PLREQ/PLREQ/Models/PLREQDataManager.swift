@@ -50,7 +50,7 @@ class PLREQDataManager {
     }
     
     // 플레이리스트 저장
-    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) -> Bool {
+    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) {
         let playListObject = NSEntityDescription.insertNewObject(forEntityName: playListModelName, into: context)
         playListObject.setValue(title, forKey: "title")
         playListObject.setValue(day, forKey: "day")
@@ -61,12 +61,20 @@ class PLREQDataManager {
             let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
             musicObject.title = music.title
             musicObject.artist = music.artist
-            musicObject.musicImageURL = music.musicImageURL
-            
-            (playListObject as! PlayListDB).addToMusic(musicObject)
+            DispatchQueue.global().async { [self] in 
+                if let data = try? Data(contentsOf: music.musicImageURL) {
+                    if let image = UIImage(data: data) {
+                        musicObject.musicImage = image.jpegData(compressionQuality: 1.0)
+                    }
+                }
+                (playListObject as! PlayListDB).addToMusic(musicObject)
+                do {
+                    try context.save()
+                } catch {
+                    //
+                }
+            }
         }
-        
-        return saveContext()
     }
     
     // 플레이리스트 삭제
@@ -96,12 +104,12 @@ class PLREQDataManager {
     }
     
     // 플레이리스트에 곡들을 추가
-    func addToPlayList(playListObject: NSManagedObject, musics: [Music]) -> Bool {
+    func addToPlayList(playListObject: NSManagedObject, musics: [MusicData]) -> Bool {
         for music in musics {
             let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
             musicObject.title = music.title
             musicObject.artist = music.artist
-            musicObject.musicImageURL = music.musicImageURL
+            musicObject.musicImage = music.musicImage
             
             (playListObject as! PlayListDB).addToMusic(musicObject)
         }
@@ -110,11 +118,11 @@ class PLREQDataManager {
     }
     
     // 바뀐 음악의 순서를 저장
-    func musicChangeOrder(playListObject: [NSManagedObject], musics: [Music]) -> Bool {
+    func musicChangeOrder(playListObject: [NSManagedObject], musics: [MusicData]) -> Bool {
         for i in 0..<playListObject.count {
                 playListObject[i].setValue(musics[i].title, forKey: "title")
                 playListObject[i].setValue(musics[i].artist, forKey: "artist")
-                playListObject[i].setValue(musics[i].musicImageURL, forKey: "musicImageURL")
+                playListObject[i].setValue(musics[i].musicImage, forKey: "musicImage")
         }
         
         return saveContext()
