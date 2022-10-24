@@ -162,14 +162,13 @@ class MatchViewController: UIViewController {
         
         let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
             guard let title = alert.textFields?[0].text else { return }
-//            let firstImageURL = self.recordedMusicList[0].musicImageURL
-//            let secondImageURL = self.recordedMusicList[1].musicImageURL
-//            let thirdImageURL = self.recordedMusicList[2].musicImageURL
-//            let fourthImageURL = self.recordedMusicList[3].musicImageURL
-
-            PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+            if title == "" {
+                let placeHolder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+                PLREQDataManager.shared.save(title: placeHolder, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+            } else {
+                PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+            }
             self.viewModel?.stopListening()
-            
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
             self.navigationController?.pushViewController(self.playListViewController, animated: true)
@@ -185,9 +184,9 @@ class MatchViewController: UIViewController {
             self.currentTimeFormatter(.now)
             switch CLLocationManager.authorizationStatus() {
             case .authorizedAlways, .authorizedWhenInUse:
-                textField.text = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+                textField.placeholder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
             case .denied, .notDetermined, .restricted:
-                textField.text = ""
+                textField.placeholder = ""
             default:
                 textField.placeholder = ""
             }
@@ -246,6 +245,8 @@ extension MatchViewController: UICollectionViewDelegateFlowLayout {
 extension MatchViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
+            var locality = ""
+            var thoroughfare = ""
             self.currentLatitude = location.coordinate.latitude
             self.currentLongtitude = location.coordinate.longitude
             
@@ -254,7 +255,9 @@ extension MatchViewController: CLLocationManagerDelegate {
             let locale = Locale(identifier: "Ko-kr")
             geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in
                 if let address: [CLPlacemark] = place {
-                    self?.currentLocation = "\(address.last?.locality ?? "")"
+                    locality = "\(address.last?.locality ?? "")"
+                    thoroughfare = "\(address.last?.thoroughfare ?? "")"
+                    self?.currentLocation = "\(locality) \(thoroughfare)"
                 }
             }
         }
