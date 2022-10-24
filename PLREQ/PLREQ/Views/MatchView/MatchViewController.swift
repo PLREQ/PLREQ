@@ -43,11 +43,14 @@ class MatchViewController: UIViewController {
     @IBAction func tapRecordButton(_ sender: UIButton) {
         self.isListening.toggle()
         if self.isListening {
+            // 음악 매칭 시 Display 가 꺼지지 않도록 구현
+            UIApplication.shared.isIdleTimerDisabled = true
             // 30초 동안 한번씩 songSearch 함수 실행
             self.locationManager.requestLocation()
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
+            UIApplication.shared.isIdleTimerDisabled = false
             timer?.invalidate()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
@@ -217,7 +220,7 @@ extension MatchViewController: UICollectionViewDataSource {
                 cell.musicImage.image = UIImage(data: data!)
             }
         }
-        cell.musicImage.addMusicCellGradient()
+        cell.musicImage.addMusicCellGradient(imageView: cell.musicImage)
         return cell
     }
 }

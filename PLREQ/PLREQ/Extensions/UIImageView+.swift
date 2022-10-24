@@ -22,7 +22,8 @@ extension UIImageView {
     }
     
     // MatchMusicCell Image Gradient
-    func addMusicCellGradient() {
+    func addMusicCellGradient(imageView: UIImageView) {
+        guard imageView.layer.sublayers?.count != 1 else { return }
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [UIColor.clear.cgColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor]
         gradient.locations = [0.0 , 1.0]
