@@ -169,7 +169,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
-                        <outlet property="PlacePlayListTableView" destination="pt4-tT-SIM" id="mVG-m3-DeI"/>
+                        <outlet property="placePlayListTableView" destination="pt4-tT-SIM" id="VLh-VZ-pH4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cor-W1-DGX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -188,7 +188,7 @@
                                 <rect key="frame" x="20" y="0.0" width="374" height="735"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pcj-Tt-zfH">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pcj-Tt-zfH">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -201,7 +201,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
-                        <outlet property="RecentPlayListCollectionView" destination="BVs-zC-yO8" id="VLZ-JF-ccV"/>
+                        <outlet property="recentPlayListCollectionView" destination="BVs-zC-yO8" id="2NA-Vu-y8C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppC-xx-UZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
