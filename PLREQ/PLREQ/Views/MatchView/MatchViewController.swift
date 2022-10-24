@@ -30,6 +30,7 @@ class MatchViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentTime: String = ""
     var currentLocation: String = ""
+    var savedLocation: String = ""
     var currentLatitude: CLLocationDegrees = 0.0
     var currentLongtitude: CLLocationDegrees = 0.0
     
@@ -109,7 +110,7 @@ class MatchViewController: UIViewController {
     private func configureNoRecordedMusicLabel() {
         self.noRecordedMusicLabel.text = "하단의 버튼을 눌러 음악을 찾아보세요."
         self.noRecordedMusicLabel.textColor = .white
-        self.noRecordedMusicLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        self.noRecordedMusicLabel.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
     //MARK: Shazam Function
@@ -158,9 +159,9 @@ class MatchViewController: UIViewController {
             guard let title = alert.textFields?[0].text else { return }
             if title == "" {
                 let placeHolder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
-                PLREQDataManager.shared.save(title: placeHolder, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                PLREQDataManager.shared.save(title: placeHolder, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             } else {
-                PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                PLREQDataManager.shared.save(title: title, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             }
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
@@ -239,6 +240,7 @@ extension MatchViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             var locality = ""
+            var subLocality = ""
             var thoroughfare = ""
             self.currentLatitude = location.coordinate.latitude
             self.currentLongtitude = location.coordinate.longitude
@@ -249,7 +251,9 @@ extension MatchViewController: CLLocationManagerDelegate {
             geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in
                 if let address: [CLPlacemark] = place {
                     locality = "\(address.last?.locality ?? "")"
+                    subLocality = "\(address.last?.subLocality ?? "")"
                     thoroughfare = "\(address.last?.thoroughfare ?? "")"
+                    self?.savedLocation = "\(locality) \(subLocality)"
                     self?.currentLocation = "\(locality) \(thoroughfare)"
                 }
             }
