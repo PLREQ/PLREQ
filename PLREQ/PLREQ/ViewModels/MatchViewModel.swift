@@ -57,6 +57,7 @@ class MatchViewModel: NSObject {
     }
     
     func stopListening() {
+        
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
     }

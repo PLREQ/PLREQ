@@ -30,8 +30,10 @@ class MatchViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentTime: String = ""
     var currentLocation: String = ""
+    var savedLocation: String = ""
     var currentLatitude: CLLocationDegrees = 0.0
     var currentLongtitude: CLLocationDegrees = 0.0
+    let userDefaults = UserDefaults.standard
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -43,15 +45,18 @@ class MatchViewController: UIViewController {
     @IBAction func tapRecordButton(_ sender: UIButton) {
         self.isListening.toggle()
         if self.isListening {
+            // 음악 매칭 시 Display 가 꺼지지 않도록 구현
+            UIApplication.shared.isIdleTimerDisabled = true
             // 30초 동안 한번씩 songSearch 함수 실행
             self.locationManager.requestLocation()
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
         } else {
+            UIApplication.shared.isIdleTimerDisabled = false
+            timer?.invalidate()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
-//                self.stopSongMatching()
                 self.saveRecordedMusicList()
             }
         }
@@ -73,6 +78,14 @@ class MatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.styleFunction()
+        self.getUserDefaultsPlayList()
+        
+        if self.recordedMusicList.isEmpty {
+            return
+        } else {
+            self.matchMusicCollectionView.reloadData()
+            self.reactivateAlert()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,10 +93,6 @@ class MatchViewController: UIViewController {
         if self.viewModel == nil {
             self.viewModel = MatchViewModel(matchHandler: songMatched)
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.stopSongMatching()
     }
     
     //MARK: Style Function
@@ -110,7 +119,7 @@ class MatchViewController: UIViewController {
     private func configureNoRecordedMusicLabel() {
         self.noRecordedMusicLabel.text = "하단의 버튼을 눌러 음악을 찾아보세요."
         self.noRecordedMusicLabel.textColor = .white
-        self.noRecordedMusicLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        self.noRecordedMusicLabel.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
     //MARK: Shazam Function
@@ -133,17 +142,13 @@ class MatchViewController: UIViewController {
         }
     }
     
-    private func stopSongMatching() {
-        self.viewModel?.audioEngine.stop()
-        self.viewModel?.audioEngine.inputNode.removeTap(onBus: 0)
-    }
-    
     private func viewDraw() {
         self.recordedMusic.title = self.viewModel?.title ?? ""
         self.recordedMusic.artist = self.viewModel?.artist ?? ""
         self.recordedMusic.musicImageURL = self.viewModel?.musicImageURL ?? URL(string: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnXzicNWJkBNWVgLZpKUpMo7fk5-VSo94bq0MY5cjEOlVUG5DhLTN5AA1qT10glFjBFnok364lIzwNfTWCcGutM7Py9NCoHqld9lqRNt0mFBR3s7QG70fEoQxzR8dwX2bXAIbXmwPGLLMC4plLijz_iSvzqPTDYFor_c_gBtnFsS4XamcQyZAlCY9b/s320/PlreqDefaultImage.jpg")!
         
         self.recordedMusicList.insert(self.recordedMusic, at: 0)
+        self.setUserDefaultsPlayList()
         self.matchMusicCollectionView.reloadData()
     }
     
@@ -164,12 +169,12 @@ class MatchViewController: UIViewController {
             guard let title = alert.textFields?[0].text else { return }
             if title == "" {
                 let placeHolder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
-                PLREQDataManager.shared.save(title: placeHolder, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                PLREQDataManager.shared.save(title: placeHolder, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             } else {
-                PLREQDataManager.shared.save(title: title, location: self.currentLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                PLREQDataManager.shared.save(title: title, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             }
-            self.viewModel?.stopListening()
             self.recordedMusicList = [Music]()
+            self.setUserDefaultsPlayList()
             self.matchMusicCollectionView.reloadData()
             self.navigationController?.pushViewController(self.playListViewController, animated: true)
         })
@@ -192,6 +197,37 @@ class MatchViewController: UIViewController {
             }
         })
         self.present(alert, animated: true)
+    }
+    
+    private func reactivateAlert() {
+        let alert = UIAlertController(title: "이전에 기록해놓은 음악이에요", message: "계속해서 음악을 기록할까요?", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "남기기", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        let rebase = UIAlertAction(title: "비우기", style: .cancel) { _ in
+            self.recordedMusicList = [Music]()
+            self.matchMusicCollectionView.reloadData()
+            self.setUserDefaultsPlayList()
+        }
+        [confirm, rebase].forEach(alert.addAction(_:))
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func setUserDefaultsPlayList() {
+        do {
+            try userDefaults.setObject(self.recordedMusicList, forKey: "LoadedPlayList")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func getUserDefaultsPlayList() {
+        do {
+            try self.recordedMusicList = userDefaults.getObject(forKey: "LoadedPlayList", castTo: [Music].self)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     private func currentTimeFormatter(_ date: Date) {
@@ -227,7 +263,7 @@ extension MatchViewController: UICollectionViewDataSource {
                 cell.musicImage.image = UIImage(data: data!)
             }
         }
-        cell.musicImage.addMusicCellGradient()
+        cell.musicImage.addMusicCellGradient(imageView: cell.musicImage)
         return cell
     }
 }
@@ -246,6 +282,7 @@ extension MatchViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             var locality = ""
+            var subLocality = ""
             var thoroughfare = ""
             self.currentLatitude = location.coordinate.latitude
             self.currentLongtitude = location.coordinate.longitude
@@ -256,7 +293,9 @@ extension MatchViewController: CLLocationManagerDelegate {
             geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { [weak self] (place, error) in
                 if let address: [CLPlacemark] = place {
                     locality = "\(address.last?.locality ?? "")"
+                    subLocality = "\(address.last?.subLocality ?? "")"
                     thoroughfare = "\(address.last?.thoroughfare ?? "")"
+                    self?.savedLocation = "\(locality) \(subLocality)"
                     self?.currentLocation = "\(locality) \(thoroughfare)"
                 }
             }
