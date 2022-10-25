@@ -17,7 +17,7 @@ extension MusicDB {
 
     @NSManaged public var title: String?
     @NSManaged public var artist: String?
-    @NSManaged public var musicImageURL: URL?
+    @NSManaged public var musicImage: Data?
     
     @NSManaged public var playlist: PlayListDB?
 

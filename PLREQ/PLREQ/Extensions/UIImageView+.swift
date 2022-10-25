@@ -21,6 +21,12 @@ extension UIImageView {
         }
     }
     
+    // UIImageView에 Data로 이미지를 불러올 때 사용
+    func load(data: Data) {
+        self.contentMode = .scaleAspectFill
+        self.image = UIImage(data: data)
+    }
+    
     // MatchMusicCell Image Gradient
     func addMusicCellGradient(imageView: UIImageView) {
         guard imageView.layer.sublayers?.count != 1 else { return }
@@ -32,4 +38,5 @@ extension UIImageView {
         gradient.frame = bounds
         layer.addSublayer(gradient)
     }
+    
 }
