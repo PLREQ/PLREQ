@@ -72,17 +72,14 @@ class CustomAnnotationView: MKAnnotationView {
 
         backgroundMaterial.contentView.addSubview(stackView)
 
-        // Make the background material the size of the annotation view container
         backgroundMaterial.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         backgroundMaterial.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         backgroundMaterial.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         backgroundMaterial.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
 
-        // Anchor the top and leading edge of the stack view to let it grow to the content size.
         stackView.leadingAnchor.constraint(equalTo: backgroundMaterial.leadingAnchor, constant: contentInsets.left).isActive = true
         stackView.topAnchor.constraint(equalTo: backgroundMaterial.topAnchor, constant: contentInsets.top).isActive = true
 
-        // Limit how much the content is allowed to grow.
         firstImageView.widthAnchor.constraint(equalToConstant: maxContentWidth).isActive = true
         secondImageView.widthAnchor.constraint(equalToConstant: maxContentWidth).isActive = true
         thirdImageView.widthAnchor.constraint(equalToConstant: maxContentWidth).isActive = true
@@ -134,27 +131,17 @@ class CustomAnnotationView: MKAnnotationView {
                 imageHeightConstraint?.isActive = true
             }
         }
-
-        // Since the image and text sizes may have changed, require the system do a layout pass to update the size of the subviews.
         setNeedsLayout()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        // The stack view will not have a size until a `layoutSubviews()` pass is completed. As this view's overall size is the size
-        // of the stack view plus a border area, the layout system needs to know that this layout pass has invalidated this view's
-        // `intrinsicContentSize`.
         invalidateIntrinsicContentSize()
-        
-        // Use the intrinsic content size to inform the size of the annotation view with all of the subviews.
-        let contentSize = intrinsicContentSize
-        frame.size = intrinsicContentSize
-        
-        // The annotation view's center is at the annotation's coordinate. For this annotation view, offset the center so that the
-        // drawn arrow point is the annotation's coordinate.
 
-        // TODO: - 가르키기 위해 뾰족한 부분 수정하기
+//        let contentSize = intrinsicContentSize
+//        frame.size = intrinsicContentSize
+//
+//         TODO: - 가르키기 위해 뾰족한 부분 수정하기
 //        centerOffset = CGPoint(x: contentSize.width / 2, y: contentSize.height / 2)
 //
 //        let shape = CAShapeLayer()
