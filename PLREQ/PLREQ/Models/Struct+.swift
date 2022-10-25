@@ -12,3 +12,9 @@ struct Music {
     var artist: String
     var musicImageURL: URL
 }
+
+struct MusicData {
+    var title: String
+    var artist: String
+    var musicImage: Data
+}
