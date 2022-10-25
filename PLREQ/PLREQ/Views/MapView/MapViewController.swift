@@ -123,14 +123,14 @@ class MapViewController: UIViewController {
     }
 
     // MARK: - 기본 핀
-    func addDefaultPin(_ latitude: Double, _ longtitude: Double) {
-
-        let pin = MKPointAnnotation()
-        let coordinate = CLLocationCoordinate2D(latitude: latitude,
-                                                longitude: longtitude)
-        pin.coordinate = coordinate
-        mapView.addAnnotation(pin)
-    }
+//    func addDefaultPin(_ latitude: Double, _ longtitude: Double) {
+//
+//        let pin = MKPointAnnotation()
+//        let coordinate = CLLocationCoordinate2D(latitude: latitude,
+//                                                longitude: longtitude)
+//        pin.coordinate = coordinate
+//        mapView.addAnnotation(pin)
+//    }
 
     // MARK: - 커스텀 핀
     func addCustomPin(_ latitude: Double, _ longtitude: Double) {
