@@ -33,6 +33,7 @@ class MatchViewController: UIViewController {
     var savedLocation: String = ""
     var currentLatitude: CLLocationDegrees = 0.0
     var currentLongtitude: CLLocationDegrees = 0.0
+    let userDefaults = UserDefaults.standard
     
     //MARK: IBOutlet Variable
     @IBOutlet weak var playListButton: UIButton!
@@ -77,6 +78,14 @@ class MatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.styleFunction()
+        self.getUserDefaultsPlayList()
+        
+        if self.recordedMusicList.isEmpty {
+            return
+        } else {
+            self.matchMusicCollectionView.reloadData()
+            self.reactivateAlert()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,6 +148,7 @@ class MatchViewController: UIViewController {
         self.recordedMusic.musicImageURL = self.viewModel?.musicImageURL ?? URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!
         
         self.recordedMusicList.insert(self.recordedMusic, at: 0)
+        self.setUserDefaultsPlayList()
         self.matchMusicCollectionView.reloadData()
     }
     
@@ -164,6 +174,7 @@ class MatchViewController: UIViewController {
                 PLREQDataManager.shared.save(title: title, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             }
             self.recordedMusicList = [Music]()
+            self.setUserDefaultsPlayList()
             self.matchMusicCollectionView.reloadData()
             self.navigationController?.pushViewController(self.playListViewController, animated: true)
         })
@@ -186,6 +197,37 @@ class MatchViewController: UIViewController {
             }
         })
         self.present(alert, animated: true)
+    }
+    
+    private func reactivateAlert() {
+        let alert = UIAlertController(title: "이전에 기록해놓은 음악이에요", message: "계속해서 음악을 기록할까요?", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "남기기", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        let rebase = UIAlertAction(title: "비우기", style: .cancel) { _ in
+            self.recordedMusicList = [Music]()
+            self.matchMusicCollectionView.reloadData()
+            self.setUserDefaultsPlayList()
+        }
+        [confirm, rebase].forEach(alert.addAction(_:))
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func setUserDefaultsPlayList() {
+        do {
+            try userDefaults.setObject(self.recordedMusicList, forKey: "LoadedPlayList")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func getUserDefaultsPlayList() {
+        do {
+            try self.recordedMusicList = userDefaults.getObject(forKey: "LoadedPlayList", castTo: [Music].self)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     private func currentTimeFormatter(_ date: Date) {

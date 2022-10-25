@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Music {
+struct Music: Codable {
     var title: String
     var artist: String
     var musicImageURL: URL
