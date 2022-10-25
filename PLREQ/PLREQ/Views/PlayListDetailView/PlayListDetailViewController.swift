@@ -19,7 +19,7 @@ final class PlayListDetailViewController: UIViewController {
     var musicList: [MusicDB]! {
         return playList.music?.array as? [MusicDB]
     }
-    var musics: [Music] = []
+    var musics: [MusicData] = []
     var isEditCheck: Bool = false // 화면을 수정했는지 확인하는 변수
     var navigationTitleText: String! {
         return "\(playList.dataToString(forKey: "title"))"
@@ -90,7 +90,7 @@ extension PlayListDetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playListDetailCell", for: indexPath) as? PlayListDetailCell
         
         let musicData = musicList[indexPath.row]
-        cell?.musicImage.load(url: musicData.dataToURL(forKey: "musicImageURL"))
+        cell?.musicImage.load(data: musicData.dataToData(forKey: "musicImage"))
         cell?.musicImage.layer.cornerRadius = 6
 
         cell?.musicTitle.text = musicData.dataToString(forKey: "title")
@@ -167,8 +167,8 @@ private extension PlayListDetailViewController {
             let musicCellData = musicList[i]
             let title = musicCellData.dataToString(forKey: "title")
             let artist = musicCellData.dataToString(forKey: "artist")
-            let musicImageURL = musicCellData.dataToURL(forKey: "musicImageURL")
-            let music = Music(title: title, artist: artist, musicImageURL: musicImageURL)
+            let musicImage = musicCellData.dataToData(forKey: "musicImage")
+            let music = MusicData(title: title, artist: artist, musicImage: musicImage)
             musics.append(music)
         }
     }
