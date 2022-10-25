@@ -3,7 +3,7 @@
 //  PLREQ
 //
 //  Created by Yeni Hwang on 2022/09/27.
-//
+//  Reference https://developer.apple.com/documentation/mapkit/mapkit_annotations/annotating_a_map_with_custom_data
 
 import CoreLocation
 import UIKit
@@ -21,14 +21,36 @@ class MapViewController: UIViewController {
     }()
 
     var playListList: [NSManagedObject] = []
+    private var allAnnotations: [MKAnnotation]?
+    
+    private var displayedAnnotations: [MKAnnotation]? {
+        willSet {
+            if let currentAnnotations = displayedAnnotations {
+                mapView.removeAnnotations(currentAnnotations)
+            }
+        }
+        didSet {
+            if let newAnnotations = displayedAnnotations {
+                mapView.addAnnotations(newAnnotations)
+            }
+        }
+    }
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         configuration()
         setMapView()
         setdismissButton()
+
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        registerMapAnnotationViews()
+        showAnnotation()
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        
     }
 
+    // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // battery
@@ -47,23 +69,18 @@ class MapViewController: UIViewController {
         }
     }
 
+    // 플레이리스트의 위치 정보를 받아오고 핀을 찍어줍니다.
     func configuration() {
         setCurrentLocation()
         playListList = PLREQDataManager.shared.fetch()
 
         for i in 0..<playListList.count{
             let playListData = playListList[i]
-            // 현재 들어오는 좌표를 확인하기 위해 남겨둔 코드입니다. 추후에 삭제하겠습니다.
-            print("💙💙💙💙💙: ", playListData.dataToDouble(forKey: "latitude"))
-
-            // TODO: Longtitude, Latitude의 데이터 타입을 Float을 Double로 바꿀 필요가 있습니다
-            addCustomPin(playListData.dataToDouble(forKey: "latitude"), playListData.dataToDouble(forKey: "longtitude"))
-
+            addCustomPin(
+                playListData.dataToDouble(forKey: "latitude"),
+                playListData.dataToDouble(forKey: "longtitude")
+            )
         }
-
-        // Test Coordinate입니다 이슈가 해결되면 삭제하겠습니다.
-//        addCustomPin(21.282778, -157.829444)
-//        addCustomPin(21.282778, -150.829444)
     }
 
     func setdismissButton() {
@@ -82,7 +99,9 @@ class MapViewController: UIViewController {
         mapView.delegate = self
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             manager.stopUpdatingLocation()
             render(location)
@@ -103,41 +122,52 @@ class MapViewController: UIViewController {
                           animated: true)
     }
 
-   func addCustomPin(_ latitude: Double, _ longtitude: Double) {
+    // MARK: - 기본 핀
+//    func addDefaultPin(_ latitude: Double, _ longtitude: Double) {
+//
+//        let pin = MKPointAnnotation()
+//        let coordinate = CLLocationCoordinate2D(latitude: latitude,
+//                                                longitude: longtitude)
+//        pin.coordinate = coordinate
+//        mapView.addAnnotation(pin)
+//    }
 
-        let pin = MKPointAnnotation()
-       let coordinate = CLLocationCoordinate2D(latitude: latitude,
-                                                longitude: longtitude)
-        pin.coordinate = coordinate
-        mapView.addAnnotation(pin)
+    // MARK: - 커스텀 핀
+    func addCustomPin(_ latitude: Double, _ longtitude: Double) {
+        let customAnnotation = CustomAnnotation(
+            coordinate: CLLocationCoordinate2D(latitude: latitude,
+                                               longitude: longtitude))
+        customAnnotation.imageName = "ella"
+        mapView.addAnnotation(customAnnotation)
+        showAnnotation()
     }
 
+    // MARK: - 뒤로가기
     @objc func dismissMapView(){
         navigationController?.popViewController(animated: true)
+    }
+
+    // MARK: - Custom Annotation Identifier 등록을 해줍니다.
+    private func registerMapAnnotationViews() {
+        mapView.register(
+            CustomAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: NSStringFromClass(CustomAnnotation.self))
+    }
+
+    // MARK: - Annotation View를 등록해줍니다
+    private func registerMapAnnotationView() {
+        mapView.register(
+            CustomAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: NSStringFromClass(CustomAnnotation.self))
+    }
+
+    private func showAnnotation(){
+        displayedAnnotations = allAnnotations
     }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
 
-}
-
-extension MapViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-
-        guard !(annotation is MKUserLocation) else {
-            return nil
-        }
-
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "MapView")
-
-//        if annotation ==  nil {
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
-//            annotationView?.canShowCallout = true
-//        } else {
-//            annotationView?.annotation = annotation
-//        }
-        return annotationView
-    }
 }
 
 private extension MKMapView {
@@ -149,4 +179,26 @@ private extension MKMapView {
         )
         setRegion(coordinateRegion, animated: true)
     }
+}
+
+extension MapViewController: MKMapViewDelegate {
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+
+        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        
+        var annotationView: MKAnnotationView?
+
+        // Custom Annotation
+        if let annotation = annotation as? CustomAnnotation {
+            annotationView = setupCustomAnnotationView(for: annotation, on: mapView)
+        }
+        return annotationView
+    }
+
+    // Custom AnnotationView
+    private func setupCustomAnnotationView(for annotation: CustomAnnotation, on mapView: MKMapView) -> MKAnnotationView {
+        return mapView.dequeueReusableAnnotationView(withIdentifier: NSStringFromClass(CustomAnnotation.self), for: annotation)
+    }
+
 }
