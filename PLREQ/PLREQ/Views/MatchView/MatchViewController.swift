@@ -51,8 +51,10 @@ class MatchViewController: UIViewController {
             self.locationManager.requestLocation()
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
+            self.recordButton.setImage(UIImage(named: "pause"), for: .normal)
         } else {
             UIApplication.shared.isIdleTimerDisabled = false
+            self.recordButton.setImage(UIImage(named: "play"), for: .normal)
             timer?.invalidate()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
@@ -121,7 +123,7 @@ class MatchViewController: UIViewController {
         self.noRecordedMusicLabel.textColor = .white
         self.noRecordedMusicLabel.font = .systemFont(ofSize: 20, weight: .bold)
     }
-    
+
     //MARK: Shazam Function
     private func songMatched(item: SHMatchedMediaItem?, error: Error?) {
         if error != nil {

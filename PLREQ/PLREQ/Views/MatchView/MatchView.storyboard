@@ -88,22 +88,26 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGt-k6-d2G">
-                                <rect key="frame" x="165" y="710" width="60" height="60"/>
+                                <rect key="frame" x="165" y="704" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="8Pa-ab-yYs"/>
                                     <constraint firstAttribute="height" constant="60" id="eqH-2C-eHN"/>
                                 </constraints>
                                 <color key="tintColor" red="0.96862745100000003" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="record.circle" catalog="system" title=""/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="" image="play"/>
                                 <connections>
                                     <action selector="tapRecordButton:" destination="QHG-as-yXz" eventType="touchUpInside" id="wdV-gD-cGn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ut-jX-QVO">
-                                <rect key="frame" x="349" y="72" width="21" height="22"/>
+                                <rect key="frame" x="350" y="72" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="jpB-0Y-Cov"/>
+                                    <constraint firstAttribute="width" constant="16" id="pOn-Bv-dSb"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="list.bullet" catalog="system"/>
+                                <state key="normal" image="playList"/>
                                 <connections>
                                     <action selector="tapPlayListButton:" destination="QHG-as-yXz" eventType="touchUpInside" id="nIX-lE-eKX"/>
                                 </connections>
@@ -119,12 +123,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mgW-pw-VFr" firstAttribute="bottom" secondItem="ZZW-29-KLd" secondAttribute="bottom" id="1io-9n-Oii"/>
-                            <constraint firstItem="mgW-pw-VFr" firstAttribute="bottom" secondItem="iGt-k6-d2G" secondAttribute="bottom" constant="40" id="2Dt-Qj-SWI"/>
+                            <constraint firstAttribute="bottom" secondItem="iGt-k6-d2G" secondAttribute="bottom" constant="80" id="2Dt-Qj-SWI"/>
                             <constraint firstItem="8es-rW-PEQ" firstAttribute="centerY" secondItem="8M7-g3-lod" secondAttribute="centerY" id="Cj5-1t-aDR"/>
                             <constraint firstItem="iGt-k6-d2G" firstAttribute="centerX" secondItem="8M7-g3-lod" secondAttribute="centerX" id="E7n-4S-Y8v"/>
                             <constraint firstItem="ZZW-29-KLd" firstAttribute="top" secondItem="mgW-pw-VFr" secondAttribute="top" id="Faf-iD-QBX"/>
                             <constraint firstItem="8es-rW-PEQ" firstAttribute="centerX" secondItem="8M7-g3-lod" secondAttribute="centerX" id="Fp4-WC-ejD"/>
-                            <constraint firstItem="mgW-pw-VFr" firstAttribute="trailing" secondItem="9ut-jX-QVO" secondAttribute="trailing" constant="20" id="Im4-gp-Zqz"/>
+                            <constraint firstItem="mgW-pw-VFr" firstAttribute="trailing" secondItem="9ut-jX-QVO" secondAttribute="trailing" constant="24" id="Im4-gp-Zqz"/>
                             <constraint firstItem="mgW-pw-VFr" firstAttribute="trailing" secondItem="ZZW-29-KLd" secondAttribute="trailing" id="nyj-7W-zPJ"/>
                             <constraint firstItem="ZZW-29-KLd" firstAttribute="leading" secondItem="mgW-pw-VFr" secondAttribute="leading" id="onE-WM-Rfa"/>
                             <constraint firstItem="9ut-jX-QVO" firstAttribute="top" secondItem="mgW-pw-VFr" secondAttribute="top" constant="25" id="wdZ-RZ-Y5E"/>
@@ -140,12 +144,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XeR-Hh-4uj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="428" y="90"/>
+            <point key="canvasLocation" x="427.69230769230768" y="89.5734597156398"/>
         </scene>
     </scenes>
     <resources>
-        <image name="list.bullet" catalog="system" width="128" height="87"/>
-        <image name="record.circle" catalog="system" width="128" height="123"/>
+        <image name="play" width="4500" height="4500"/>
+        <image name="playList" width="1669" height="1751"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
