@@ -50,7 +50,7 @@ class PLREQDataManager {
     }
     
     // 플레이리스트 저장
-    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) -> Bool {
+    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) {
         let playListObject = NSEntityDescription.insertNewObject(forEntityName: playListModelName, into: context)
         playListObject.setValue(title, forKey: "title")
         playListObject.setValue(day, forKey: "day")
@@ -58,19 +58,25 @@ class PLREQDataManager {
         playListObject.setValue(latitude, forKey: "latitude")
         playListObject.setValue(longtitude, forKey: "longtitude")
         for music in musics {
-            let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
-            musicObject.title = music.title
-            musicObject.artist = music.artist
-            DispatchQueue.global().async {  
-                if let data = try? Data(contentsOf: music.musicImageURL) {
-                    if let image = UIImage(data: data) {
-                        musicObject.musicImage = image.jpegData(compressionQuality: 1.0)
+            if music.title != "" { // 음악 검색을 실패하면 저장되지 않는다.
+                let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
+                musicObject.title = music.title
+                musicObject.artist = music.artist
+                DispatchQueue.global().async {
+                    if let data = try? Data(contentsOf: music.musicImageURL) {
+                        if let image = UIImage(data: data) {
+                            musicObject.musicImage = image.jpegData(compressionQuality: 1.0)
+                        }
+                    }
+                    (playListObject as! PlayListDB).addToMusic(musicObject)
+                    do {
+                        try self.context.save()
+                    } catch {
+                        print("failure Save")
                     }
                 }
-                (playListObject as! PlayListDB).addToMusic(musicObject)
             }
         }
-        return saveContext()
     }
     
     // 플레이리스트 삭제
