@@ -50,7 +50,7 @@ class PLREQDataManager {
     }
     
     // 플레이리스트 저장
-    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) {
+    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) -> Bool {
         let playListObject = NSEntityDescription.insertNewObject(forEntityName: playListModelName, into: context)
         playListObject.setValue(title, forKey: "title")
         playListObject.setValue(day, forKey: "day")
@@ -61,20 +61,16 @@ class PLREQDataManager {
             let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
             musicObject.title = music.title
             musicObject.artist = music.artist
-            DispatchQueue.global().async { [self] in 
+            DispatchQueue.global().async {  
                 if let data = try? Data(contentsOf: music.musicImageURL) {
                     if let image = UIImage(data: data) {
                         musicObject.musicImage = image.jpegData(compressionQuality: 1.0)
                     }
                 }
                 (playListObject as! PlayListDB).addToMusic(musicObject)
-                do {
-                    try context.save()
-                } catch {
-                    //
-                }
             }
         }
+        return saveContext()
     }
     
     // 플레이리스트 삭제
