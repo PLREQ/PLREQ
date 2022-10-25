@@ -18,7 +18,7 @@ class MatchViewController: UIViewController {
         }
     }
     // 임시 Image URL 추가
-    var recordedMusic = Music(title: "", artist: "", musicImageURL: URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!)
+    var recordedMusic = Music(title: "", artist: "", musicImageURL: URL(string: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnXzicNWJkBNWVgLZpKUpMo7fk5-VSo94bq0MY5cjEOlVUG5DhLTN5AA1qT10glFjBFnok364lIzwNfTWCcGutM7Py9NCoHqld9lqRNt0mFBR3s7QG70fEoQxzR8dwX2bXAIbXmwPGLLMC4plLijz_iSvzqPTDYFor_c_gBtnFsS4XamcQyZAlCY9b/s320/PlreqDefaultImage.jpg")!)
     var viewModel: MatchViewModel?
     var isListening: Bool = false
     var timer: Timer?
@@ -141,7 +141,7 @@ class MatchViewController: UIViewController {
     private func viewDraw() {
         self.recordedMusic.title = self.viewModel?.title ?? ""
         self.recordedMusic.artist = self.viewModel?.artist ?? ""
-        self.recordedMusic.musicImageURL = self.viewModel?.musicImageURL ?? URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music128/v4/46/e3/8c/46e38c01-05a5-5787-af4b-593dde5ba586/8809550047556.jpg/800x800bb.jpg")!
+        self.recordedMusic.musicImageURL = self.viewModel?.musicImageURL ?? URL(string: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnXzicNWJkBNWVgLZpKUpMo7fk5-VSo94bq0MY5cjEOlVUG5DhLTN5AA1qT10glFjBFnok364lIzwNfTWCcGutM7Py9NCoHqld9lqRNt0mFBR3s7QG70fEoQxzR8dwX2bXAIbXmwPGLLMC4plLijz_iSvzqPTDYFor_c_gBtnFsS4XamcQyZAlCY9b/s320/PlreqDefaultImage.jpg")!
         
         self.recordedMusicList.insert(self.recordedMusic, at: 0)
         self.matchMusicCollectionView.reloadData()
