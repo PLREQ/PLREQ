@@ -12,14 +12,20 @@ class CustomAnnotation: NSObject, MKAnnotation {
 
     @objc dynamic var coordinate: CLLocationCoordinate2D
     
-    var title: String?
+    let playList: PlayListDB
+    var musicImage: [UIImage] = []
     
-    var subtitle: String?
-    
-    var imageName: String?
-    
-    init(coordinate: CLLocationCoordinate2D) {
+    init(coordinate: CLLocationCoordinate2D, playListDB: PlayListDB) {
         self.coordinate = coordinate
+        self.playList = playListDB
+        let musicsData = playListDB.music?.array as? [MusicDB]
+        for i in 0..<4 {
+            if i < musicsData!.count {
+                self.musicImage.append(UIImage(data: musicsData![i].dataToData(forKey: "musicImage"))!)
+            } else {
+                self.musicImage.append(UIImage())
+            }
+        }
         super.init()
     }
 }

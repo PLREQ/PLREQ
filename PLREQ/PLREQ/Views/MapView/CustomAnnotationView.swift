@@ -80,7 +80,6 @@ class CustomAnnotationView: MKAnnotationView {
         backgroundMaterial.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         backgroundMaterial.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
 
-        // Anchor the top and leading edge of the stack view to let it grow to the content size.
         stackView.leadingAnchor.constraint(equalTo: backgroundMaterial.leadingAnchor, constant: contentInsets.left).isActive = true
         stackView.trailingAnchor.constraint(equalTo: backgroundMaterial.trailingAnchor, constant: contentInsets.left).isActive = true
         stackView.bottomAnchor.constraint(equalTo: backgroundMaterial.bottomAnchor, constant: contentInsets.left).isActive = true
@@ -104,33 +103,34 @@ class CustomAnnotationView: MKAnnotationView {
         
         if let annotation = annotation as? CustomAnnotation {
             
-            if let imageName = annotation.imageName, let image = UIImage(named: imageName) {
-                firstImageView.image = image
-                secondImageView.image = image
-                thirdImageView.image = image
-                fourthImageView.image = image
+            let imageName = annotation.musicImage
+            let image = imageName[0]
+            firstImageView.image = imageName[0]
+            secondImageView.image = imageName[1]
+            thirdImageView.image = imageName[2]
+            fourthImageView.image = imageName[3]
 
-                if let heightConstraint = imageHeightConstraint {
-                    firstImageView.removeConstraint(heightConstraint)
-                    secondImageView.removeConstraint(heightConstraint)
-                    thirdImageView.removeConstraint(heightConstraint)
-                    fourthImageView.removeConstraint(heightConstraint)
-                }
-
-                let ratio = image.size.height / image.size.width
-
-                imageHeightConstraint = firstImageView.heightAnchor.constraint(equalTo: firstImageView.widthAnchor, multiplier: ratio, constant: 0)
-                imageHeightConstraint?.isActive = true
-                
-                imageHeightConstraint = secondImageView.heightAnchor.constraint(equalTo: secondImageView.widthAnchor, multiplier: ratio, constant: 0)
-                imageHeightConstraint?.isActive = true
-
-                imageHeightConstraint = secondImageView.heightAnchor.constraint(equalTo: thirdImageView.widthAnchor, multiplier: ratio, constant: 0)
-                imageHeightConstraint?.isActive = true
-
-                imageHeightConstraint = secondImageView.heightAnchor.constraint(equalTo: fourthImageView.widthAnchor, multiplier: ratio, constant: 0)
-                imageHeightConstraint?.isActive = true
+            if let heightConstraint = imageHeightConstraint {
+                firstImageView.removeConstraint(heightConstraint)
+                secondImageView.removeConstraint(heightConstraint)
+                thirdImageView.removeConstraint(heightConstraint)
+                fourthImageView.removeConstraint(heightConstraint)
             }
+
+            let ratio = image.size.height / image.size.width
+
+            imageHeightConstraint = firstImageView.heightAnchor.constraint(equalTo: firstImageView.widthAnchor, multiplier: ratio, constant: 0)
+            imageHeightConstraint?.isActive = true
+            
+            imageHeightConstraint = secondImageView.heightAnchor.constraint(equalTo: secondImageView.widthAnchor, multiplier: ratio, constant: 0)
+            imageHeightConstraint?.isActive = true
+
+            imageHeightConstraint = secondImageView.heightAnchor.constraint(equalTo: thirdImageView.widthAnchor, multiplier: ratio, constant: 0)
+            imageHeightConstraint?.isActive = true
+
+            imageHeightConstraint = secondImageView.heightAnchor.constraint(equalTo: fourthImageView.widthAnchor, multiplier: ratio, constant: 0)
+            imageHeightConstraint?.isActive = true
+            
         }
         
         setNeedsLayout()

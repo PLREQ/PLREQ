@@ -20,7 +20,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             return button
     }()
     
-    var playListList: [NSManagedObject] = []
+    var playListList: [NSManagedObject] {
+        return PLREQDataManager.shared.fetch()
+    }
+
     private var allAnnotations: [MKAnnotation]?
     
     private var displayedAnnotations: [MKAnnotation]? {
@@ -68,23 +71,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     func configuration() {
         setCurrentLocation()
-        playListList = PLREQDataManager.shared.fetch()
 
         for i in 0..<playListList.count{
             let playListData = playListList[i]
             addCustomPin(
                 playListData.dataToDouble(forKey: "latitude"),
-                playListData.dataToDouble(forKey: "longtitude")
+                playListData.dataToDouble(forKey: "longtitude"),
+                playListDB: playListList[i] as! PlayListDB
             )
         }
     }
     
     // MARK: - 커스텀 핀
-    func addCustomPin(_ latitude: Double, _ longtitude: Double) {
+    func addCustomPin(_ latitude: Double, _ longtitude: Double, playListDB: PlayListDB) {
         let customAnnotation = CustomAnnotation(
             coordinate: CLLocationCoordinate2D(latitude: latitude,
-                                               longitude: longtitude))
-        customAnnotation.imageName = "ella"
+                                               longitude: longtitude),
+            playListDB: playListDB)
         mapView.addAnnotation(customAnnotation)
         showAnnotations()
     }
