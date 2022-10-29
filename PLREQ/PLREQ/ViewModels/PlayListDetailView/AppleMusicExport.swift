@@ -79,9 +79,7 @@ class CheckAppleMusicSubscription: ObservableObject {
             // 에러 발생시
             guard err == nil else { return }
             // 사용자가 애플 뮤직을 구독 중이라면
-            if capability.contains(SKCloudServiceCapability.musicCatalogPlayback) { self.check = false
-                
-            }
+            if capability.contains(SKCloudServiceCapability.musicCatalogPlayback) { self.check = true }
             // 사용자가 애플 뮤직을 구독 중이지 않다면
             if capability.contains(SKCloudServiceCapability.musicCatalogSubscriptionEligible) { self.check = false }
         }
