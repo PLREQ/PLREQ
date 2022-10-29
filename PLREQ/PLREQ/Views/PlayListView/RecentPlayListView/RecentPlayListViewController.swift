@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import SwiftUI
+import Combine
 
 class RecentPlayListViewController: UIViewController {
     
@@ -15,13 +17,16 @@ class RecentPlayListViewController: UIViewController {
     var playListList: [NSManagedObject] = []
     let playListCollectionViewCellNib: UINib = UINib(nibName: "PlayListCollectionViewCell", bundle: nil)
     let playListCollectionViewCell: String = "PlayListCollectionViewCell"
-    
+    @ObservedObject var checkAppleMusicSubscription = CheckAppleMusicSubscription()
+    var cancelBag = Set<AnyCancellable>()
+    var isCheck: Bool = false
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshReloadCollectView), for: .valueChanged)
         
         return refreshControl
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +35,13 @@ class RecentPlayListViewController: UIViewController {
         registerNib()
         setAutoLayout()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
+        self.checkAppleMusicSubscription.$check
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                if self!.isCheck { if !self!.checkAppleMusicSubscription.check { self!.checkMusicSubscirption() } }
+                self!.isCheck = true
+            })
+            .store(in: &self.cancelBag)
     }
     
     @objc func refreshReloadCollectView() {
@@ -41,6 +53,13 @@ class RecentPlayListViewController: UIViewController {
     @objc func reloadView(_ noti: Notification) {
         self.playListList = PLREQDataManager.shared.fetch()
         self.recentPlayListCollectionView.reloadData()
+    }
+    
+    private func checkMusicSubscirption() {
+        let appleAlert = UIAlertController(title: "애플 뮤직을 구독중인지 확인해주세요.", message: "애플 뮤직을 구독하고 계시지않으면 내보내기를 할 수 없어요.", preferredStyle: .alert)
+        let appleConfirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        appleAlert.addAction(appleConfirm)
+        self.present(appleAlert, animated: true, completion: nil)
     }
     
     private func collectionViewLink() {
@@ -91,7 +110,7 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
                 cell.PlayListImageArr[i].image = UIImage()
             }
         }
-
+        
         cell.playListName.setLable(text: playListData.dataToString(forKey: "title"), fontSize: 14)
         
         cell.playListDay.setLable(text: Date().toYMDString(date: playListData.dataToDate(forKey: "day")), fontSize: 12)
@@ -151,6 +170,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
                 let appleAlert = UIAlertController(title: "정말 내보내시겠어요?", message: "'\(self.playListList[indexPath].dataToString(forKey: "title"))'으로 저장됩니다.", preferredStyle: .alert)
                 let appleCancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                 let addPlayList = UIAlertAction(title: "플레이리스트 내보내기", style: .default) { _ in
+                    self.checkAppleMusicSubscription.appleMusicSubscription()
                     let musicLists = (self.playListList[indexPath] as! PlayListDB).music?.array as? [MusicDB]
                     var musicListsTitle: [String] = []
                     for i in 0..<musicLists!.count {
@@ -173,6 +193,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
         let appleName = UIAlertAction(title: "애플뮤직 특정 플레이리스트에 추가하기", style: .default) { _ in
             let appleNameAlert = UIAlertController(title: "이름을 입력해주세요.\n(일치하는 플레이리스트가 없다면 입력한 이름으로 저장됩니다.)", message: nil, preferredStyle: .alert)
             let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
+                self.checkAppleMusicSubscription.appleMusicSubscription()
                 if #available(iOS 16.0, *) {
                     guard var playlistTitle = appleNameAlert.textFields?[0].text else { return }
                     if((playlistTitle == "")) { playlistTitle = self.playListList[indexPath].dataToString(forKey: "title") }

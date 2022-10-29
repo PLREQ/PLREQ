@@ -8,24 +8,11 @@
 import Foundation
 import MusicKit
 import StoreKit
+import Combine
 
 @available(iOS 16.0, *)
 final class AppleMusicExport: MusicPlaylistAddable, Sendable {
     var id: MusicItemID = ""
-    var check: Bool = false
-    
-    // 사용자가 애플 뮤직을 구독 중인지 확인
-    func appleMusicSubscription() -> Bool {
-        SKCloudServiceController().requestCapabilities { (capability:SKCloudServiceCapability, err:Error?) in
-            // 에러 발생시
-            guard err == nil else { return }
-            // 사용자가 애플 뮤직을 구독 중이라면
-            if capability.contains(SKCloudServiceCapability.musicCatalogPlayback) { self.check = true }
-            // 사용자가 애플 뮤직을 구독 중이지 않다면
-            if capability.contains(SKCloudServiceCapability.musicCatalogSubscriptionEligible) { self.check = false }
-        }
-        return check
-    }
     
     // 플레이리스트 추가 및 음악 목록 추가
     func addPlayList(name: String, musicList: [String]) {
@@ -81,4 +68,22 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
     // 이름을 지정해서 해당 플레이리스트에서 노래 불러오기
     // 개발 예정
     
+}
+
+class CheckAppleMusicSubscription: ObservableObject {
+    @Published var check: Bool = false
+    
+    // 사용자가 애플 뮤직을 구독 중인지 확인
+    func appleMusicSubscription() {
+        SKCloudServiceController().requestCapabilities { (capability:SKCloudServiceCapability, err:Error?) in
+            // 에러 발생시
+            guard err == nil else { return }
+            // 사용자가 애플 뮤직을 구독 중이라면
+            if capability.contains(SKCloudServiceCapability.musicCatalogPlayback) { self.check = false
+                
+            }
+            // 사용자가 애플 뮤직을 구독 중이지 않다면
+            if capability.contains(SKCloudServiceCapability.musicCatalogSubscriptionEligible) { self.check = false }
+        }
+    }
 }
