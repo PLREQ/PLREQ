@@ -39,7 +39,7 @@ class CustomAnnotationView: MKAnnotationView {
         stackView.alignment = .center
         stackView.distribution = .fillEqually
         stackView.spacing = 0
-        stackView.backgroundColor = .blue
+        stackView.backgroundColor = .black
          return stackView
      }()
 
