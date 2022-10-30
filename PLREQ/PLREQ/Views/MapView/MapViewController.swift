@@ -160,6 +160,23 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+
+        if let annotation = annotation as? CustomAnnotation {
+
+            let storyBoard = UIStoryboard(name: "PlayListDetailView", bundle: nil)
+
+            guard let playListDetailViewController = storyBoard.instantiateViewController(withIdentifier: "PlayListDetailView") as? PlayListDetailViewController else { return }
+
+            playListDetailViewController.playList = annotation.playList
+
+            self.navigationController?.pushViewController(playListDetailViewController, animated: true)
+        }
+        
+        // selected된 annotation을 deselected로 전환합니다
+        mapView.deselectAnnotation(annotation, animated: false)
+    }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
