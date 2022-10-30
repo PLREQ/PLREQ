@@ -18,14 +18,18 @@ class CustomAnnotation: NSObject, MKAnnotation {
     init(coordinate: CLLocationCoordinate2D, playListDB: PlayListDB) {
         self.coordinate = coordinate
         self.playList = playListDB
+        super.init()
+        configuration(playListDB: playListDB)
+    }
+
+    private func configuration(playListDB: PlayListDB) {
         let musicsData = playListDB.music?.array as? [MusicDB]
         for i in 0..<4 {
             if i < musicsData!.count {
-                self.musicImage.append(UIImage(data: musicsData![i].dataToData(forKey: "musicImage"))!)
+                musicImage.append(UIImage(data: musicsData![i].dataToData(forKey: "musicImage"))!)
             } else {
-                self.musicImage.append(UIImage())
+                musicImage.append(UIImage())
             }
         }
-        super.init()
     }
 }
