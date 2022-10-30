@@ -10,7 +10,7 @@ import CoreData
 import CoreLocation
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
@@ -50,16 +50,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         showAnnotations()
 
     }
-    
+
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest // battery
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        setLocationManager()
     }
-    
+
     func setCurrentLocation(){
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
@@ -81,7 +78,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             )
         }
     }
-    
+
     // MARK: - 커스텀 핀
     func addCustomPin(_ latitude: Double, _ longtitude: Double, playListDB: PlayListDB) {
         let customAnnotation = CustomAnnotation(
@@ -153,14 +150,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
 }
 
-private extension MapViewController {
-    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(
-            center: location.coordinate,
-            latitudinalMeters: regionRadius,
-            longitudinalMeters: regionRadius
-        )
-        mapView.setRegion(coordinateRegion, animated: true)
+extension MapViewController: CLLocationManagerDelegate {
+    func setLocationManager(){
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 }
 
@@ -169,7 +164,6 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         guard !annotation.isKind(of: MKUserLocation.self) else {
-            // Make a fast exit if the annotation is the `MKUserLocation`, as it's not an annotation view we wish to customize.
             return nil
         }
         
