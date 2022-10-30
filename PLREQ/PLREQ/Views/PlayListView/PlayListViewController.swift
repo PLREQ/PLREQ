@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import SwiftUI
+import Combine
 
 class PlayListViewController: UIViewController {
     
@@ -26,10 +28,20 @@ class PlayListViewController: UIViewController {
     var playListList: [NSManagedObject] {
         return PLREQDataManager.shared.fetch()
     }
+    @ObservedObject var checkAppleMusicSubscription = CheckAppleMusicSubscription.shared
+    var cancelBag = Set<AnyCancellable>()
+    var isCheck: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setButton()
+        self.checkAppleMusicSubscription.$check
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                if self!.isCheck { if !self!.checkAppleMusicSubscription.check { self!.checkMusicSubscirption() } }
+                self!.isCheck = true
+            })
+            .store(in: &self.cancelBag)
         // Do any additional setup after loading the view.
     }
     
@@ -104,4 +116,12 @@ class PlayListViewController: UIViewController {
         playListButtonStackView.layer.addBorder([.bottom], color: .gray, width: 1)
         
     }
+    
+    private func checkMusicSubscirption() {
+        let appleAlert = UIAlertController(title: "애플 뮤직을 구독중인지 확인해주세요.", message: "애플 뮤직을 구독하고 계시지않으면 내보내기를 할 수 없어요.", preferredStyle: .alert)
+        let appleConfirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        appleAlert.addAction(appleConfirm)
+        self.present(appleAlert, animated: true, completion: nil)
+    }
+    
 }

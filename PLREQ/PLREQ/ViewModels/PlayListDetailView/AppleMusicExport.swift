@@ -43,7 +43,9 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
                             var request = MusicCatalogSearchRequest.init(term: musicTitle, types: [Song.self])
                             request.includeTopResults = true
                             let response = try await request.response()
-                            try await MusicLibrary.shared.add(response.songs.first!, to: libraryResponse.playlists[0])
+                            if !response.songs.isEmpty { // 검색한 노래가 있는지 화기인
+                                try await MusicLibrary.shared.add(response.songs.first!, to: libraryResponse.playlists[0])
+                            }
                         }
                     }
                 }
@@ -72,7 +74,7 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
 
 class CheckAppleMusicSubscription: ObservableObject {
     @Published var check: Bool = false
-    
+    static let shared: CheckAppleMusicSubscription = CheckAppleMusicSubscription()
     // 사용자가 애플 뮤직을 구독 중인지 확인
     func appleMusicSubscription() {
         SKCloudServiceController().requestCapabilities { (capability:SKCloudServiceCapability, err:Error?) in
