@@ -30,7 +30,6 @@ class PlayListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setButton()
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,6 +37,21 @@ class PlayListViewController: UIViewController {
         if !buttonCheck {
             recentButton.layer.addBorder([.bottom], color: .white, width: 2)
         }
+        self.checkAppleMusicSubscription.$check
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                if self!.isCheck {
+                    if !self!.checkAppleMusicSubscription.check {
+                        self!.checkMusicSubscirption()
+                    } else {
+                        if let appleMusic = URL(string: "music://"), UIApplication.shared.canOpenURL(appleMusic) {
+                            UIApplication.shared.open(appleMusic, options: [:], completionHandler: nil)
+                        }
+                    }
+                }
+                self!.isCheck = true
+            })
+            .store(in: &self.cancelBag)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -184,6 +184,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
                     }
                     AppleMusicExport().addSongsToPlayList(name: playlistTitle, musicList: musicListsTitle)
                     appleNameAlert.dismiss(animated: true)
+                    CheckAppleMusicSubscription.shared.appleMusicSubscription()
                 } else {
                     let appleAlert = UIAlertController(title: "애플 뮤직 관련 기능을 사용하실려면 iOS 16버전 이상의 버전이 필요합니다.", message: "사용하시려면 iOS 버전을 확인해주세요.", preferredStyle: .alert)
                     let appleCancel = UIAlertAction(title: "확인", style: .cancel, handler: nil)
