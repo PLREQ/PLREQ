@@ -146,6 +146,7 @@ extension PlacePlayListViewController: collectionViewCellClicked, collectionView
                 let appleAlert = UIAlertController(title: "정말 내보내시겠어요?", message: "'\(self.playListList[indexPath].dataToString(forKey: "title"))'으로 저장됩니다.", preferredStyle: .alert)
                 let appleCancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                 let addPlayList = UIAlertAction(title: "플레이리스트 내보내기", style: .default) { _ in
+                    CheckAppleMusicSubscription.shared.appleMusicSubscription()
                     let musicLists = (self.playListList[indexPath] as! PlayListDB).music?.array as? [MusicDB]
                     var musicListsTitle: [String] = []
                     for i in 0..<musicLists!.count {
@@ -180,6 +181,7 @@ extension PlacePlayListViewController: collectionViewCellClicked, collectionView
                     }
                     AppleMusicExport().addSongsToPlayList(name: playlistTitle, musicList: musicListsTitle)
                     appleNameAlert.dismiss(animated: true)
+                    CheckAppleMusicSubscription.shared.appleMusicSubscription()
                 } else {
                     let appleAlert = UIAlertController(title: "애플 뮤직 관련 기능을 사용하실려면 iOS 16버전 이상의 버전이 필요합니다.", message: "사용하시려면 iOS 버전을 확인해주세요.", preferredStyle: .alert)
                     let appleCancel = UIAlertAction(title: "확인", style: .cancel, handler: nil)
