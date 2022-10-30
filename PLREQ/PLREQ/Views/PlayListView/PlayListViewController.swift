@@ -40,16 +40,17 @@ class PlayListViewController: UIViewController {
         self.checkAppleMusicSubscription.$check
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
-                if self!.isCheck {
-                    if !self!.checkAppleMusicSubscription.check {
-                        self!.checkMusicSubscirption()
+                guard let self = self else { return }
+                if self.isCheck {
+                    if !self.checkAppleMusicSubscription.check {
+                        self.checkMusicSubscirption()
                     } else {
                         if let appleMusic = URL(string: "music://"), UIApplication.shared.canOpenURL(appleMusic) {
                             UIApplication.shared.open(appleMusic, options: [:], completionHandler: nil)
                         }
                     }
                 }
-                self!.isCheck = true
+                self.isCheck = true
             })
             .store(in: &self.cancelBag)
     }
