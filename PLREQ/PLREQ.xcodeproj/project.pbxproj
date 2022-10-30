@@ -12,9 +12,9 @@
 		8B3F69412907867C002F554E /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F69402907867C002F554E /* UserDefaults+.swift */; };
 		8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93D54028E8789700AD8170 /* MatchMusicCell.swift */; };
 		8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFE1AE28F8412700D183CE /* Struct+.swift */; };
-		A879F28129067DC100B9E29F /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A879F28029067DC100B9E29F /* CustomAnnotationView.swift */; };
-		A879F2832906C17100B9E29F /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A879F2822906C17100B9E29F /* CustomAnnotation.swift */; };
-		A879F2852906D90200B9E29F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A879F2842906D90200B9E29F /* DetailViewController.swift */; };
+		A8BF6D80290D5DAE0046C2FE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF6D7F290D5DAE0046C2FE /* MapViewController.swift */; };
+		A8BF6D82290D5F2C0046C2FE /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF6D81290D5F2C0046C2FE /* CustomAnnotation.swift */; };
+		A8BF6D84290D608A0046C2FE /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF6D83290D608A0046C2FE /* CustomAnnotationView.swift */; };
 		D50154BD28F9D38E001BA8D5 /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50154BC28F9D38E001BA8D5 /* Notification.Name+.swift */; };
 		D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */; };
 		D50F95DC28F5DDE40072CDB5 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */; };
@@ -38,7 +38,6 @@
 		D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580699E28E45C7500461CD8 /* PlayListDetailViewController.swift */; };
 		D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58069A028E45C7500461CD8 /* MatchViewController.swift */; };
 		D58069AD28E45C7500461CD8 /* MatchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58069A128E45C7500461CD8 /* MatchView.storyboard */; };
-		D58069AE28E45C7500461CD8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58069A328E45C7500461CD8 /* MapViewController.swift */; };
 		D58069AF28E45C7500461CD8 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58069A428E45C7500461CD8 /* MapView.storyboard */; };
 		D58069B028E45C7500461CD8 /* PlayListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D58069A628E45C7500461CD8 /* PlayListView.storyboard */; };
 		D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58069A728E45C7500461CD8 /* PlayListViewController.swift */; };
@@ -59,9 +58,9 @@
 		8B3F69402907867C002F554E /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		8B93D54028E8789700AD8170 /* MatchMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMusicCell.swift; sourceTree = "<group>"; };
 		8BFFE1AE28F8412700D183CE /* Struct+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+.swift"; sourceTree = "<group>"; };
-		A879F28029067DC100B9E29F /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
-		A879F2822906C17100B9E29F /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
-		A879F2842906D90200B9E29F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A8BF6D7F290D5DAE0046C2FE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A8BF6D81290D5F2C0046C2FE /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		A8BF6D83290D608A0046C2FE /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		D50154BC28F9D38E001BA8D5 /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		D50F95D528F59C9F0072CDB5 /* NSManagedObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+.swift"; sourceTree = "<group>"; };
 		D50F95DB28F5DDE40072CDB5 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
@@ -87,7 +86,6 @@
 		D580699E28E45C7500461CD8 /* PlayListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListDetailViewController.swift; sourceTree = "<group>"; };
 		D58069A028E45C7500461CD8 /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		D58069A128E45C7500461CD8 /* MatchView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MatchView.storyboard; sourceTree = "<group>"; };
-		D58069A328E45C7500461CD8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D58069A428E45C7500461CD8 /* MapView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
 		D58069A628E45C7500461CD8 /* PlayListView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayListView.storyboard; sourceTree = "<group>"; };
 		D58069A728E45C7500461CD8 /* PlayListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListViewController.swift; sourceTree = "<group>"; };
@@ -235,10 +233,9 @@
 			isa = PBXGroup;
 			children = (
 				D58069A428E45C7500461CD8 /* MapView.storyboard */,
-				A879F2822906C17100B9E29F /* CustomAnnotation.swift */,
-				D58069A328E45C7500461CD8 /* MapViewController.swift */,
-				A879F2842906D90200B9E29F /* DetailViewController.swift */,
-				A879F28029067DC100B9E29F /* CustomAnnotationView.swift */,
+				A8BF6D7F290D5DAE0046C2FE /* MapViewController.swift */,
+				A8BF6D81290D5F2C0046C2FE /* CustomAnnotation.swift */,
+				A8BF6D83290D608A0046C2FE /* CustomAnnotationView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -363,14 +360,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFFE1AF28F8412700D183CE /* Struct+.swift in Sources */,
-				A879F2852906D90200B9E29F /* DetailViewController.swift in Sources */,
 				D58069B128E45C7500461CD8 /* PlayListViewController.swift in Sources */,
 				8B93D54128E8789700AD8170 /* MatchMusicCell.swift in Sources */,
 				D58069AC28E45C7500461CD8 /* MatchViewController.swift in Sources */,
 				D537201428F4A81A00753C36 /* PlayListDB+CoreDataClass.swift in Sources */,
 				D50F960828F724BC0072CDB5 /* AppleMusicExport.swift in Sources */,
 				D50154BD28F9D38E001BA8D5 /* Notification.Name+.swift in Sources */,
-				A879F28129067DC100B9E29F /* CustomAnnotationView.swift in Sources */,
 				D593996128EF55710082A3F9 /* UILable+.swift in Sources */,
 				D50F95E528F6EA930072CDB5 /* Protocol+.swift in Sources */,
 				D5B9ADA328EAFC5000859D50 /* PlacePlayListViewController.swift in Sources */,
@@ -379,15 +374,16 @@
 				D5B9ADA028EAFC1800859D50 /* RecentPlayListViewController.swift in Sources */,
 				D537200F28F4A50200753C36 /* PLREQDataManager.swift in Sources */,
 				D50F95D628F59C9F0072CDB5 /* NSManagedObject+.swift in Sources */,
+				A8BF6D80290D5DAE0046C2FE /* MapViewController.swift in Sources */,
 				D58069AB28E45C7500461CD8 /* PlayListDetailViewController.swift in Sources */,
-				A879F2832906C17100B9E29F /* CustomAnnotation.swift in Sources */,
+				A8BF6D82290D5F2C0046C2FE /* CustomAnnotation.swift in Sources */,
 				8B3F69412907867C002F554E /* UserDefaults+.swift in Sources */,
 				D537201528F4A81A00753C36 /* PlayListDB+CoreDataProperties.swift in Sources */,
 				D58069B228E45C7500461CD8 /* PlayListCollectionViewCell.swift in Sources */,
 				D54C413A28E343F400C7C0FD /* ViewController.swift in Sources */,
-				D58069AE28E45C7500461CD8 /* MapViewController.swift in Sources */,
 				D59398FC28EC6E300082A3F9 /* UIImageView+.swift in Sources */,
 				D537201728F4A81A00753C36 /* MusicDB+CoreDataProperties.swift in Sources */,
+				A8BF6D84290D608A0046C2FE /* CustomAnnotationView.swift in Sources */,
 				D54C413628E343F400C7C0FD /* AppDelegate.swift in Sources */,
 				D593996328EF59B30082A3F9 /* Date+.swift in Sources */,
 				D5B9ADA628EB1E0400859D50 /* PlacePlayListTableViewCell.swift in Sources */,
@@ -544,7 +540,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
+				DEVELOPMENT_TEAM = 22A6RK2943;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
@@ -585,7 +581,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
+				DEVELOPMENT_TEAM = 22A6RK2943;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PLREQ/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "애플 뮤직 플레이리스트를 사용하기 위해서는 접근권한이 필요합니다.";
