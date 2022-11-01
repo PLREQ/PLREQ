@@ -58,6 +58,7 @@ class MatchViewController: UIViewController {
             UIApplication.shared.isIdleTimerDisabled = false
             self.recordButton.setImage(UIImage(named: "play"), for: .normal)
             timer?.invalidate()
+            viewModel?.stopListening()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
