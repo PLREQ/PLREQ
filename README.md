@@ -34,24 +34,24 @@
 <table>
   <tr height="150px">
   <td align="center">
-    <a href="https://github.com/jim4020key"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785205-341b003f-d47d-45d8-aa62-ef60f9fc5587.png"/></a>
+    <a href="https://github.com/LeeSungNo-ian"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785205-341b003f-d47d-45d8-aa62-ef60f9fc5587.png"/></a>
     <br />
-    <a href="https://github.com/jim4020key">이성노 🎨💻</a>
+    <a href="[https://github.com/Juhwa-Lee1023](https://github.com/LeeSungNo-ian)">이성노 </a>
   </td>
   <td align="center">
-    <a href="https://github.com/Juhwa-Lee1023"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785211-7c60ae9d-6330-44ba-9627-f88a69a0a620.jpg"/></a>
+    <a href="https://github.com/2youngjun"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785211-7c60ae9d-6330-44ba-9627-f88a69a0a620.jpg"/></a>
     <br />
-    <a href="https://github.com/Juhwa-Lee1023">준 💻</a>
+    <a href="https://github.com/2youngjun">이영준 💻</a>
   </td>
   <td align="center">
-    <a href="https://github.com/KiYoonSu"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785213-ae66962d-22b8-4475-9c9f-d8824c025d85.jpg"/></a>
+    <a href="https://github.com/Juhwa-Lee1023"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785213-ae66962d-22b8-4475-9c9f-d8824c025d85.jpg"/></a>
     <br />
-    <a href="https://github.com/KiYoonSu">이주화 💡💻</a>
+    <a href="https://github.com/Juhwa-Lee1023">이주화 💡💻</a>
   </td>
   <td align="center">
-    <a href="https://github.com/100seo"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785199-34e97d76-124e-4cd3-82d0-4234b9479e8b.jpg"/></a>
+    <a href="https://github.com/yeniful"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785199-34e97d76-124e-4cd3-82d0-4234b9479e8b.jpg"/></a>
     <br />
-    <a href="https://github.com/100seo">황예은 💻</a>
+    <a href="https://github.com/yeniful">황예은 💻</a>
   </td>
   </tr>
 </table>
