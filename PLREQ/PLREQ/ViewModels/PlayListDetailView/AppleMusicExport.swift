@@ -67,6 +67,22 @@ final class AppleMusicExport: MusicPlaylistAddable, Sendable {
         }
     }
     
+    func requestMusicAuthorization()  {
+        SKCloudServiceController.requestAuthorization { [weak self] status in
+            switch status {
+            case .authorized:
+                print("")
+            case .restricted:
+                print("")
+            case .notDetermined:
+                 print("")
+            case .denied:
+                print("")
+            @unknown default:
+                print("")
+            }
+        }
+    }
     // 이름을 지정해서 해당 플레이리스트에서 노래 불러오기
     // 개발 예정
     

@@ -54,7 +54,7 @@ class PlayListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewDidAppear(animated)
         if !buttonCheck {
             recentButton.layer.addBorder([.bottom], color: .white, width: 2)
         }

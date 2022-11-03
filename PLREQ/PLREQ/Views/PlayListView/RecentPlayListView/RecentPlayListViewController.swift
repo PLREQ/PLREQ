@@ -148,6 +148,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
         
         let apple = UIAlertAction(title: "애플뮤직으로 내보내기", style: .default) { _ in
             if #available(iOS 16.0, *) {
+                AppleMusicExport().requestMusicAuthorization()
                 let appleAlert = UIAlertController(title: "정말 내보내시겠어요?", message: "'\(self.playListList[indexPath].dataToString(forKey: "title"))'으로 저장됩니다.", preferredStyle: .alert)
                 let appleCancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                 let addPlayList = UIAlertAction(title: "플레이리스트 내보내기", style: .default) { _ in
@@ -176,6 +177,7 @@ extension RecentPlayListViewController: collectionViewCelEditButtonlClicked {
             let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
                 CheckAppleMusicSubscription.shared.appleMusicSubscription()
                 if #available(iOS 16.0, *) {
+                    AppleMusicExport().requestMusicAuthorization()
                     guard var playlistTitle = appleNameAlert.textFields?[0].text else { return }
                     if((playlistTitle == "")) { playlistTitle = self.playListList[indexPath].dataToString(forKey: "title") }
                     let musicLists = (self.playListList[indexPath] as! PlayListDB).music?.array as? [MusicDB]
