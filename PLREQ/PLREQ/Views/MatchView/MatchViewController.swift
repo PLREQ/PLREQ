@@ -276,7 +276,7 @@ extension MatchViewController: UICollectionViewDataSource {
                 cell.musicImage.image = UIImage(data: data!)
             }
         }
-        cell.musicImage.addMusicCellGradient(imageView: cell.musicImage)
+        cell.musicImage.addMusicCellGradient(imageView: cell.musicImage, cell: cell)
         return cell
     }
 }
