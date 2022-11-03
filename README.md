@@ -36,7 +36,7 @@
   <td align="center">
     <a href="https://github.com/LeeSungNo-ian"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785205-341b003f-d47d-45d8-aa62-ef60f9fc5587.png"/></a>
     <br />
-    <a href="[https://github.com/Juhwa-Lee1023](https://github.com/LeeSungNo-ian)">이성노 </a>
+    <a href="https://github.com/LeeSungNo-ian">이성노 </a>
   </td>
   <td align="center">
     <a href="https://github.com/2youngjun"><img height="150px" width="150px" src="https://user-images.githubusercontent.com/63584245/199785211-7c60ae9d-6330-44ba-9627-f88a69a0a620.jpg"/></a>
