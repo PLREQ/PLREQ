@@ -88,7 +88,7 @@ extension RecentPlayListViewController: UICollectionViewDelegate, UICollectionVi
             if i < musicsData!.count {
                 cell.PlayListImageArr[i].load(data: musicsData![i].dataToData(forKey: "musicImage"))
             } else {
-                cell.PlayListImageArr[i].image = UIImage()
+                cell.PlayListImageArr[i].image = UIImage(named: "emptyImage")
             }
         }
         

@@ -28,7 +28,7 @@ class CustomAnnotation: NSObject, MKAnnotation {
             if i < musicsData!.count {
                 musicImage.append(UIImage(data: musicsData![i].dataToData(forKey: "musicImage"))!)
             } else {
-                musicImage.append(UIImage())
+                musicImage.append(UIImage(named: "emptyImage")!)
             }
         }
     }
