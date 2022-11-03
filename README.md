@@ -77,10 +77,11 @@
   - Miro
   - Notion
   - Github
+  
   ### Design
   - Figma
   - Adobe Illistrator
-  
+  - Adobe Photoshop
 
 ## :lock_with_ink_pen: License
 
