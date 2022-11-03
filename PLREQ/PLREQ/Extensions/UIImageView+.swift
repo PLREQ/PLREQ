@@ -28,14 +28,14 @@ extension UIImageView {
     }
     
     // MatchMusicCell Image Gradient
-    func addMusicCellGradient(imageView: UIImageView) {
+    func addMusicCellGradient(imageView: UIImageView, cell: UICollectionViewCell) {
         guard imageView.layer.sublayers?.count != 1 else { return }
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [UIColor.clear.cgColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor]
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.frame = bounds
+        gradient.frame = cell.bounds
         layer.addSublayer(gradient)
     }
     
