@@ -45,6 +45,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         configuration()
         setMapView()
+        view.addSubview(dismissButton)
         setDismissButton()
         registerMapAnnotationView()
         showAnnotations()
@@ -96,10 +97,13 @@ class MapViewController: UIViewController {
     }
     
     func setDismissButton() {
-        view.addSubview(dismissButton)
         let safeArea = self.view.safeAreaLayoutGuide
-        dismissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5).isActive = true
-        dismissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
+        dismissButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 12).isActive = true
+        dismissButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16).isActive = true
+        dismissButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        dismissButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        dismissButton.contentVerticalAlignment = .fill
+        dismissButton.contentHorizontalAlignment = .fill
         dismissButton.tintColor = .white
         dismissButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         dismissButton.addTarget(self, action: #selector(dismissMapView), for: .touchUpInside)
