@@ -35,13 +35,6 @@ class PlayListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setButton()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if !buttonCheck {
-            recentButton.layer.addBorder([.bottom], color: .white, width: 2)
-        }
         self.checkAppleMusicSubscription.$check
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
@@ -58,6 +51,13 @@ class PlayListViewController: UIViewController {
                 self.isCheck = true
             })
             .store(in: &self.cancelBag)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !buttonCheck {
+            recentButton.layer.addBorder([.bottom], color: .white, width: 2)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

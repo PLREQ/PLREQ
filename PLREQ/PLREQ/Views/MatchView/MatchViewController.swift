@@ -47,8 +47,10 @@ class MatchViewController: UIViewController {
         if self.isListening {
             // 음악 매칭 시 Display 가 꺼지지 않도록 구현
             UIApplication.shared.isIdleTimerDisabled = true
-            // 30초 동안 한번씩 songSearch 함수 실행
+            // 음악 매칭 시도 시 한번만 유저의 현재 위치 요청
             self.locationManager.requestLocation()
+            
+            // 30초 동안 한번씩 songSearch 함수 실행
             timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(catchMusic), userInfo: nil, repeats: true)
             self.recordButton.setImage(UIImage(named: "pause"), for: .normal)
@@ -56,6 +58,7 @@ class MatchViewController: UIViewController {
             UIApplication.shared.isIdleTimerDisabled = false
             self.recordButton.setImage(UIImage(named: "play"), for: .normal)
             timer?.invalidate()
+            viewModel?.stopListening()
             if self.recordedMusicList.count == 0 {
                 self.isEmptyRecordedMusicListAlert()
             } else {
@@ -170,8 +173,12 @@ class MatchViewController: UIViewController {
         let registerButton = UIAlertAction(title: "저장", style: .default, handler: { _ in
             guard let title = alert.textFields?[0].text else { return }
             if title == "" {
-                let placeHolder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
-                PLREQDataManager.shared.save(title: placeHolder, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                if self.currentLocation == "" {
+                    PLREQDataManager.shared.save(title: "\(self.currentTime)의 여기, 이곳에서", location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                } else {
+                    let placeHolder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+                    PLREQDataManager.shared.save(title: placeHolder, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                }
             } else {
                 PLREQDataManager.shared.save(title: title, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             }
@@ -191,7 +198,11 @@ class MatchViewController: UIViewController {
             self.currentTimeFormatter(.now)
             switch CLLocationManager.authorizationStatus() {
             case .authorizedAlways, .authorizedWhenInUse:
-                textField.placeholder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+                if self.currentLocation == "" {
+                    textField.placeholder = ""
+                } else {
+                    textField.placeholder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
+                }
             case .denied, .notDetermined, .restricted:
                 textField.placeholder = ""
             default:
@@ -206,7 +217,7 @@ class MatchViewController: UIViewController {
         let confirm = UIAlertAction(title: "남기기", style: .default) { _ in
             alert.dismiss(animated: true)
         }
-        let rebase = UIAlertAction(title: "비우기", style: .cancel) { _ in
+        let rebase = UIAlertAction(title: "비우기", style: .destructive) { _ in
             self.recordedMusicList = [Music]()
             self.matchMusicCollectionView.reloadData()
             self.setUserDefaultsPlayList()
