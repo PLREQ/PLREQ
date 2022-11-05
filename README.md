@@ -72,11 +72,13 @@
   - MapKit
   - Coredata
   - CoreLocation
+  - Express.js
 
   ### Communication
   - Miro
   - Notion
   - Github
+  - FigJam
   
   ### Design
   - Figma
