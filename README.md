@@ -1,5 +1,5 @@
 # PLREQ
-![Frame 31](https://user-images.githubusercontent.com/63584245/199915790-4c58a740-7504-420e-ae99-e4b5ef171ead.svg)
+![Frame 31](https://user-images.githubusercontent.com/63584245/200192722-3c56524b-4fa4-403e-96ba-441e28727829.svg)
 
 
 **손쉽게 카페, 바, 콘서트, 페스티벌, 클럽 등에서 흘러나오는 플레이리스트들을 저장해보세요. 저장한 플레이리스트들을 위치별로 보관하고, 여러 스트리밍 플랫폼으로 내보낼 수 있습니다!**
