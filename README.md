@@ -27,7 +27,7 @@
 
 - 지원 플랫폼  
 애플 뮤직(Apple Music), 지니(Genie), 플로(FLO), 바이브(VIBE), 벅스(Bugs)  
-(11월 8일 추가 예정 - 유튜브 뮤직(Youtube Music), 유튜브(Youtube), 스포티파이(Sportify))
+(11월 18일 추가 예정 - 유튜브 뮤직(Youtube Music), 유튜브(Youtube), 스포티파이(Sportify))
 
 </br>
 
