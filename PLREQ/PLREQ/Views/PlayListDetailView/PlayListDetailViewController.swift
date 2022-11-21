@@ -55,7 +55,7 @@ final class PlayListDetailViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        let image: UIImage = UIImage().shareWithImage(tableView: musicDetailTableView)
+        let image: UIImage = musicDetailTableView.convertImage()
 
         let alret = UIAlertController(title: "플레이리스트가 저장됐어요!", message: "저장된 플레이리스트를 어떻게 도와드릴까요?", preferredStyle: .actionSheet)
         
