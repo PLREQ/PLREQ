@@ -12,6 +12,8 @@ final class PlayListDetailViewController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var navigationTitle: UINavigationItem!
     
+    @IBOutlet weak var emptyInfoText: UILabel!
+    
     @IBOutlet weak var shareButtonTapped: UIButton!
     @IBOutlet weak var musicDetailTableView: UITableView!
     
@@ -40,6 +42,7 @@ final class PlayListDetailViewController: UIViewController {
         musicDetailTableView.dropDelegate = self
         
         inputMusicCellData()
+        disablePlaylist()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -55,7 +58,7 @@ final class PlayListDetailViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        let image: UIImage = UIImage().shareWithImage(tableView: musicDetailTableView)
+        let image: UIImage = musicDetailTableView.convertImage()
 
         let alret = UIAlertController(title: "플레이리스트가 저장됐어요!", message: "저장된 플레이리스트를 어떻게 도와드릴까요?", preferredStyle: .actionSheet)
         
@@ -109,6 +112,8 @@ extension PlayListDetailViewController: UITableViewDataSource {
         } else {
             return
         }
+        
+        disablePlaylist()
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -170,6 +175,13 @@ private extension PlayListDetailViewController {
             let musicImage = musicCellData.dataToData(forKey: "musicImage")
             let music = MusicData(title: title, artist: artist, musicImage: musicImage)
             musics.append(music)
+        }
+    }
+    
+    func disablePlaylist() {
+        if musicList.isEmpty == true {
+            shareButtonTapped.isHidden = true
+            emptyInfoText.isHidden = false
         }
     }
 }
