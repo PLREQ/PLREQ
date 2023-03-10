@@ -38,16 +38,15 @@ class PLREQDataManager {
         let sort = NSSortDescriptor(key: "day", ascending: false)
         fetchRequest.sortDescriptors = [sort]
         
-        var result = [NSManagedObject]()
-        
         do {
-            result = try! context.fetch(fetchRequest)
+            let result = try context.fetch(fetchRequest)
+            return result
         } catch {
             print("fetch fail")
+            return []
         }
-        
-        return result
     }
+    
     
     // 플레이리스트 저장
     func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) {
@@ -57,11 +56,17 @@ class PLREQDataManager {
         playListObject.setValue(location, forKey: "location")
         playListObject.setValue(latitude, forKey: "latitude")
         playListObject.setValue(longtitude, forKey: "longtitude")
+        
+        let group = DispatchGroup()
+        var errorOccurred = false
+        
         for music in musics {
             if music.title != "" { // 음악 검색을 실패하면 저장되지 않는다.
                 let musicObject = NSEntityDescription.insertNewObject(forEntityName: MusicModelName, into: context) as! MusicDB
                 musicObject.title = music.title
                 musicObject.artist = music.artist
+                
+                group.enter()
                 DispatchQueue.global().async {
                     if let data = try? Data(contentsOf: music.musicImageURL) {
                         if let image = UIImage(data: data) {
@@ -69,12 +74,16 @@ class PLREQDataManager {
                         }
                     }
                     (playListObject as! PlayListDB).addToMusic(musicObject)
-                    do {
-                        try self.context.save()
-                    } catch {
-                        print("failure Save")
-                    }
+                    group.leave()
                 }
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            do {
+                try self.context.save()
+            } catch {
+                print("failure Save")
             }
         }
     }
@@ -122,9 +131,9 @@ class PLREQDataManager {
     // 바뀐 음악의 순서를 저장
     func musicChangeOrder(playListObject: [NSManagedObject], musics: [MusicData]) -> Bool {
         for i in 0..<playListObject.count {
-                playListObject[i].setValue(musics[i].title, forKey: "title")
-                playListObject[i].setValue(musics[i].artist, forKey: "artist")
-                playListObject[i].setValue(musics[i].musicImage, forKey: "musicImage")
+            playListObject[i].setValue(musics[i].title, forKey: "title")
+            playListObject[i].setValue(musics[i].artist, forKey: "artist")
+            playListObject[i].setValue(musics[i].musicImage, forKey: "musicImage")
         }
         
         return saveContext()
