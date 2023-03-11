@@ -30,18 +30,18 @@ class RecentPlayListViewController: UIViewController {
         registerNib()
         setAutoLayout()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
-        fetchPlayList()
+        fetchPlayLists()
     }
     
     @objc func refreshReloadCollectView() {
-        fetchPlayList()
+        fetchPlayLists()
     }
     
     @objc func reloadView(_ noti: Notification) {
-        fetchPlayList()
+        fetchPlayLists()
     }
     
-    private func fetchPlayList() {
+    private func fetchPlayLists() {
         self.playListList = PLREQDataManager.shared.fetch()
         self.recentPlayListCollectionView.reloadData()
         self.refreshControl.endRefreshing()
