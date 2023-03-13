@@ -49,7 +49,7 @@ class PLREQDataManager {
     
     
     // 플레이리스트 저장
-    func save(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) {
+    func savePlayList(title: String, location: String, day: Date, latitude: Double, longtitude: Double, musics: [Music]) {
         let playListObject = NSEntityDescription.insertNewObject(forEntityName: playListModelName, into: context)
         playListObject.setValue(title, forKey: "title")
         playListObject.setValue(day, forKey: "day")
