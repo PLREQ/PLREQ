@@ -31,20 +31,30 @@ class PlacePlayListViewController: UIViewController {
         tableViewLink()
         setAutoLayout()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .viewReload, object: nil)
-        // Do any additional setup after loading the view.
+        fetchPlaylists() // viewDidLoad에서 fetch 메서드 호출
     }
-
-    @objc func refreshReloadTableView() {
+    
+    private func fetchPlaylists() {
+        // fetch 메서드 호출 후 placeList와 playListList 초기화
         self.playListList = PLREQDataManager.shared.fetch()
-        self.placePlayListTableView.reloadData()
+        self.placeList = []
+        for playListData in playListList {
+            if !placeList.contains(playListData.dataToString(forKey: "location")) {
+                placeList.append(playListData.dataToString(forKey: "location"))
+            }
+        }
+        placePlayListTableView.reloadData()
+    }
+    
+    @objc func refreshReloadTableView() {
+        fetchPlaylists() // 데이터를 새로 받아올 때 fetch 메서드 호출
         self.refreshControl.endRefreshing()
     }
     
     @objc func reloadView(_ noti: Notification) {
-        self.playListList = PLREQDataManager.shared.fetch()
-        self.placeList.removeAll()
-        self.placePlayListTableView.reloadData()
+        fetchPlaylists() // 데이터가 변경될 때 fetch 메서드 호출
     }
+    
     
     private func registerNib() {
         placePlayListTableView.register(placePlayListTableViewCellNib, forCellReuseIdentifier: placePlayListTableViewCell)
@@ -63,7 +73,7 @@ class PlacePlayListViewController: UIViewController {
         self.placePlayListTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
     }
     
-   
+    
     /*
      // MARK: - Navigation
      
@@ -115,14 +125,14 @@ extension PlacePlayListViewController: UITableViewDelegate, UITableViewDataSourc
         cell.PlacePlayListCollectionView.reloadData()
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (UIScreen.main.bounds.width / UIScreen.main.bounds.height) <= 9/19 {
             return UIScreen.main.bounds.height * 0.40
         } else {
             return UIScreen.main.bounds.height * 0.5
         }
-            
+        
     }
 }
 

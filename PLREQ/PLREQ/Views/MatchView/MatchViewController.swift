@@ -174,13 +174,13 @@ class MatchViewController: UIViewController {
             guard let title = alert.textFields?[0].text else { return }
             if title == "" {
                 if self.currentLocation == "" {
-                    PLREQDataManager.shared.save(title: "\(self.currentTime)의 여기, 이곳에서", location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                    PLREQDataManager.shared.savePlayList(title: "\(self.currentTime)의 여기, 이곳에서", location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
                 } else {
                     let placeHolder = "\(self.currentLocation)에서의 " + "\(self.currentTime)"
-                    PLREQDataManager.shared.save(title: placeHolder, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                    PLREQDataManager.shared.savePlayList(title: placeHolder, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
                 }
             } else {
-                PLREQDataManager.shared.save(title: title, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
+                PLREQDataManager.shared.savePlayList(title: title, location: self.savedLocation, day: Date(), latitude: self.currentLatitude, longtitude: self.currentLongtitude, musics: self.recordedMusicList)
             }
             self.recordedMusicList = [Music]()
             self.setUserDefaultsPlayList()
