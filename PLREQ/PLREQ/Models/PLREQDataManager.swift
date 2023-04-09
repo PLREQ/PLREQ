@@ -12,6 +12,10 @@ import CoreData
 class PLREQDataManager {
     static let shared: PLREQDataManager = PLREQDataManager()
     
+    private init(){
+        
+    }
+    
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     
     lazy var persistentContainer: NSPersistentContainer = {
